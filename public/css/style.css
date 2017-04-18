@@ -1,0 +1,57 @@
+body{
+  background-color: white;
+}
+.terug_button{
+  float: left;
+  background-color: rgb(0, 150, 136) !important;
+  color: #f2f2f2 !important;
+}
+.terug_button:hover{
+  background-color: rgba(150,153,153,.6) !important;
+  color: white !important;
+}
+.bestel{
+  float: left;
+  background-color: rgb(0, 150, 136) !important;
+  color: #f2f2f2 !important;
+}
+.bestel:hover{
+  background-color: rgba(150,153,153,.6) !important;
+  color: white !important;
+}
+.bestel-plus{
+  padding-right: 5px;
+}
+.form-knop{
+  color: #fff !important;
+  background-color: rgba(0, 150, 136, 1) !important;
+}
+.form-knop:hover{
+  background-color: rgba(153, 153, 153, 0.2) !important;
+  color: rgba(0, 150, 136, 1) !important;
+}
+.alert{
+  background-color: rgba(225,30,1, 0.84) !important;
+}
+.succes {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 0;
+    background-color: #00cc00 !important;
+    color: rgba(255,255,255,1);
+}
+.warning{
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background-color: rgba(237,95,0, 0.84) !important;
+  color: rgba(255,255,255,1);
+}
+.navbar.navbar-default {
+    background-color: #80726a;
+    height: 20px;
+    margin-top: -10px;
+    font-weight: bold;
+}
