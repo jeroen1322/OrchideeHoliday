@@ -7,6 +7,7 @@ create table Persoon(
 `achternaam` varchar(255),
 `email` varchar(255),
 `woonplaats` varchar(255),
+`postcode` varchar(10),
 `straat` varchar(255),
 `huisnummer` varchar(255),
 primary key(`id`)
@@ -18,7 +19,7 @@ create table Rol(
 primary key(`id`)
 );
 
-create table tussenRol(
+create table TussenRol(
 `rolid` INT,
 `persoonid` INT,
 PRIMARY KEY(`rolid`, `persoonid`),
