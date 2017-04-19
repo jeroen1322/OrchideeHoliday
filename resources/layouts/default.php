@@ -50,6 +50,10 @@ if(!empty($_SESSION['login'])){
     <![endif]-->
   </head>
   <body>
+    <div class="navtop container">
+      <a href="/"><h1 class="orchideeHoliday">OrchideeHoliday</h1></a>
+      <input type="text" class="form-control zoek-balk" placeholder="ZOEKEN">
+    </div>
     <div class="navbar navbar-default">
       <div class="container-fluid container">
         <div class="navbar-header">
@@ -82,17 +86,18 @@ if(!empty($_SESSION['login'])){
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">TEMPOVIDEO</a>
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav nav-links">
             <li><a href="/aanbod">AANBOD</a></li>
+            <li><a href="/best_verkocht">BEST VERKOCHT</a></li>
             <li><a href="/contact">CONTACT</a></li>
+            <li><a href="/voorwaarden">VOORWAARDEN</a></li>
           </ul>
             <?php
             if(!empty($_SESSION['login'])){
               ?>
-              <ul class="nav navbar-nav menu_right">
+              <ul class="nav navbar-nav nav-rechts">
                 <?php
                 $stmt = DB::conn()->prepare("SELECT id FROM `Order` WHERE klantid=? AND besteld=0");
                 $stmt->bind_param("i", $klantId);
@@ -140,7 +145,7 @@ if(!empty($_SESSION['login'])){
               <?php
             }else{
               ?>
-              <ul class="nav navbar-nav menu_right">
+              <ul class="nav navbar-nav nav-rechts">
                 <li><a href="/login">LOGIN</a></li>
                 <li><a href="/registreer">REGISTREER</a></li>
               </ul>

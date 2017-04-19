@@ -42,7 +42,7 @@ $klein->onHttpError(function ($code, $router) {
     switch ($code) {
         case 404:
             $router->response()->body(
-                '<h1>404 - Ik kan niet vinden waar u naar zoekt.</h1>'
+                '<h1>404 - Pagina niet gevonden.</h1>'
             );
             break;
         case 405:
