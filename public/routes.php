@@ -16,6 +16,14 @@ $klein->respond('/', function ($request, $response, $service) {
     $service->pageTitle = 'Orchidee Holiday';
     $service->render(VIEWS.'/home.php');
 });
+$klein->respond('/aanbod', function ($request, $response, $service) {
+    $service->pageTitle = 'Aanbod | Orchidee Holiday';
+    $service->render(VIEWS.'/aanbod.php');
+});
+$klein->respond('/beheer/orchidee_toevoegen', function ($request, $response, $service) {
+    $service->pageTitle = 'Orchidee toevoegen | Orchidee Holiday';
+    $service->render(VIEWS.'/orchidee_toevoegen.php');
+});
 
 $klein->respond('/cover/[:naam]', function ($request, $response, $service) {
     $naam = $request->naam;

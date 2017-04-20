@@ -13,7 +13,7 @@ defined("MAIL")
     or define("MAIL", realpath(dirname(__FILE__) . '/mail'));
 
 defined("FOTO")
-    or define("FOTO", realpath(dirname(__FILE__) . '/storage/film_foto'));
+    or define("FOTO", realpath(dirname(__FILE__) . '/storage/orchidee_foto'));
 
 
 error_reporting(-1);
