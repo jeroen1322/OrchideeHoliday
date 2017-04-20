@@ -2,7 +2,7 @@ create database orchideeholiday;
 use orchideeholiday;
 
 create table Persoon(
-`id` int,
+`id` int auto_increment,
 `voornaam` varchar(255),
 `achternaam` varchar(255),
 `email` varchar(255),
@@ -71,3 +71,9 @@ PRIMARY KEY(`exemplaarid`, `orderid`),
 FOREIGN KEY(`exemplaarid`) REFERENCES Exemplaar(`id`),
 FOREIGN KEY(`orderid`) REFERENCES `Order`(`id`)
 );
+
+INSERT INTO Rol(id, omschrijving) VALUES(1, 'beheerder');
+INSERT INTO Rol(id, omschrijving) VALUES(2, 'klant');
+INSERT INTO Persoon(voornaam, achternaam, email, woonplaats, postcode, straat, huisnummer)
+VALUES('Jeroen', 'Grooten', 'contact@jeroengrooten.nl', 'Wijk bij Duurstede', '3961AM', 'Oeverstraat', '21A');
+INSERT INTO TussenRol(rolid, persoonid) VALUES(1, 1);

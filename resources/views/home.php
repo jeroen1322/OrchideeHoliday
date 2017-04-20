@@ -15,6 +15,5 @@
   </div>
 </div>
 <hr>
-test
 <?php
 DB::conn()->close();

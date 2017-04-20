@@ -20,10 +20,23 @@ $klein->respond('/aanbod', function ($request, $response, $service) {
     $service->pageTitle = 'Aanbod | Orchidee Holiday';
     $service->render(VIEWS.'/aanbod.php');
 });
+$klein->respond('/login', function ($request, $response, $service) {
+    $service->pageTitle = 'Login | Orchidee Holiday';
+    $service->render(VIEWS.'/login.php');
+});
+$klein->respond('/registreren', function ($request, $response, $service) {
+    $service->pageTitle = 'Registreren | Orchidee Holiday';
+    $service->render(VIEWS.'/registreer.php');
+});
+$klein->respond('/uitloggen', function ($request, $response, $service) {
+    $service->pageTitle = 'Uitloggen | Orchidee Holiday';
+    $service->render(VIEWS.'/uitloggen.php');
+});
 $klein->respond('/beheer/orchidee_toevoegen', function ($request, $response, $service) {
     $service->pageTitle = 'Orchidee toevoegen | Orchidee Holiday';
     $service->render(VIEWS.'/orchidee_toevoegen.php');
 });
+
 
 $klein->respond('/cover/[:naam]', function ($request, $response, $service) {
     $naam = $request->naam;
