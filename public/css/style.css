@@ -68,3 +68,22 @@ body{
 .nav-rechts{
   float: right !important;
 }
+.slider {
+  height: 100%;
+  width: 65%;
+  margin: 0;
+  float: left;
+}
+.slide-boxes {
+  float: right;
+  width: 32%;
+  height: 100%;
+}
+.slide-box{
+  height: 30%;
+  background-color: #c8c8c8;
+  margin-bottom: 15px;
+}
+.top-home {
+  height: 300px;
+}
