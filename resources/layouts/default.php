@@ -7,7 +7,7 @@ session_start();
 
 if(!empty($_SESSION['login'])){
   $klantId = $_SESSION['login'][0];
-  // $klantNaam = $_SESSION['login'][1];
+  $klantNaam = $_SESSION['login'][1];
   $klantRolId = $_SESSION['login'][2];
 
   //  $stmt = DB::conn()->prepare("SELECT naam FROM `Persoon` WHERE id=?");
@@ -57,30 +57,6 @@ if(!empty($_SESSION['login'])){
     <div class="navbar navbar-default">
       <div class="container-fluid container">
         <div class="navbar-header">
-          <?php
-            if(!empty($_SESSION['login'])){
-              $stmt = DB::conn()->prepare("SELECT id FROM `Order` WHERE klantid=? AND besteld=0");
-              $stmt->bind_param("i", $klantId);
-              $stmt->execute();
-              $stmt->bind_result($order_id);
-              $stmt->fetch();
-              $stmt->close();
-              $stmt = DB::conn()->prepare("select count(exemplaarid) from Orderregel where orderid =?;");
-              $stmt->bind_param("i", $order_id);
-              $stmt->execute();
-              $stmt->bind_result($count);
-              $stmt->fetch();
-              $stmt->close();
-
-              if($count > 0){
-                ?>
-                <ul class="nav navbar-nav mobile_cart_right">
-                  <li><a href="/winkelmand" class="menu_winkelmand"><i class="fa fa-shopping-cart" aria-hidden="true"></i>(<?php echo $count; ?>)</a></li>
-                </ul>
-                <?php
-              }
-            }
-            ?>
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -98,43 +74,18 @@ if(!empty($_SESSION['login'])){
             if(!empty($_SESSION['login'])){
               ?>
               <ul class="nav navbar-nav nav-rechts">
-                <?php
-                $stmt = DB::conn()->prepare("SELECT id FROM `Order` WHERE klantid=? AND besteld=0");
-                $stmt->bind_param("i", $klantId);
-                $stmt->execute();
-                $stmt->bind_result($order_id);
-                $stmt->fetch();
-                $stmt->close();
-                $stmt = DB::conn()->prepare("select count(exemplaarid) from Orderregel where orderid =?;");
-                $stmt->bind_param("i", $order_id);
-                $stmt->execute();
-                $stmt->bind_result($count);
-                $stmt->fetch();
-                $stmt->close();
-
-                if($count > 0){
-                  ?>
-                  <li><a href="/winkelmand" class="menu_winkelmand dropdown_cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>(<?php echo $count; ?>)</a></li>
-                  <?php
-                }
-                ?>
                 <li class="dropdown">
                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $klantNaam ?>
                    <span class="caret"></span></a>
                    <ul class="dropdown-menu">
                      <?php
-                     if($_SESSION['login'][2] === 4){
+                     if($_SESSION['login'][2] === 1){
                        ?>
                          <li><a href="/eigenaar/overzicht" class="naam">OVERZICHT</a></li>
                        <?php
-                     }elseif($_SESSION['login'][2] === 1 || $_SESSION['login'][2] === 5){
-                       ?>
-                       <li><a href="/klant/overzicht" class="naam">OVERZICHT</a></li>
-                       <?php
-                     }
-                     elseif($_SESSION['login'][2] === 3){
+                     }elseif($_SESSION['login'][2] === 2){
                          ?>
-                         <li><a href="/baliemedewerker/afhandelen" class="naam">OVERZICHT</a></li>
+                         <li><a href="/overzicht" class="naam">OVERZICHT</a></li>
                          <?php
                      }
                      ?>
