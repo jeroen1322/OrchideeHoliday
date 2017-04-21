@@ -87,3 +87,8 @@ body{
 .top-home {
   height: 300px;
 }
+img.img-responsive.cover {
+  max-width: 350px;
+  float: left;
+  margin-right: 20px;
+}

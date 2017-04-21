@@ -4,18 +4,10 @@ include(MAIL . '/mailLib.php');
 include(__DIR__.'/../library/lib.php');
 session_start();
 
-
 if(!empty($_SESSION['login'])){
   $klantId = $_SESSION['login'][0];
   $klantNaam = $_SESSION['login'][1];
   $klantRolId = $_SESSION['login'][2];
-
-  //  $stmt = DB::conn()->prepare("SELECT naam FROM `Persoon` WHERE id=?");
-  //  $stmt->bind_param('i', $klantId);
-  //  $stmt->execute();
-  //  $stmt->bind_result($klantNaam);
-  //  $stmt->fetch();
-  //  $stmt->close();
 }
 
 ?>
