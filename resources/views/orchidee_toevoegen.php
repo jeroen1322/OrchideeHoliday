@@ -1,18 +1,24 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <?php
+    $account = new Account;
+    if($account->isBeheerder()){
+    ?>
+    <h1>ORCHIDEE TOEVOEGEN</h1>
+    <form method="post" enctype="multipart/form-data">
+      <input type="text" name="titel" placeholder="Titel" class="form-control" autocomplete="off" required>
+      <input type="text" name="korteOmschrijving" placeholder="Korte omschrijving" class="form-control" autocomplete="off" required>
+      <textarea class="form-control" name="langeOmschrijving" placeholder="Lange omschrijving" required></textarea>
+      <input type="number" name="prijs" min="1" step="0.01" class="form-control" placeholder="PRIJS IN EURO'S" required>
+      <input type="file" name="img" placeholder="FOTO" class="form-control" accept="image/*">
+      <input type="submit" class="btn btn-succes form-knop" name="submit" value="VOEG TOE">
+    </form>
+    <?php
+    }
+    ?>
+  </div>
+</div>
 <?php
-$account = new Account;
-if($account->isBeheerder()){
-?>
-<h1>ORCHIDEE TOEVOEGEN</h1>
-<form method="post" enctype="multipart/form-data">
-  <input type="text" name="titel" placeholder="Titel" class="form-control" autocomplete="off" required>
-  <input type="text" name="korteOmschrijving" placeholder="Korte omschrijving" class="form-control" autocomplete="off" required>
-  <textarea class="form-control" name="langeOmschrijving" placeholder="Lange omschrijving" required></textarea>
-  <input type="number" name="prijs" min="1" step="0.01" class="form-control" placeholder="PRIJS IN EURO'S" required>
-  <input type="file" name="img" placeholder="FOTO" class="form-control" accept="image/*">
-  <input type="submit" class="btn btn-succes form-knop" name="submit" value="VOEG TOE">
-</form>
-<?php
-}
  if(!empty($_POST)){
    $titel = $_POST['titel'];
    $prijs = $_POST['prijs'];

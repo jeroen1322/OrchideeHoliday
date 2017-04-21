@@ -73,7 +73,7 @@ if(!empty($_SESSION['login'])){
                      <?php
                      if($_SESSION['login'][2] === 1){
                        ?>
-                         <li><a href="/eigenaar/overzicht" class="naam">OVERZICHT</a></li>
+                         <li><a href="/beheer/overzicht" class="naam">OVERZICHT</a></li>
                        <?php
                      }elseif($_SESSION['login'][2] === 2){
                          ?>

@@ -3,9 +3,11 @@
 
   </div>
   <div class="slide-boxes">
-    <div class="slide-box">
-      1
-    </div>
+    <a href="/aanbod">
+      <div class="slide-box orchidee-slide-box">
+        <h2>AANBOD</h2>
+      </div>
+    </a>
     <div class="slide-box">
       2
     </div>

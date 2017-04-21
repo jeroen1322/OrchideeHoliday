@@ -102,3 +102,23 @@ img.img-responsive.cover {
 h2.textfilmaanbod {
   font-weight: normal;
 }
+.btn-group.admin{
+  width: 100%;
+}
+.admin_menu{
+  width: 33.33%;
+}
+.actief{
+  background-color: #80726a !important;
+  color: white !important;
+}
+.slide-box h2{
+  margin: 0;
+  bottom: 0;
+}
+.orchidee-slide-box{
+  background-image: url('/foto/orchidee.jpg');
+  background-size: cover;
+  color: white;
+  font-weight: bold;
+}
