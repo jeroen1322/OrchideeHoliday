@@ -27,7 +27,7 @@ FOREIGN KEY(`persoonid`) REFERENCES Persoon(`id`)
 );
 
 create table Wachtwoord(
-`id` int,
+`id` int auto_increment,
 `wachtwoord` varchar(255),
 `persoon` int,
 primary key(`id`),
@@ -77,3 +77,4 @@ INSERT INTO Rol(id, omschrijving) VALUES(2, 'klant');
 INSERT INTO Persoon(voornaam, achternaam, email, woonplaats, postcode, straat, huisnummer)
 VALUES('Jeroen', 'Grooten', 'contact@jeroengrooten.nl', 'Wijk bij Duurstede', '3961AM', 'Oeverstraat', '21A');
 INSERT INTO TussenRol(rolid, persoonid) VALUES(1, 1);
+INSERT INTO Wachtwoord(wachtwoord, persoon) VALUES('$2y$10$ygURUwn2sI/6UcexSQlCn.CVyG//.WVdOCvbuVUhqaadCAuXGmHaS', 1);
