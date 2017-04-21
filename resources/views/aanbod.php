@@ -1,14 +1,28 @@
 <?php
-$stmt = DB::conn()->prepare("SELECT titel FROM Orchidee");
+$stmt = DB::conn()->prepare("SELECT id FROM Orchidee");
 $stmt->execute();
-$stmt->bind_result($titel);
+$stmt->bind_result($id);
 while($stmt->fetch()){
-  $titels[] = $titel;
+  $ids[] = $id;
 }
 $stmt->close();
 
-if(!empty($titels)){
-  print_r($titels);
+$thumb = new Artikel;
+
+if(!empty($ids)){
+  foreach($ids as $id){
+    $info = $thumb->thumbInfo($id);
+    ?>
+    <div class="filmThumbnail filmAanbodFilm col-md-3 filmAanbodItem">
+      <div class="thumb">
+          <a href=<?php echo '/artikel/'.$info['id'] ?>>
+            <img src=<?php echo '/foto/'.$info['img'] ?> class="thumb_img filmaanbod_img"/></a>
+            <h2 class="textfilmaanbod"><?php echo $info['titel'] ?> </h2>
+          </a>
+        </div>
+      </div>
+    <?php
+  }
 }else{
   echo 'geen titels';
 }

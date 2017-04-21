@@ -7,7 +7,7 @@ if($account->isBeheerder()){
   <input type="text" name="titel" placeholder="Titel" class="form-control" autocomplete="off" required>
   <input type="text" name="korteOmschrijving" placeholder="Korte omschrijving" class="form-control" autocomplete="off" required>
   <textarea class="form-control" name="langeOmschrijving" placeholder="Lange omschrijving" required></textarea>
-  <input type="number" name="prijs" min="1" placeholder="PRIJS IN EURO'S" class="form-control" required>
+  <input type="number" name="prijs" min="1" step="0.01" class="form-control" placeholder="PRIJS IN EURO'S" required>
   <input type="file" name="img" placeholder="FOTO" class="form-control" accept="image/*">
   <input type="submit" class="btn btn-succes form-knop" name="submit" value="VOEG TOE">
 </form>
@@ -67,14 +67,14 @@ if($account->isBeheerder()){
    if(!empty($opgehaaldId)){
      $newRandId = rand(1, 999999);
      $stmt = DB::conn()->prepare("INSERT INTO Orchidee(id, titel, langeOmschrijving, korteOmschrijving, prijs, img) VALUES (?, ?, ?, ?, ?, ?)");
-     $stmt->bind_param('isssbs', $newRandId, $titel, $langeOmschrijving, $korteOmschrijving, $prijs, $name);
+     $stmt->bind_param('isssds', $newRandId, $titel, $langeOmschrijving, $korteOmschrijving, $prijs, $name);
      $stmt->execute();
      $stmt->close();
 
      header("Refresh:0; url=/artikel/$newRandId");
    }else{
      $stmt = DB::conn()->prepare("INSERT INTO Orchidee(id, titel, langeOmschrijving, korteOmschrijving, prijs, img) VALUES (?, ?, ?, ?, ?, ?)");
-     $stmt->bind_param('isssbs', $randId, $titel, $langeOmschrijving, $korteOmschrijving, $prijs, $name);
+     $stmt->bind_param('isssds', $randId, $titel, $langeOmschrijving, $korteOmschrijving, $prijs, $name);
      $stmt->execute();
      $stmt->close();
      header("Refresh:0; url=/artikel/$randId");
