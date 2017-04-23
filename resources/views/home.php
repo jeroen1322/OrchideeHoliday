@@ -4,15 +4,23 @@
   </div>
   <div class="slide-boxes">
     <a href="/aanbod">
-      <div class="slide-box orchidee-slide-box">
+      <div class="slide-box orchidee-slide-box-1">
         <h2>AANBOD</h2>
       </div>
     </a>
     <div class="slide-box">
-      2
+      <a href="/best_verkocht">
+        <div class="slide-box orchidee-slide-box-2">
+          <h2>BEST VERKOCHT</h2>
+        </div>
+      </a>
     </div>
     <div class="slide-box">
-      3
+      <a href="/contact">
+        <div class="slide-box orchidee-slide-box-3">
+          <h2>CONTACT</h2>
+        </div>
+      </a>
     </div>
   </div>
 </div>

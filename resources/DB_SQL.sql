@@ -37,8 +37,9 @@ foreign key(`persoon`) references Persoon(`id`)
 create table Orchidee(
 `id` INT,
 `titel` VARCHAR(255),
-`langeOmschrijving` VARCHAR(255),
+`langeOmschrijving` TEXT,
 `korteOmschrijving` VARCHAR(45),
+`prijs` FLOAT,
 `img` VARCHAR(45),
 PRIMARY KEY(`id`)
 );
@@ -55,7 +56,6 @@ FOREIGN KEY(`id`) REFERENCES Orchidee(`id`)
 create table `Order`(
 `id` INT,
 `persoon` INT,
-`bedrag` FLOAT,
 `besteld` BOOL,
 `afleverdatum` VARCHAR(45),
 `ophaaldatum` VARCHAR(45),
@@ -71,6 +71,15 @@ PRIMARY KEY(`exemplaarid`, `orderid`),
 FOREIGN KEY(`exemplaarid`) REFERENCES Exemplaar(`id`),
 FOREIGN KEY(`orderid`) REFERENCES `Order`(`id`)
 );
+
+create table Favoriet(
+`orchidee` INT,
+`persoon` INT,
+PRIMARY KEY(`orchidee`, `persoon`),
+FOREIGN KEY(`orchidee`) REFERENCES Orchidee(`id`),
+FOREIGN KEY(`persoon`) REFERENCES Persoon(`id`)
+);
+
 
 INSERT INTO Rol(id, omschrijving) VALUES(1, 'beheerder');
 INSERT INTO Rol(id, omschrijving) VALUES(2, 'klant');
