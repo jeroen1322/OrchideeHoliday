@@ -54,9 +54,10 @@ FOREIGN KEY(`persoon`) REFERENCES Persoon(`id`)
 );
 
 create table OrderRegel(
+`id` INT,
 `orchideeid` INT,
 `orderid` INT,
-PRIMARY KEY(`orchideeid`, `orderid`),
+PRIMARY KEY(`id`, `orchideeid`, `orderid`),
 FOREIGN KEY(`orchideeid`) REFERENCES Orchidee(`id`),
 FOREIGN KEY(`orderid`) REFERENCES `Order`(`id`)
 );
