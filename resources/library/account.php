@@ -129,4 +129,24 @@ class Account{
       }
     }
   }
+
+  public function telOpenOrders($gebruikerId){
+    $stmt = DB::conn()->prepare('SELECT id FROM `Order` WHERE Persoon=? AND besteld=0');
+    $stmt->bind_param('i', $gebruikerId);
+    $stmt->execute();
+    $stmt->bind_result($orderId);
+    $stmt->fetch();
+    $stmt->close();
+
+    if(!empty($orderId)){
+      $stmt = DB::conn()->prepare('SELECT COUNT(id) FROM `OrderRegel` WHERE orderid=?');
+      $stmt->bind_param('i', $orderId);
+      $stmt->execute();
+      $stmt->bind_result($aantalArtikelen);
+      $stmt->fetch();
+      $stmt->close();
+
+      return $aantalArtikelen;
+    }
+  }
 }

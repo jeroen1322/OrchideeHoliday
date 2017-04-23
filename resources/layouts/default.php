@@ -47,6 +47,16 @@ if(!empty($_SESSION['login'])){
     <div class="navtop container">
       <a href="/"><h1 class="orchideeHoliday">OrchideeHoliday</h1></a>
       <input type="text" class="form-control zoek-balk" placeholder="ZOEKEN">
+      <?php
+      $account = new Account;
+      $openOrders = $account->telOpenOrders($_SESSION['login'][0]);
+
+      if(!empty($openOrders)){
+        ?>
+        <div class="artikelCount"><h3><b><?php echo $openOrders ?></b></h3></div>
+        <?php
+      }
+      ?>
     </div>
     <div class="navbar navbar-default">
       <div class="container-fluid container">

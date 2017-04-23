@@ -7,6 +7,7 @@ $info = $orchidee->informatie($this->orchideeId);
 if(!empty($_GET)){
   if($_GET['action'] == 'bestel'){
     $bestel->plaatsInWinkelmand($_GET['id'], $_SESSION['login'][0]);
+    header("Refresh:0; url=/artikel/".$_GET['id']);
   }
 }
 
