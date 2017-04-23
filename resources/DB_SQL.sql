@@ -48,8 +48,6 @@ create table `Order`(
 `id` INT,
 `persoon` INT,
 `besteld` BOOL,
-`afleverdatum` VARCHAR(45),
-`ophaaldatum` VARCHAR(45),
 `orderdatum` VARCHAR(45),
 PRIMARY KEY(`id`),
 FOREIGN KEY(`persoon`) REFERENCES Persoon(`id`)

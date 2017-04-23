@@ -1,7 +1,14 @@
 <?php
 $gebruiker = new Account;
 $orchidee = new Artikel;
+$bestel = new Bestel;
 $info = $orchidee->informatie($this->orchideeId);
+
+if(!empty($_GET)){
+  if($_GET['action'] == 'bestel'){
+    $bestel->plaatsInWinkelmand($_GET['id'], $_SESSION['login'][0]);
+  }
+}
 
 if(!empty($info)){
   $foto = '/foto/'.$info['img'];
@@ -25,7 +32,9 @@ if(!empty($info)){
   <?php
   if($gebruiker->isIngelogd()){
   ?>
-    <button class="btn btn-succes form-knop bestel-knop">IN WINKELMAND</button>
+    <form method="post" action="?action=bestel&id=<?php echo $info['id']?>">
+      <button class="btn btn-succes form-knop bestel-knop">IN WINKELMAND</button>
+    </form>
   <?php
   }else{
     ?>
