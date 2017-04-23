@@ -113,6 +113,12 @@ class Account{
 
     return $gebruikerGegevens;
   }
+
+  public function isIngelogd(){
+    if(!empty($_SESSION['login'])){
+      return true;
+    }
+  }
 }
 
 class Artikel{
