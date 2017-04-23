@@ -44,15 +44,6 @@ create table Orchidee(
 PRIMARY KEY(`id`)
 );
 
-create table Exemplaar(
-`id` INT,
-`orchidee` INT,
-`status` INT,
-`aantalVerkocht` INT,
-PRIMARY KEY(`id`),
-FOREIGN KEY(`id`) REFERENCES Orchidee(`id`)
-);
-
 create table `Order`(
 `id` INT,
 `persoon` INT,
@@ -65,10 +56,10 @@ FOREIGN KEY(`persoon`) REFERENCES Persoon(`id`)
 );
 
 create table OrderRegel(
-`exemplaarid` INT,
+`orchideeid` INT,
 `orderid` INT,
-PRIMARY KEY(`exemplaarid`, `orderid`),
-FOREIGN KEY(`exemplaarid`) REFERENCES Exemplaar(`id`),
+PRIMARY KEY(`orchideeid`, `orderid`),
+FOREIGN KEY(`orchideeid`) REFERENCES Orchidee(`id`),
 FOREIGN KEY(`orderid`) REFERENCES `Order`(`id`)
 );
 
