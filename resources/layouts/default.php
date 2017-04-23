@@ -1,7 +1,9 @@
 <?php
 include(__DIR__ . '/../db.php');
 include(MAIL . '/mailLib.php');
-include(__DIR__.'/../library/lib.php');
+foreach(glob(__DIR__.'/../library/*.php') as $file){
+  include $file;
+}
 session_start();
 
 if(!empty($_SESSION['login'])){
