@@ -26,7 +26,7 @@ $klein->respond('/login', function ($request, $response, $service) {
 });
 $klein->respond('/registreren', function ($request, $response, $service) {
     $service->pageTitle = 'Registreren | Orchidee Holiday';
-    $service->render(VIEWS.'/registreer.php');
+    $service->render(VIEWS.'/registreren.php');
 });
 $klein->respond('/uitloggen', function ($request, $response, $service) {
     $service->pageTitle = 'Uitloggen | Orchidee Holiday';

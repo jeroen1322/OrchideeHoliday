@@ -90,7 +90,7 @@ if(!empty($_SESSION['login'])){
               ?>
               <ul class="nav navbar-nav nav-rechts">
                 <li><a href="/login">LOGIN</a></li>
-                <li><a href="/registreer">REGISTREER</a></li>
+                <li><a href="/registreren">REGISTREER</a></li>
               </ul>
               <?php
             }

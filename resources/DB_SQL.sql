@@ -80,7 +80,6 @@ FOREIGN KEY(`orchidee`) REFERENCES Orchidee(`id`),
 FOREIGN KEY(`persoon`) REFERENCES Persoon(`id`)
 );
 
-
 INSERT INTO Rol(id, omschrijving) VALUES(1, 'beheerder');
 INSERT INTO Rol(id, omschrijving) VALUES(2, 'klant');
 INSERT INTO Persoon(voornaam, achternaam, email, woonplaats, postcode, straat, huisnummer)
