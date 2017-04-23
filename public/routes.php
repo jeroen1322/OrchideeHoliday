@@ -40,13 +40,15 @@ $klein->respond('/beheer/overzicht', function ($request, $response, $service) {
     $service->pageTitle = 'Overzicht | Orchidee Holiday';
     $service->render(VIEWS.'/overzicht.php');
 });
-
 $klein->respond('/artikel/[:id]', function ($request, $response, $service) {
     $service->orchideeId = $request->id;
     $service->pageTitle = 'Artikel | Orchidee Holiday';
     $service->render(VIEWS.'/artikel.php');
 });
-
+$klein->respond('/winkelmand', function ($request, $response, $service) {
+    $service->pageTitle = 'Winkelmand | Orchidee Holiday';
+    $service->render(VIEWS.'/winkelmand.php');
+});
 $klein->respond('/foto/[:naam]', function ($request, $response, $service) {
     $naam = $request->naam;
     $path = FOTO . "/" . $naam;

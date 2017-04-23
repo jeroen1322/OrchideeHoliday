@@ -49,12 +49,14 @@ if(!empty($_SESSION['login'])){
       <input type="text" class="form-control zoek-balk" placeholder="ZOEKEN">
       <?php
       $account = new Account;
-      $openOrders = $account->telOpenOrders($_SESSION['login'][0]);
+      if($account->isIngelogd()){
+        $openOrders = $account->telOpenOrders($_SESSION['login'][0]);
 
-      if(!empty($openOrders)){
-        ?>
-        <div class="artikelCount"><h3><b><?php echo $openOrders ?></b></h3></div>
-        <?php
+        if(!empty($openOrders)){
+          ?>
+          <a href="/winkelmand"><div class="artikelCount"><h3><b><?php echo $openOrders ?></b></h3></div></a>
+          <?php
+        }
       }
       ?>
     </div>

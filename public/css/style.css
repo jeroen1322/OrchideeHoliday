@@ -149,3 +149,13 @@ h2.textfilmaanbod {
     margin-top: 6px;
     margin-left: 11px;
 }
+img.winkelmand_img {
+    max-height: 155px;
+}
+.winkelmand_table td {
+    width: 25%;
+}
+.fa-trash-o{
+  font-size: 22px;
+  color: red;
+}

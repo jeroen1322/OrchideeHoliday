@@ -21,14 +21,15 @@ class Artikel{
   }
 
   public function thumbInfo($artikelId){
-    $stmt = DB::conn()->prepare('SELECT id, titel, korteOmschrijving, img FROM Orchidee WHERE id=?');
+    $stmt = DB::conn()->prepare('SELECT id, titel, korteOmschrijving, prijs, img FROM Orchidee WHERE id=?');
     $stmt->bind_param('i', $artikelId);
     $stmt->execute();
-    $stmt->bind_result($id, $titel, $korteOmschrijving, $img);
+    $stmt->bind_result($id, $titel, $korteOmschrijving, $prijs, $img);
     while($stmt->fetch()){
       $thumbInfo['id'] = $id;
       $thumbInfo['titel'] = $titel;
       $thumbInfo['korteOmschrijving'] = $korteOmschrijving;
+      $thumbInfo['prijs'] = $prijs;
       $thumbInfo['img'] = $img;
     }
     $stmt->close();
