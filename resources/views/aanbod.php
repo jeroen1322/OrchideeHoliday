@@ -25,7 +25,7 @@ if(!empty($ids)){
     <?php
   }
 }else{
-  echo 'geen titels';
+  echo '<div class="warning"><b>Er zijn nog geen artikelen toegevoegd.</b></div>';
 }
 ?>
 
