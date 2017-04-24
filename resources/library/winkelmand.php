@@ -37,8 +37,8 @@ class Winkelmand{
           }
           $stmt->close();
         }
+        return $orchideeen;
       }
-      return $orchideeen;
     }
     $artikelen = getArtikelIds($gebruiker);
     return $artikelen;
