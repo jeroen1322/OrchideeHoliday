@@ -57,6 +57,13 @@ if(!empty($_SESSION['login'])){
           <a href="/winkelmand"><div class="artikelCount"><h3><b><?php echo $openOrders ?></b></h3></div></a>
           <?php
         }
+      }else{
+        if(!empty($_SESSION['winkelmand'])){
+          $aantal = count($_SESSION['winkelmand']);
+          ?>
+          <a href="/winkelmand"><div class="artikelCount"><h3><b><?php echo $aantal ?></b></h3></div></a>
+          <?php
+        }
       }
       ?>
     </div>

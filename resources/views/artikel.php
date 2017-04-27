@@ -11,6 +11,7 @@ if(!empty($_GET)){
       header("Refresh:0; url=/artikel/".$_GET['id']);
     }else{
       $winkelmand->plaatsInSessionWinkelmand($_GET['id']);
+      header("Refresh:0; url=/artikel/".$_GET['id']);
     }
   }
 }

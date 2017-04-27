@@ -117,15 +117,14 @@ class Winkelmand{
       $_SESSION['winkelmand'] = array();
     }
 
-    function plaatsArtikelInWinkelmand($artikelId){
-      array_push($_SESSION['winkelmand'], 'TEST');
-      print_r($_SESSION['winkelmand']);
+    function plaatsArtikelInSession($artikelId){
+      array_push($_SESSION['winkelmand'], $artikelId);
     }
 
     if(empty($_SESSION['winkelmand'])){
       maakWinkelmandSessionAan();
     }
-    plaatsArtikelInWinkelmand($artikelId);
+    plaatsArtikelInSession($artikelId);
 
   }
 
