@@ -1,6 +1,6 @@
 <?php
 class Bestel{
-  public function plaatsInWinkelmand($orchideeId, $gebruikerId){
+  public function plaatsDatabaseInWinkelmand($orchideeId, $gebruikerId){
 
     function controlleerBestaandeOrder($gebruikerId){
       $stmt = DB::conn()->prepare('SELECT id FROM `Order` WHERE persoon=? AND besteld=0');
@@ -45,16 +45,16 @@ class Bestel{
       $stmt->close();
 
       $orderRegelId = rand(1, 999999);
-      $stmt = DB::conn()->prepare('INSERT INTO `OrderRegel`(id, orchideeid, orderid) VALUES(?, ?, ?)');
-      $stmt->bind_param('iii', $orderRegelId, $orchideeId, $id);
+      $stmt = DB::conn()->prepare('INSERT INTO `OrderRegel`(orchideeid, orderid) VALUES(?m ?, ?)');
+      $stmt->bind_param('iii', $orchideeId, $id);
       $stmt->execute();
       $stmt->close();
     }
 
     function insertBestaandeOrderRegel($orchideeId, $id){
       $orderRegelId = rand(1, 999999);
-      $stmt = DB::conn()->prepare('INSERT INTO `OrderRegel`(id, orchideeid, orderid) VALUES(?, ?, ?)');
-      $stmt->bind_param('iii', $orderRegelId, $orchideeId, $id);
+      $stmt = DB::conn()->prepare('INSERT INTO `OrderRegel`(orchideeid, orderid) VALUES(?, ?)');
+      $stmt->bind_param('ii', $orchideeId, $id);
       $stmt->execute();
       $stmt->close();
     }
@@ -65,5 +65,9 @@ class Bestel{
     }else{
       insertBestaandeOrderRegel($orchideeId, $bestaandeOrder);
     }
+  }
+
+  public function plaatsInSessionWinkelmand($artikelId){
+    echo 'test';
   }
 }
