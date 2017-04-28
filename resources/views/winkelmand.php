@@ -29,6 +29,11 @@ if($account->isIngelogd()){
       </tr>
       <?php
     }
+    ?>
+      </tbody>
+    </table>
+    <a href="/afrekenen"><button class="btn btn-succes form-knop">AFREKENEN</button></a>
+    <?php
   }else{
     echo '<div class="warning"><b>Geen artikelen in winkelmand.</b></div>';
   }
@@ -55,5 +60,10 @@ if($account->isIngelogd()){
       </tr>
       <?php
     }
+    ?>
+      </tbody>
+    </table>
+    <a href="/afrekenen"><button class="btn btn-succes form-knop">AFREKENEN</button></a>
+    <?php
   }
 }

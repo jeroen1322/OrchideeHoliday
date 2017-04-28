@@ -49,6 +49,12 @@ $klein->respond('/winkelmand', function ($request, $response, $service) {
     $service->pageTitle = 'Winkelmand | Orchidee Holiday';
     $service->render(VIEWS.'/winkelmand.php');
 });
+$klein->respond('/afrekenen', function ($request, $response, $service) {
+    $service->pageTitle = 'Afrekenen | Orchidee Holiday';
+    $service->render(VIEWS.'/afrekenen.php');
+});
+
+
 $klein->respond('/foto/[:naam]', function ($request, $response, $service) {
     $naam = $request->naam;
     $path = FOTO . "/" . $naam;
