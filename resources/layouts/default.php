@@ -11,7 +11,6 @@ if(!empty($_SESSION['login'])){
   $klantNaam = $_SESSION['login'][1];
   $klantRolId = $_SESSION['login'][2];
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

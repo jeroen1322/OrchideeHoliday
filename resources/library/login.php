@@ -37,7 +37,7 @@ class Login{
     function logInSession($wachtwoord, $opgehaaldWachtwoord, $id){
       if (password_verify($wachtwoord, $opgehaaldWachtwoord)) {
         $stmt = DB::conn()->prepare('SELECT rolid FROM TussenRol WHERE persoonid=?');
-        $stmt->bind_param('i', $klantId);
+        $stmt->bind_param('i', $id);
         $stmt->execute();
         $stmt->bind_result($klantRolId);
         $stmt->fetch();
