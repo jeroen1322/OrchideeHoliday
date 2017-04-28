@@ -89,7 +89,7 @@ class Winkelmand{
       $stmt->close();
 
       $orderRegelId = rand(1, 999999);
-      $stmt = DB::conn()->prepare('INSERT INTO `OrderRegel`(orchideeid, orderid) VALUES(? ?, ?)');
+      $stmt = DB::conn()->prepare('INSERT INTO `OrderRegel`(orchideeid, orderid) VALUES(?, ?, ?)');
       $stmt->bind_param('iii', $orderRegelId, $orchideeId, $id);
       $stmt->execute();
       $stmt->close();

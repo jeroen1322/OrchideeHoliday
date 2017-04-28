@@ -162,3 +162,12 @@ img.winkelmand_img {
 .bekijk-knop{
   width: 100%;
 }
+.left{
+  float: left;
+  width: 45%;
+}
+.right{
+  float: left;
+  width: 45%;
+  margin-left: 5%;
+}
