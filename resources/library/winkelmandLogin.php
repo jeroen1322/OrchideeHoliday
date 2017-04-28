@@ -60,7 +60,7 @@ class winkelmandLogin extends Login{
         }
       }
 
-      function maakOrder($gebruikerId){
+      function maakOrder($gebruikerId, $winkelmand){
 
         $besteld = 0;
         $randId = rand(1, 999999);
@@ -75,6 +75,14 @@ class winkelmandLogin extends Login{
         $stmt->bind_param('iiss', $id, $gebruikerId, $besteld, $orderDatum);
         $stmt->execute();
         $stmt->close();
+
+        foreach($winkelmand as $item){
+          $orderRegelId = rand(1, 999999);
+          $stmt = DB::conn()->prepare('INSERT INTO `OrderRegel`(id, orchideeid, orderid) VALUES(?, ?, ?)');
+          $stmt->bind_param('iii', $orderRegelId, $item, $id);
+          $stmt->execute();
+          $stmt->close();
+        }
       }
 
       function plaatsInOrderRegel($winkelmand, $orderId){
@@ -89,7 +97,7 @@ class winkelmandLogin extends Login{
 
       $bestaandeOrder = controlleerBestaandeOrder($id);
       if(empty($bestaandeOrder)){
-        maakOrder($id);
+        maakOrder($id, $winkelmand);
       }else{
         plaatsInOrderRegel($winkelmand, $bestaandeOrder);
       }
