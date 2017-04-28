@@ -2,9 +2,15 @@
 $afrekenen = new Afrekenen;
 $account = new Account;
 $login = new winkelmandLogin;
+$registreer = new winkelmandRegistreer;
+
 if(!empty($_POST)){
   if(!$account->isIngelogd()){
-    $login->login($_SESSION['winkelmand'], $_POST['email'], $_POST['wachtwoord']);
+    if($_POST['submit'] == 'LOGIN'){
+      $login->login($_SESSION['winkelmand'], $_POST['email'], $_POST['wachtwoord']);
+    }elseif($_POST['submit'] == 'REGISTREER'){
+      $registreer->registreer($_POST, $_SESSION['winkelmand']);
+    }
   }
 }
 ?>
@@ -18,7 +24,7 @@ if($account->isIngelogd()){
     <div class="panel panel-default">
       <div class="panel-body login-panel">
         <h1>LOGIN</h1>
-        <form method="post">
+        <form method="post" name="TEST">
           <input type="email" name="email" placeholder="Email" class="form-control">
           <input type="password" name="wachtwoord" placeholder="Wachtwoord" class="form-control">
           <input type="submit" name="submit" class="btn btn-primary form-knop" value="LOGIN">

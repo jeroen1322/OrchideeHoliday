@@ -1,5 +1,5 @@
 <?php
-class winkelmandLogin extends Login{
+class winkelmandLogin{
   /* ------------------------------------------------------------------ */
   public function login($winkelmand, $email, $wachtwoord){
     function controlleerInvullingVelden($email, $wachtwoord){
@@ -140,5 +140,9 @@ class winkelmandLogin extends Login{
     }else{
       echo '<div class="alert"><b>Controleer of u alle velden correct heeft ingevuld.</b></div>';
     }
+  }
+
+  public function registreer(){
+
   }
 }
