@@ -165,7 +165,7 @@ class winkelmandRegistreer{
       if(controlleerOvereenkomstWachtwoorden($wachtwoord, $herhaalWachtwoord)){
         if(voegToeAanDatabase($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $wachtwoord)){
           $gebruikerId = getGebruikerId($email);
-          if(plaatsSessionWinkelmandInDatabase($winkelmand, $gebruikerId)){
+          if(plaatsSessionWinkelmandInDatabase($winkelmand, $email)){
             header("Refresh:0; url=/afrekenen");
           }
         }else{
