@@ -1,6 +1,7 @@
 create database orchideeholiday;
 use orchideeholiday;
 
+
 create table Persoon(
 `id` int auto_increment,
 `voornaam` varchar(255),
@@ -44,13 +45,22 @@ create table Orchidee(
 PRIMARY KEY(`id`)
 );
 
+create table verzendWijze(
+`id` INT,
+`omschrijving` VARCHAR(100),
+PRIMARY KEY(`id`)
+);
+
+
 create table `Order`(
 `id` INT,
 `persoon` INT,
 `besteld` BOOL,
+`verzendWijze` INT,
 `orderdatum` VARCHAR(45),
 PRIMARY KEY(`id`),
-FOREIGN KEY(`persoon`) REFERENCES Persoon(`id`)
+FOREIGN KEY(`persoon`) REFERENCES Persoon(`id`),
+FOREIGN KEY(`verzendWijze`) REFERENCES verzendWijze(`id`)
 );
 
 create table OrderRegel(
