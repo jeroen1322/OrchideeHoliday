@@ -1,6 +1,11 @@
 create database orchideeholiday;
 use orchideeholiday;
 
+create table betaalWijze(
+`id` INT,
+`omschrijving` VARCHAR(100),
+PRIMARY KEY(`id`)
+);
 
 create table Persoon(
 `id` int auto_increment,
@@ -11,7 +16,9 @@ create table Persoon(
 `postcode` varchar(10),
 `straat` varchar(255),
 `huisnummer` varchar(255),
-primary key(`id`)
+`betaalWijze` INT,
+primary key(`id`),
+FOREIGN KEY(`betaalWijze`) REFERENCES betaalWijze(`id`)
 );
 
 create table Rol(
@@ -51,16 +58,17 @@ create table verzendWijze(
 PRIMARY KEY(`id`)
 );
 
-
 create table `Order`(
 `id` INT,
 `persoon` INT,
 `besteld` BOOL,
 `verzendWijze` INT,
+`betaalWijze` INT,
 `orderdatum` VARCHAR(45),
 PRIMARY KEY(`id`),
 FOREIGN KEY(`persoon`) REFERENCES Persoon(`id`),
-FOREIGN KEY(`verzendWijze`) REFERENCES verzendWijze(`id`)
+FOREIGN KEY(`verzendWijze`) REFERENCES verzendWijze(`id`),
+FOREIGN KEY(`betaalWijze`) REFERENCES betaalWijze(`id`)
 );
 
 create table OrderRegel(
@@ -86,3 +94,6 @@ INSERT INTO Persoon(voornaam, achternaam, email, woonplaats, postcode, straat, h
 VALUES('Jeroen', 'Grooten', 'contact@jeroengrooten.nl', 'Wijk bij Duurstede', '3961AM', 'Oeverstraat', '21A');
 INSERT INTO TussenRol(rolid, persoonid) VALUES(1, 1);
 INSERT INTO Wachtwoord(wachtwoord, persoon) VALUES('$2y$10$ygURUwn2sI/6UcexSQlCn.CVyG//.WVdOCvbuVUhqaadCAuXGmHaS', 1);
+
+INSERT INTO verzendWijze(id, omschrijving) VALUES (1, 'Koerierdienst');
+INSERT INTO verzendWijze(id, omschrijving) VALUES (2, 'Ophalen op locatie');
