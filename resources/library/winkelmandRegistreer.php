@@ -157,6 +157,32 @@ class winkelmandRegistreer{
         plaatsInOrderRegel($winkelmand, $bestaandeOrder);
       }
 
+      return true;
+    }
+
+    function logInSession($id){
+      $stmt = DB::conn()->prepare('SELECT rolid FROM TussenRol WHERE persoonid=?');
+      $stmt->bind_param('i', $id);
+      $stmt->execute();
+      $stmt->bind_result($klantRolId);
+      $stmt->fetch();
+      $stmt->close();
+
+      $stmt = DB::conn()->prepare('SELECT voornaam, achternaam FROM Persoon WHERE id=?');
+      $stmt->bind_param('i', $id);
+      $stmt->execute();
+      $stmt->bind_result($voornaam, $achternaam);
+      $stmt->fetch();
+      $stmt->close();
+
+      $naam = $voornaam.' '.$achternaam;
+
+      $_SESSION['login'] = array();
+      $_SESSION['login'][] = $id;
+      $_SESSION['login'][] = $naam;
+      $_SESSION['login'][] = $klantRolId;
+      header("Refresh:0; url=/afrekenen");
+      return true;
     }
 
     if(controlleerEmailAlInGebruik($email)){
@@ -166,7 +192,9 @@ class winkelmandRegistreer{
         if(voegToeAanDatabase($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $wachtwoord)){
           $gebruikerId = getGebruikerId($email);
           if(plaatsSessionWinkelmandInDatabase($winkelmand, $email)){
-            header("Refresh:0; url=/afrekenen");
+            if(logInSession($gebruikerId)){
+              header("Refresh:0; url=/afrekenen");
+            }
           }
         }else{
           echo '<div class="error"><b>Er is een fout opgetreden tijdens het registreren. Probeer het later nog een keer</b></div>';
