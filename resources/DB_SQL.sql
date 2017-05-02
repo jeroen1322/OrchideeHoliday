@@ -88,13 +88,6 @@ FOREIGN KEY(`orchidee`) REFERENCES Orchidee(`id`),
 FOREIGN KEY(`persoon`) REFERENCES Persoon(`id`)
 );
 
-INSERT INTO Rol(id, omschrijving) VALUES(1, 'beheerder');
-INSERT INTO Rol(id, omschrijving) VALUES(2, 'klant');
-INSERT INTO Persoon(voornaam, achternaam, email, woonplaats, postcode, straat, huisnummer)
-VALUES('Jeroen', 'Grooten', 'contact@jeroengrooten.nl', 'Wijk bij Duurstede', '3961AM', 'Oeverstraat', '21A');
-INSERT INTO TussenRol(rolid, persoonid) VALUES(1, 1);
-INSERT INTO Wachtwoord(wachtwoord, persoon) VALUES('$2y$10$ygURUwn2sI/6UcexSQlCn.CVyG//.WVdOCvbuVUhqaadCAuXGmHaS', 1);
-
 INSERT INTO verzendWijze(id, omschrijving) VALUES (1, 'Koerierdienst');
 INSERT INTO verzendWijze(id, omschrijving) VALUES (2, 'Ophalen op locatie');
 
@@ -103,3 +96,10 @@ INSERT INTO betaalWijze(id, omschrijving) VALUES (2, 'RABOBANK');
 INSERT INTO betaalWijze(id, omschrijving) VALUES (3, 'ABN AMRO');
 INSERT INTO betaalWijze(id, omschrijving) VALUES (4, 'SNS BANK');
 INSERT INTO betaalWijze(id, omschrijving) VALUES (5, 'BITCOIN');
+
+INSERT INTO Rol(id, omschrijving) VALUES(1, 'beheerder');
+INSERT INTO Rol(id, omschrijving) VALUES(2, 'klant');
+INSERT INTO Persoon(voornaam, achternaam, email, woonplaats, postcode, straat, huisnummer, betaalwijze)
+VALUES('Jeroen', 'Grooten', 'contact@jeroengrooten.nl', 'Wijk bij Duurstede', '3961AM', 'Oeverstraat', '21A', 1);
+INSERT INTO TussenRol(rolid, persoonid) VALUES(1, 1);
+INSERT INTO Wachtwoord(wachtwoord, persoon) VALUES('$2y$10$ygURUwn2sI/6UcexSQlCn.CVyG//.WVdOCvbuVUhqaadCAuXGmHaS', 1);

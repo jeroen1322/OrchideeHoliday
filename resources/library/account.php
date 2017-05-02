@@ -37,7 +37,7 @@ class Account{
     }
   }
 
-  public function Registreren($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $wachtwoord, $herhaalWachtwoord){
+  public function Registreren($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $wachtwoord, $herhaalWachtwoord, $betaalWijze){
 
     function controlleerEmailAlInGebruik($email){
       $stmt = DB::conn()->prepare('SELECT email FROM Persoon WHERE email=?');
@@ -57,12 +57,12 @@ class Account{
       }
     }
 
-    function voegToeAanDatabase($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $wachtwoord){
+    function voegToeAanDatabase($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $wachtwoord, $betaalWijze){
 
-      function insertPersoon($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $wachtwoord){
-        $stmt = DB::conn()->prepare('INSERT INTO Persoon(voornaam, achternaam, email, woonplaats, postcode, straat, huisnummer)
-        VALUES(?, ?, ?, ?, ?, ?, ?)');
-        $stmt->bind_param('sssssss', $voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer);
+      function insertPersoon($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $betaalWijze){
+        $stmt = DB::conn()->prepare('INSERT INTO Persoon(voornaam, achternaam, email, woonplaats, postcode, straat, huisnummer, betaalWijze)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?)');
+        $stmt->bind_param('sssssssi', $voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $betaalWijze);
         $stmt->execute();
         $stmt->close();
 
@@ -100,7 +100,7 @@ class Account{
         return true;
       }
 
-      if(insertPersoon($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $wachtwoord)){
+      if(insertPersoon($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $betaalWijze)){
         $gebruikerId = getGebruikerId($email);
         $defaultRolId = 2;
         if(insertTussenRol($gebruikerId, $defaultRolId)){
@@ -119,7 +119,7 @@ class Account{
       echo '<div class="warning"><b>Het door u opgegeven email adres is al in gebruik.</b></div>';
     }else{
       if(controlleerOvereenkomstWachtwoorden($wachtwoord, $herhaalWachtwoord)){
-        if(voegToeAanDatabase($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $wachtwoord)){
+        if(voegToeAanDatabase($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $wachtwoord, $betaalWijze)){
           header("Refresh:0; url=/login");
         }else{
           echo '<div class="error"><b>Er is een fout opgetreden tijdens het registreren. Probeer het later nog een keer</b></div>';

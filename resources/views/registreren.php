@@ -11,10 +11,10 @@ if(!empty($_POST)){
   $huisnummer = $_POST['huisnummer'];
   $wachtwoord = $_POST['wachtwoord'];
   $herhaalWachtwoord = $_POST['herhaalWachtwoord'];
-  print_r($_POST);
-  // if(!empty($voornaam || $achternaam || $email || $woonplaats || $postcode || $straat || $huisnummer || $wachtwoord || $herhaalWachtwoord)){
-  //   $gebruiker->Registreren($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $wachtwoord, $herhaalWachtwoord);
-  // }
+  $betaalWijze = $_POST['betaalWijze'];
+  if(!empty($voornaam || $achternaam || $email || $woonplaats || $postcode || $straat || $huisnummer || $wachtwoord || $herhaalWachtwoord)){
+    $gebruiker->Registreren($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $wachtwoord, $herhaalWachtwoord, $betaalWijze);
+  }
 }
 
 if(!$gebruiker->isIngelogd()){
