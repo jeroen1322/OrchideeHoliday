@@ -5,6 +5,7 @@ $login = new winkelmandLogin;
 $registreer = new winkelmandRegistreer;
 
 if(!empty($_POST)){
+
   if(!$account->isIngelogd()){
     if($_POST['submit'] == 'LOGIN'){
       $login->login($_SESSION['winkelmand'], $_POST['email'], $_POST['wachtwoord']);
@@ -13,9 +14,35 @@ if(!empty($_POST)){
     }elseif($_GET['bestellen'] == 'anoniem'){
       echo '<u><b>TODO:</b> Anoniem bestellen</u>';
     }
+  }else{
+    switch($_GET['stap']){
+      case 'opmerking':
+        $afrekenen->slaBezorgwijzeOpInSession($_POST['bezorgwijze']);
+        if($afrekenen->controlleerBezorgwijzeSession()){
+          ?>
+          <h1>AFREKENEN</h1>
+          <hr>
+          <h3>OPMERKING</h3>
+
+          <form method="post" action="?stap=overzicht">
+          <textarea name="opmerking" placeholder="OPMERKING (optioneel)" class="form-control"></textarea>
+          <button class="btn btn-primary form-knop">VERDER</button>
+          </form>
+          <?php
+        }else{
+          echo '<div class="warning"><b>Er is een fout opgetreden. Probeer het later opnieuw</b></div>';
+        }
+        break;
+
+      case 'overzicht':
+        if(!empty($_POST['opmerking'])){
+          $afrekenen->storeOpmerkingInSession($_POST['opmerking']);
+        }
+        break;
+    }
+
   }
-  $afrekenen->slaBezorgwijzeOpInSession($_POST['bezorgwijze']);
-  print_r($_SESSION['bezorgwijze']);
+
 }else{
 
   if($account->isIngelogd()){
@@ -23,7 +50,7 @@ if(!empty($_POST)){
     <h1>AFREKENEN</h1>
     <hr>
     <h3>VERZENDWIJZE</h3>
-    <form method="POST">
+    <form method="post" action="?stap=opmerking">
       <div class="left">
         <div class="panel panel-default bezorger">
           <div class="panel-body">
@@ -48,7 +75,7 @@ if(!empty($_POST)){
       </div>
       <br>
       <div></div>
-      <button type="submit" class="btn btn-primary form-knop">VERDER</button>
+      <button type="submit" class="btn btn-primary form-knop verzendButton">VERDER</button>
     </form>
   <?php
   }else{

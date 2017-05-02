@@ -188,6 +188,9 @@ i.fa.fa-user, i.fa.fa-truck{
 .bezorger{
   margin-bottom: -2px;
 }
+.bezorger:hover{
+  cursor: pointer;
+}
 .ophalen{
   margin: 0;
 }

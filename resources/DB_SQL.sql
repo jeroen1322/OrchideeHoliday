@@ -65,6 +65,7 @@ create table `Order`(
 `verzendWijze` INT,
 `betaalWijze` INT,
 `orderdatum` VARCHAR(45),
+`opmerking` TEXT,
 PRIMARY KEY(`id`),
 FOREIGN KEY(`persoon`) REFERENCES Persoon(`id`),
 FOREIGN KEY(`verzendWijze`) REFERENCES verzendWijze(`id`),

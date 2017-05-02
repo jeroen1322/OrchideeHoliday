@@ -34,13 +34,16 @@ $(document).ready(function(){
     $('.vraag').hide("fast");
   });
 
+  $('.verzendButton').prop('disabled', true);
   $(".bezorger").click(function(){
     $(".bezorger").css("border", "1px solid #009688");
     $(".ophalen").css("border", "none");
+    $('.verzendButton').prop('disabled', false);
   });
   $(".ophalen").click(function(){
     $(".ophalen").css("border", "1px solid #009688");
     $(".bezorger").css("border", "none");
+    $('.verzendButton').prop('disabled', false);
   });
 
 });
