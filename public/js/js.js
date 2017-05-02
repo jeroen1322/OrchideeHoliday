@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
   if($(window).width() < 610){
     $('.nieuw_film_slider').slick({
       infinite: true,
@@ -32,4 +33,14 @@ $(document).ready(function(){
     $('.afleverDatum').show("fast");
     $('.vraag').hide("fast");
   });
+
+  $(".bezorger").click(function(){
+    $(".bezorger").css("border", "1px solid #009688");
+    $(".ophalen").css("border", "none");
+  });
+  $(".ophalen").click(function(){
+    $(".ophalen").css("border", "1px solid #009688");
+    $(".bezorger").css("border", "none");
+  });
+
 });

@@ -174,3 +174,20 @@ img.winkelmand_img {
 .anoniem-bestel-knop{
   width: 100%;
 }
+input[type=radio] {
+   display:none;
+}
+.verzendwijze{
+  width: 100%;
+  text-align: center;
+  height: 300px;
+}
+i.fa.fa-user, i.fa.fa-truck{
+    font-size: 130px;
+}
+.bezorger{
+  margin-bottom: -2px;
+}
+.ophalen{
+  margin: 0;
+}

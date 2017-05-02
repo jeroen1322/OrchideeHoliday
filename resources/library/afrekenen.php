@@ -1,6 +1,7 @@
 <?php
 class Afrekenen{
-  public function logIn($sessionArray, $email, $wachtwoord){
-    
+  public function slaBezorgwijzeOpInSession($bezorgwijze){
+    $_SESSION['bezorgwijze'] = array();
+    $_SESSION['bezorgwijze'] = $bezorgwijze;
   }
 }
