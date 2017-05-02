@@ -1,6 +1,6 @@
 <?php
 $gebruiker = new Account;
-
+$betalen = new Betalen;
 if(!empty($_POST)){
   $voornaam = $_POST['voornaam'];
   $achternaam = $_POST['achternaam'];
@@ -11,10 +11,10 @@ if(!empty($_POST)){
   $huisnummer = $_POST['huisnummer'];
   $wachtwoord = $_POST['wachtwoord'];
   $herhaalWachtwoord = $_POST['herhaalWachtwoord'];
-
-  if(!empty($voornaam || $achternaam || $email || $woonplaats || $postcode || $straat || $huisnummer || $wachtwoord || $herhaalWachtwoord)){
-    $gebruiker->Registreren($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $wachtwoord, $herhaalWachtwoord);
-  }
+  print_r($_POST);
+  // if(!empty($voornaam || $achternaam || $email || $woonplaats || $postcode || $straat || $huisnummer || $wachtwoord || $herhaalWachtwoord)){
+  //   $gebruiker->Registreren($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $wachtwoord, $herhaalWachtwoord);
+  // }
 }
 
 if(!$gebruiker->isIngelogd()){
@@ -32,6 +32,9 @@ if(!$gebruiker->isIngelogd()){
         <input type="text" name="huisnummer" placeholder="Huisnummer" class="form-control" autocomplete="off" required>
         <input type="password" name="wachtwoord" placeholder="Wachtwoord" autocomplete="off" class="form-control" autocomplete="off" required>
         <input type="password" name="herhaalWachtwoord" placeholder="Herhaal wachtwoord" autocomplete="off" class="form-control" autocomplete="off" required>
+        <?php
+          $betaalwijze = $betalen->displayBetaalWijze();
+        ?>
         <input type="submit" name="submit" class="btn btn-primary form-knop" value="REGISTREER">
       </form>
     </div>

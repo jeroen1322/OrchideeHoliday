@@ -97,3 +97,9 @@ INSERT INTO Wachtwoord(wachtwoord, persoon) VALUES('$2y$10$ygURUwn2sI/6UcexSQlCn
 
 INSERT INTO verzendWijze(id, omschrijving) VALUES (1, 'Koerierdienst');
 INSERT INTO verzendWijze(id, omschrijving) VALUES (2, 'Ophalen op locatie');
+
+INSERT INTO betaalWijze(id, omschrijving) VALUES (1, 'ING');
+INSERT INTO betaalWijze(id, omschrijving) VALUES (2, 'RABOBANK');
+INSERT INTO betaalWijze(id, omschrijving) VALUES (3, 'ABN AMRO');
+INSERT INTO betaalWijze(id, omschrijving) VALUES (4, 'SNS BANK');
+INSERT INTO betaalWijze(id, omschrijving) VALUES (5, 'BITCOIN');
