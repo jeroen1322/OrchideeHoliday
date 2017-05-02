@@ -10,16 +10,19 @@ if(!empty($_POST)){
       $login->login($_SESSION['winkelmand'], $_POST['email'], $_POST['wachtwoord']);
     }elseif($_POST['submit'] == 'REGISTREER'){
       $registreer->registreer($_POST, $_SESSION['winkelmand']);
+    }elseif($_GET['bestellen'] == 'anoniem'){
+      echo '<u><b>TODO:</b> Anoniem bestellen</u>';
     }
   }
 }
-?>
-<h1>AFREKENEN</h1>
-<?php
 if($account->isIngelogd()){
-
+  ?>
+  <h1>AFREKENEN</h1>
+<?php
 }else{
   ?>
+  <h1>INLOGGEN OF REGISTREREN</h1>
+  <h4>Als u anoniem besteld, zal u een factuur moeten voldoen voordat de bestelling word verzonden.</h4>
   <div class="left">
     <div class="panel panel-default">
       <div class="panel-body login-panel">
@@ -31,6 +34,10 @@ if($account->isIngelogd()){
         </form>
       </div>
     </div>
+    <hr>
+    <form method="post" action="?bestellen=anoniem">
+      <button type="submit" name="submit" class="btn btn-primary form-knop anoniem-bestel-knop">ANONIEM BESTELLEN</button>
+    </form>
   </div>
   <div class="right">
     <div class="panel panel-default">
