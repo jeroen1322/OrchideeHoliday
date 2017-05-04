@@ -3,9 +3,11 @@ $winkelmand = new Winkelmand;
 $account = new Account;
 
 if(!empty($_GET)){
-  if($_GET['afgerond'] == true){
-    $gebruikerId = $account->getLoginId();
+  $gebruikerId = $account->getLoginId();
+  if($_GET['afgerond'] == 'true'){
     $winkelmand->rondBestellingAf($gebruikerId);
+  }elseif($_GET['afgerond'] == 'false'){
+    $winkelmand->annuleerOrder($gebruikerId);
   }
 }
 ?>

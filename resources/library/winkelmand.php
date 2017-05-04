@@ -189,4 +189,50 @@ class Winkelmand{
     rondOrderAf($order);
     header("Refresh:0; url=/");
   }
+
+  public function annuleerOrder($gebruiker){
+    function getOrder($gebruiker){
+      $stmt = DB::conn()->prepare('SELECT id FROM `Order` WHERE Persoon=? AND besteld=0');
+      $stmt->bind_param('i', $gebruiker);
+      $stmt->execute();
+      $stmt->bind_result($orderId);
+      $stmt->fetch();
+      $stmt->close();
+
+      return $orderId;
+    }
+
+    function verwijderArtikelen($order){
+      function getOrderRegelArtikelen($order){
+        $stmt = DB::conn()->prepare('SELECT id FROM `OrderRegel` WHERE orderid=?');
+        $stmt->bind_param('i', $order);
+        $stmt->execute();
+        $stmt->bind_result($orderRegelId);
+        while($stmt->fetch()){
+          $regels[] = $orderRegelId;
+        }
+        $stmt->close();
+
+        return $regels;
+      }
+
+      function verwijderOrderRegelArtikelen($orderRegelArtikelen){
+        foreach($orderRegelArtikelen as $o){
+          $stmt = DB::conn()->prepare('DELETE FROM `OrderRegel` WHERE id=?');
+          $stmt->bind_param('i', $o);
+          $stmt->execute();
+          $stmt->close();
+        }
+      }
+
+      $orderRegels = getOrderRegelArtikelen($order);
+      verwijderOrderRegelArtikelen($orderRegels);
+
+    }
+
+    $order = getOrder($gebruiker);
+    verwijderArtikelen($order);
+    header("Refresh:0; url=/");
+  }
+
 }

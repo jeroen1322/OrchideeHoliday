@@ -71,6 +71,7 @@ if(!empty($_POST)){
           <?php
           }
           ?>
+          <a href="/?afgerond=false"><button class="btn btn-succes form-knop annuleren">BESTELLING ANNULEREN</button></a>
           <a href="/?afgerond=true"><button class="btn btn-succes form-knop form-knop-rechts">BESTELLING AFRONDEN</button></a>
           <?php
         }
