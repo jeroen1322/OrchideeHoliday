@@ -128,4 +128,42 @@ class Winkelmand{
 
   }
 
+  public function deleteFromDatabaseWinkelmand($artikelId, $gebruikerId){
+
+    function getOrder($gebruikerId){
+      $stmt = DB::conn()->prepare('SELECT id FROM `Order` WHERE Persoon=? AND besteld=0');
+      $stmt->bind_param('i', $gebruikerId);
+      $stmt->execute();
+      $stmt->bind_result($orderId);
+      $stmt->fetch();
+      $stmt->close();
+
+      return $orderId;
+    }
+
+    function getOrderRegelId($artikelId, $orderid){
+      $stmt = DB::conn()->prepare('SELECT id FROM `OrderRegel` WHERE orchideeid=? AND orderid=?');
+      $stmt->bind_param('ii', $artikelId, $orderid);
+      $stmt->execute();
+      $stmt->bind_result($orderRegelId);
+      $stmt->fetch();
+      $stmt->close();
+
+      return $orderRegelId;
+    }
+
+    function delete($artikelId, $orderRegelId){
+      $stmt = DB::conn()->prepare('DELETE FROM `OrderRegel` WHERE orchideeid=? AND id=?');
+      $stmt->bind_param('ii', $artikelId, $orderRegelId);
+      $stmt->execute();
+      $stmt->close();
+    }
+
+    $order = getOrder($gebruikerId);
+    $orderRegelId = getOrderRegelId($artikelId, $order);
+    delete($artikelId, $orderRegelId);
+
+    return true;
+  }
+
 }

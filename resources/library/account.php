@@ -12,6 +12,14 @@ class Account{
     }
   }
 
+  public function getLoginId(){
+    if(!empty($_SESSION['login'])){
+      return $_SESSION['login'][0];
+    }else{
+      return false;
+    }
+  }
+
   public function gebruikerGegevens($klantId){
     $stmt = DB::conn()->prepare('SELECT voornaam, achternaam, email, woonplaats, postcode, straat, huisnummer FROM Persoon WHERE id=?');
     $stmt->bind_param('i', $klantId);

@@ -16,6 +16,6 @@ class Afrekenen{
   public function storeOpmerkingInSession($opmerking){
     $_SESSION['opmerking'] = array();
     $_SESSION['opmerking'] = $opmerking;
-    print_r($_SESSION['opmerking']);
   }
+
 }

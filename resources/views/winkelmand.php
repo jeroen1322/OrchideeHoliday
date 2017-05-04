@@ -2,6 +2,18 @@
 $account = new Account;
 $winkelmand = new Winkelmand;
 $artikel = new Artikel;
+
+if(!empty($_GET)){
+  if($account->isIngelogd()){
+    if($_GET['action'] == 'delete'){
+      $gebruikerId = $account->getLoginId();
+      if($winkelmand->deleteFromDatabaseWinkelmand($_GET['code'], $gebruikerId)){
+        header("Refresh:0; url=/winkelmand");
+      }
+    }
+  }
+}
+
 if($account->isIngelogd()){
   ?>
   <h1>WINKELMAND</h1>
@@ -12,8 +24,10 @@ if($account->isIngelogd()){
     <table class="table winkelmand_table">
       <tbody>
     <?php
+    $totaal = array();
     foreach ($artikelen as $artikelId){
       $info = $artikel->thumbInfo($artikelId);
+      $totaal[] = $info['prijs'];
       ?>
       <tr>
         <td><a href="/artikel/<?php echo $artikelId?>"><img src="/foto/<?php echo $info['img']?>" class="winkelmand_img"></a></td>
@@ -32,6 +46,9 @@ if($account->isIngelogd()){
     ?>
       </tbody>
     </table>
+    <?php
+      echo '<h4><b>TOTAAL PRIJS: €'.array_sum($totaal).'</b></h4>';
+    ?>
     <a href="/afrekenen"><button class="btn btn-succes form-knop">AFREKENEN</button></a>
     <?php
   }else{
