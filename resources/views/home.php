@@ -1,3 +1,14 @@
+<?php
+$winkelmand = new Winkelmand;
+$account = new Account;
+
+if(!empty($_GET)){
+  if($_GET['afgerond'] == true){
+    $gebruikerId = $account->getLoginId();
+    $winkelmand->rondBestellingAf($gebruikerId);
+  }
+}
+?>
 <div class="top-home">
   <div class="slider">
 

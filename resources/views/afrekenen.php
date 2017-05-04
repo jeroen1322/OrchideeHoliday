@@ -54,13 +54,6 @@ if(!empty($_POST)){
                   <td><a href="/artikel/<?php echo $artikelId?>"><img src="/foto/<?php echo $info['img']?>" class="winkelmand_img"></a></td>
                   <td><p><?php echo $info['titel'] ?></p></td>
                   <td><h4>€<?php echo $info['prijs'] ?></h4></td>
-                  <td>
-                    <form method="post" action="?action=delete&code=<?php echo $artikelId ?>">
-                      <button type="submit" class="btn btn-success">
-                        <i class="fa fa-trash-o" aria-hidden="true"></i>
-                      </button>
-                    </form>
-                  </td>
                 </tr>
                 <?php
               }
@@ -69,11 +62,20 @@ if(!empty($_POST)){
           </table>
           <?php
           echo '<h4><b>TOTAAL PRIJS: €'.array_sum($totaal).'</b></h4>';
+          $opmerking = $afrekenen->getSessionOpmerking();
+          if(!empty($opmerking)){
           ?>
-          <a href="/?afgerekend=true"><button class="btn btn-succes form-knop">AFREKENEN</button></a>
+          <hr>
+          <h3>OPMERKING: </h3>"<?php echo $opmerking ?>"</h3>
+          <hr>
+          <?php
+          }
+          ?>
+          <a href="/?afgerond=true"><button class="btn btn-succes form-knop form-knop-rechts">BESTELLING AFRONDEN</button></a>
           <?php
         }
         break;
+
       }
   }else{
     if($_POST['submit'] == 'LOGIN'){

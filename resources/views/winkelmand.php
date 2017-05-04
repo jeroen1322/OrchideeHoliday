@@ -2,6 +2,7 @@
 $account = new Account;
 $winkelmand = new Winkelmand;
 $artikel = new Artikel;
+$afrekenen = new Afrekenen;
 
 if(!empty($_GET)){
   if($account->isIngelogd()){

@@ -166,4 +166,27 @@ class Winkelmand{
     return true;
   }
 
+  public function rondBestellingAf($gebruiker){
+    function getOrder($gebruiker){
+      $stmt = DB::conn()->prepare('SELECT id FROM `Order` WHERE Persoon=? AND besteld=0');
+      $stmt->bind_param('i', $gebruiker);
+      $stmt->execute();
+      $stmt->bind_result($orderId);
+      $stmt->fetch();
+      $stmt->close();
+
+      return $orderId;
+    }
+
+    function rondOrderAf($order){
+      $stmt = DB::conn()->prepare('UPDATE `Order` SET besteld=1 WHERE id=?');
+      $stmt->bind_param('i', $order);
+      $stmt->execute();
+      $stmt->close();
+    }
+
+    $order = getOrder($gebruiker);
+    rondOrderAf($order);
+    header("Refresh:0; url=/");
+  }
 }

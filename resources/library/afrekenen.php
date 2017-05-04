@@ -18,4 +18,13 @@ class Afrekenen{
     $_SESSION['opmerking'] = $opmerking;
   }
 
+  public function getSessionOpmerking(){
+    if(!empty($_SESSION['opmerking'])){
+      $opmerking = $_SESSION['opmerking'];
+      return $opmerking;
+    }else{
+      return false;
+    }
+  }
+
 }
