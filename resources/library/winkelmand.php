@@ -235,4 +235,11 @@ class Winkelmand{
     header("Refresh:0; url=/");
   }
 
+  public function rondSessionBestellingAf(){
+    echo 'TODO AFRONDEN';
+  }
+
+  public function annuleerSessionOrder(){
+    echo 'TODO ANNULEREN';
+  }
 }

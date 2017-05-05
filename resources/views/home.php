@@ -3,11 +3,19 @@ $winkelmand = new Winkelmand;
 $account = new Account;
 
 if(!empty($_GET)){
-  $gebruikerId = $account->getLoginId();
-  if($_GET['afgerond'] == 'true'){
-    $winkelmand->rondBestellingAf($gebruikerId);
-  }elseif($_GET['afgerond'] == 'false'){
-    $winkelmand->annuleerOrder($gebruikerId);
+  if($_GET['ingelogd'] == 'true'){
+    $gebruikerId = $account->getLoginId();
+    if($_GET['afgerond'] == 'true'){
+      $winkelmand->rondBestellingAf($gebruikerId);
+    }elseif($_GET['afgerond'] == 'false'){
+      $winkelmand->annuleerOrder($gebruikerId);
+    }
+  }else{
+    if($_GET['afgerond'] == 'true'){
+      $winkelmand->rondSessionBestellingAf();
+    }elseif($_GET['afgerond'] == 'false'){
+      $winkelmand->annuleerSessionOrder();
+    }
   }
 }
 ?>
