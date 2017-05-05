@@ -39,10 +39,10 @@ if(!empty($_POST)){
 
       if(!empty($artikelen)){
         ?>
+        <button class="btn btn-succes form-knop form-knop-rechts" onClick="window.print()"><i class="fa fa-print" aria-hidden="true"></i></button>
         <h1>AFREKENEN</h1>
         <hr>
         <h4>OVERZICHT</h4>
-        <p><b>TODO: PRINT KNOP, BESTELLING AFRONDEN EN OPTIE VOOR ANULERING ORDER<b></p>
           <table class="table winkelmand_table">
             <tbody>
               <?php
@@ -72,8 +72,10 @@ if(!empty($_POST)){
           <?php
           }
           ?>
-          <a href="/?afgerond=false&ingelogd=true"><button class="btn btn-succes form-knop annuleren">BESTELLING ANNULEREN</button></a>
-          <a href="/?afgerond=true&ingelogd=true"><button class="btn btn-succes form-knop form-knop-rechts">BESTELLING AFRONDEN</button></a>
+          <div class="overzichtBottom">
+            <a href="/?afgerond=false&ingelogd=true"><button class="btn btn-succes form-knop annuleren">BESTELLING ANNULEREN</button></a>
+            <a href="/?afgerond=true&ingelogd=true"><button class="btn btn-succes form-knop form-knop-rechts">BESTELLING AFRONDEN</button></a>
+          </div>
           <?php
         }
         break;
@@ -149,10 +151,10 @@ if(!empty($_POST)){
 
         if(!empty($_SESSION['winkelmand'])){
           ?>
+          <button class="btn btn-succes form-knop form-knop-rechts" onClick="window.print()"><i class="fa fa-print" aria-hidden="true"></i></button>
           <h1>AFREKENEN</h1>
           <hr>
           <h4>OVERZICHT</h4>
-          <p><b>TODO: PRINT KNOP, BESTELLING AFRONDEN EN OPTIE VOOR ANULERING ORDER<b></p>
             <table class="table winkelmand_table">
               <tbody>
                 <?php

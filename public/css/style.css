@@ -1,3 +1,32 @@
+@media print {
+  .navbar{
+    display: none !important;
+  }
+  h1{
+    display: none !important;
+  }
+  form{
+    display: none !important;
+  }
+  .navtop{
+    display: none !important;
+  }
+  .overzichtBottom{
+    display: none !important;
+  }
+  a[href]:after {
+    content: none !important;
+  }
+  button{
+    display: none !important;
+  }
+  hr{
+    display: none !important;
+  }
+  h4{
+    font-weight: bold;
+  }
+}
 body{
   background-color: white;
 }
