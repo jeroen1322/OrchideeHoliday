@@ -61,8 +61,10 @@ if($account->isIngelogd()){
     <table class="table winkelmand_table">
       <tbody>
     <?php
+    $totaal = array();
     foreach($_SESSION['winkelmand'] as $artikelId){
       $info = $artikel->thumbInfo($artikelId);
+      $totaal[] = $info['prijs'];
       ?>
       <tr>
         <td><a href="/artikel/<?php echo $artikelId?>"><img src="/foto/<?php echo $info['img']?>" class="winkelmand_img"></a></td>
@@ -81,6 +83,9 @@ if($account->isIngelogd()){
     ?>
       </tbody>
     </table>
+    <?php
+      echo '<h4><b>TOTAAL PRIJS: €'.array_sum($totaal).'</b></h4>';
+    ?>
     <a href="/afrekenen"><button class="btn btn-succes form-knop">AFREKENEN</button></a>
     <?php
   }
