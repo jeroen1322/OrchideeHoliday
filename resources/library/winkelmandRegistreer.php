@@ -10,6 +10,7 @@ class winkelmandRegistreer{
     $huisnummer = $postArray['huisnummer'];
     $wachtwoord = $postArray['wachtwoord'];
     $herhaalWachtwoord = $postArray['herhaalWachtwoord'];
+    $betaalWijze = $postArray['betaalWijze'];
 
     function controlleerEmailAlInGebruik($email){
       $stmt = DB::conn()->prepare('SELECT email FROM Persoon WHERE email=?');
@@ -29,12 +30,12 @@ class winkelmandRegistreer{
       }
     }
 
-    function voegToeAanDatabase($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $wachtwoord){
+    function voegToeAanDatabase($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $wachtwoord, $betaalWijze){
 
-      function insertPersoon($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $wachtwoord){
-        $stmt = DB::conn()->prepare('INSERT INTO Persoon(voornaam, achternaam, email, woonplaats, postcode, straat, huisnummer)
-        VALUES(?, ?, ?, ?, ?, ?, ?)');
-        $stmt->bind_param('sssssss', $voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer);
+      function insertPersoon($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $betaalWijze){
+        $stmt = DB::conn()->prepare('INSERT INTO Persoon(voornaam, achternaam, email, woonplaats, postcode, straat, huisnummer, betaalWijze)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?)');
+        $stmt->bind_param('sssssssi', $voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $betaalWijze);
         $stmt->execute();
         $stmt->close();
 
@@ -72,7 +73,7 @@ class winkelmandRegistreer{
         return true;
       }
 
-      if(insertPersoon($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $wachtwoord)){
+      if(insertPersoon($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $betaalWijze)){
         $gebruikerId = getGebruikerId($email);
         $defaultRolId = 2;
         if(insertTussenRol($gebruikerId, $defaultRolId)){
@@ -181,7 +182,7 @@ class winkelmandRegistreer{
       $_SESSION['login'][] = $id;
       $_SESSION['login'][] = $naam;
       $_SESSION['login'][] = $klantRolId;
-      header("Refresh:0; url=/afrekenen");
+
       return true;
     }
 
@@ -189,7 +190,7 @@ class winkelmandRegistreer{
       echo '<div class="warning"><b>Het door u opgegeven email adres is al in gebruik.</b></div>';
     }else{
       if(controlleerOvereenkomstWachtwoorden($wachtwoord, $herhaalWachtwoord)){
-        if(voegToeAanDatabase($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $wachtwoord)){
+        if(voegToeAanDatabase($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $wachtwoord, $betaalWijze)){
           $gebruikerId = getGebruikerId($email);
           if(plaatsSessionWinkelmandInDatabase($winkelmand, $email)){
             if(logInSession($gebruikerId)){

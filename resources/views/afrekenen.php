@@ -1,6 +1,7 @@
 <?php
 $afrekenen = new Afrekenen;
 $account = new Account;
+$betalen = new Betalen;
 $login = new winkelmandLogin;
 $registreer = new winkelmandRegistreer;
 $winkelmand = new Winkelmand;
@@ -260,6 +261,9 @@ if(!empty($_POST)){
             <input type="text" name="huisnummer" placeholder="Huisnummer" class="form-control" autocomplete="off" required>
             <input type="password" name="wachtwoord" placeholder="Wachtwoord" autocomplete="off" class="form-control" autocomplete="off" required>
             <input type="password" name="herhaalWachtwoord" placeholder="Herhaal wachtwoord" autocomplete="off" class="form-control" autocomplete="off" required>
+            <?php
+              $betaalwijze = $betalen->displayBetaalWijze();
+            ?>
             <input type="submit" name="submit" class="btn btn-primary form-knop" value="REGISTREER">
           </form>
         </div>
