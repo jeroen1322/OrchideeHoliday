@@ -7,6 +7,16 @@ create table betaalWijze(
 PRIMARY KEY(`id`)
 );
 
+create table AnoniemeGebruiker(
+`id` int auto_increment,
+`email` varchar(255),
+`woonplaats` varchar(255),
+`postcode` varchar(10),
+`straat` varchar(255),
+`huisnummer` varchar(255),
+PRIMARY KEY(`id`)
+);
+
 create table Persoon(
 `id` int auto_increment,
 `voornaam` varchar(255),
