@@ -7,16 +7,6 @@ create table betaalWijze(
 PRIMARY KEY(`id`)
 );
 
-create table AnoniemeGebruiker(
-`id` int auto_increment,
-`email` varchar(255),
-`woonplaats` varchar(255),
-`postcode` varchar(10),
-`straat` varchar(255),
-`huisnummer` varchar(255),
-PRIMARY KEY(`id`)
-);
-
 create table Persoon(
 `id` int auto_increment,
 `voornaam` varchar(255),
@@ -27,6 +17,7 @@ create table Persoon(
 `straat` varchar(255),
 `huisnummer` varchar(255),
 `betaalWijze` INT,
+`anoniem` INT,
 primary key(`id`),
 FOREIGN KEY(`betaalWijze`) REFERENCES betaalWijze(`id`)
 );
@@ -76,6 +67,7 @@ create table `Order`(
 `betaalWijze` INT,
 `orderdatum` VARCHAR(45),
 `opmerking` TEXT,
+`anoniem` INT,
 PRIMARY KEY(`id`),
 FOREIGN KEY(`persoon`) REFERENCES Persoon(`id`),
 FOREIGN KEY(`verzendWijze`) REFERENCES verzendWijze(`id`),
