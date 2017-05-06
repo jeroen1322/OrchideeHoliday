@@ -414,8 +414,9 @@ class Winkelmand{
     }
 
     if(registreer($postArray, $winkelmand, $verzendWijze)){
-      session_unset($_SESSION);
+      anoniemeGebruikerMail($postArray['email'], $winkelmand);
       header("Refresh:0; url=/");
+      session_unset($_SESSION);
     }
   }
 

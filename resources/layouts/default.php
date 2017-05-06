@@ -1,6 +1,9 @@
 <?php
 include(__DIR__ . '/../db.php');
-include(MAIL . '/mailLib.php');
+// include(MAIL . '/mailLib.php');
+foreach(glob(MAIL.'/*.php') as $file){
+  include $file;
+}
 foreach(glob(__DIR__.'/../library/*.php') as $file){
   include $file;
 }
