@@ -53,6 +53,10 @@ $klein->respond('/afrekenen', function ($request, $response, $service) {
     $service->pageTitle = 'Afrekenen | Orchidee Holiday';
     $service->render(VIEWS.'/afrekenen.php');
 });
+$klein->respond('/best_verkocht', function ($request, $response, $service) {
+    $service->pageTitle = 'Best verkocht | Orchidee Holiday';
+    $service->render(VIEWS.'/best_verkocht.php');
+});
 $klein->respond('/zoeken', function ($request, $response, $service) {
     $service->pageTitle = 'Zoeken | Orchidee Holiday';
     $service->render(VIEWS.'/simpelZoeken.php');

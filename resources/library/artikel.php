@@ -36,4 +36,31 @@ class Artikel{
 
     return $thumbInfo;
   }
+
+  public function zoekBestVerkocht(){
+    function getOrderRegelOrchideeen(){
+      $stmt = DB::conn()->prepare('SELECT orchideeid FROM `OrderRegel`');
+      $stmt->execute();
+      $stmt->bind_result($id);
+      while($stmt->fetch()){
+        $orderRegels[] = $id;
+      }
+      $stmt->close();
+
+      if(!empty($orderRegels)){
+        return $orderRegels;
+      }
+    }
+
+    function telAantalVerkochtOp($orchideeen){
+      return array_count_values($orchideeen);
+    }
+
+    $orchideeen = getOrderRegelOrchideeen();
+
+    if(!empty($orchideeen)){
+      return TelAantalVerkochtOp($orchideeen);
+    }
+
+  }
 }
