@@ -45,7 +45,9 @@ if(!empty($_SESSION['login'])){
   <body>
     <div class="navtop container">
       <a href="/"><h1 class="orchideeHoliday">OrchideeHoliday</h1></a>
-      <input type="text" class="form-control zoek-balk" placeholder="ZOEKEN">
+      <form method="post" action="/zoeken">
+        <input type="text" class="form-control zoek-balk" name="zoekterm" placeholder="ZOEKEN" required>
+      </form>
       <?php
       $account = new Account;
       if($account->isIngelogd()){
