@@ -235,8 +235,97 @@ class Winkelmand{
     header("Refresh:0; url=/");
   }
 
-  public function rondSessionBestellingAf(){
-    echo 'TODO AFRONDEN';
+  public function rondSessionBestellingAf($postArray, $winkelmand, $verzendWijze){
+
+    function getId($email){
+      $stmt = DB::conn()->prepare('SELECT id FROM Persoon WHERE email=? and anoniem=1');
+      $stmt->bind_param('s', $email);
+      $stmt->execute();
+      $stmt->bind_result($id);
+      $stmt->fetch();
+      $stmt->close();
+
+      return $id;
+    }
+
+    function getVerzendWijzeId($verzendWijze){
+      $stmt = DB::conn()->prepare('SELECT id FROM verzendWijze WHERE omschrijving=?');
+      $stmt->bind_param('s', $verzendWijze);
+      $stmt->execute();
+      $stmt->bind_result($id);
+      $stmt->fetch();
+      $stmt->close();
+
+      return $id;
+    }
+
+    function anoniemeOrder($id, $verzendWijze){
+      $randId = rand(1, 99999);
+      $besteld = 1;
+      $anoniem = 1;
+      $verzendId = getVerzendWijzeId($verzendWijze);
+      $orderdatum = date('d-m-Y');
+
+      $stmt = DB::conn()->prepare('INSERT INTO `Order`(id, persoon, besteld, verzendWijze, orderdatum, anoniem) VALUES(?, ?, ?, ?, ?, ?)');
+      $stmt->bind_param('iiiisi', $randId, $id, $besteld, $verzendId, $orderdatum, $anoniem);
+      $stmt->execute();
+      $stmt->close();
+    }
+
+    function getOrderId($id){
+      $stmt = DB::conn()->prepare('SELECT id FROM `Order` WHERE persoon=? AND anoniem=1');
+      $stmt->bind_param('i', $id);
+      $stmt->execute();
+      $stmt->bind_result($orderId);
+      $stmt->fetch();
+      $stmt->close();
+
+      return $orderId;
+    }
+
+    function anoniemeOrderRegel($id, $winkelmand){
+      $randId = rand(1, 99999);
+      $orderId = getOrderId($id);
+
+      foreach($winkelmand as $item){
+        $stmt = DB::conn()->prepare('INSERT INTO `OrderRegel`(id, orchideeid, orderid) VALUES (?, ?, ?)');
+        $stmt->bind_param('iii', $randId, $item, $orderId);
+        $stmt->execute();
+        $stmt->close();
+      }
+    }
+
+    function registreer($postArray, $winkelmand, $verzendWijze){
+      $email = $postArray['email'];
+      $woonplaats = $postArray['woonplaats'];
+      $postcode = $postArray['postcode'];
+      $straat = $postArray['straat'];
+      $huisnummer = $postArray['huisnummer'];
+      $anoniemeGebruikerHerbruik = getId($email);
+      $anoniem = 1;
+
+      if(empty($anoniemeGebruikerHerbruik)){
+        $stmt = DB::conn()->prepare('INSERT INTO Persoon(email, woonplaats, postcode, straat, huisnummer, anoniem) VALUES(?, ?, ?, ?, ?, ?)');
+        $stmt->bind_param('sssssi', $email, $woonplaats, $postcode, $straat, $huisnummer, $anoniem);
+        $stmt->execute();
+        $stmt->close();
+
+        $id = getId($email);
+        anoniemeOrder($id, $verzendWijze);
+        anoniemeOrderRegel($id, $winkelmand);
+      }else{
+        $id = getId($email);
+        anoniemeOrder($id, $verzendWijze);
+        anoniemeOrderRegel($id, $winkelmand);
+      }
+
+      return true;
+    }
+
+    if(registreer($postArray, $winkelmand, $verzendWijze)){
+      session_unset($_SESSION);
+      header("Refresh:0; url=/");
+    }
   }
 
   public function annuleerSessionOrder(){

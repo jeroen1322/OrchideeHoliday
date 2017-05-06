@@ -12,7 +12,7 @@ if(!empty($_GET)){
     }
   }else{
     if($_GET['afgerond'] == 'true'){
-      $winkelmand->rondSessionBestellingAf();
+      $winkelmand->rondSessionBestellingAf($_POST, $_SESSION['winkelmand'], $_SESSION['bezorgwijze']);
     }elseif($_GET['afgerond'] == 'false'){
       $winkelmand->annuleerSessionOrder();
     }

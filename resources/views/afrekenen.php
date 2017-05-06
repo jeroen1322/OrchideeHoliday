@@ -100,7 +100,7 @@ if(!empty($_POST)){
           <div class="left">
             <div class="panel panel-default bezorger">
               <div class="panel-body">
-                <input type="radio" id="bezorger" name="bezorgwijze" value="bezorgen">
+                <input type="radio" id="bezorger" name="bezorgwijze" value="Koerierdienst">
                 <label class="verzendwijze" for="bezorger">
                   <i class="fa fa-truck" aria-hidden="true"></i>
                   <h3><b>LATEN BEZORGEN</b></h3>
@@ -111,7 +111,7 @@ if(!empty($_POST)){
           <div class="right">
             <div class="panel panel-default ophalen">
               <div class="panel-body">
-                <input type="radio" id="ophalen" name="bezorgwijze" value="ophalen">
+                <input type="radio" id="ophalen" name="bezorgwijze" value="Ophalen op locatie">
                 <label class="verzendwijze" for="ophalen">
                   <i class="fa fa-user" aria-hidden="true"></i>
                   <h3><b>ZELF OPHALEN</b></h3>
@@ -184,8 +184,18 @@ if(!empty($_POST)){
             <?php
             }
             ?>
+            <hr>
+            <h4>Na het afronden van de bestelling, ontvangt u een factuur via email waar u eerst aan moet voldoen voordat de bestelling word verzonden</h4>
+            <h4><b>Bezorg-gegevens:</b></h4>
+            <form method="post" action="/?afgerond=true&ingelogd=false">
+              <input type="email" name="email" placeholder="Email" class="form-control" autocomplete="off" required>
+              <input type="text" name="woonplaats" placeholder="Woonplaats" class="form-control" autocomplete="off" required>
+              <input type="text" name="postcode" placeholder="Postcode" class="form-control" autocomplete="off" required>
+              <input type="text" name="straat" placeholder="Straat" autocomplete="off" class="form-control" autocomplete="off" required>
+              <input type="text" name="huisnummer" placeholder="Huisnummer" class="form-control" autocomplete="off" required>
+              <input type="submit" class="btn btn-succes form-knop form-knop-rechts" value="BESTELLING AFRONDEN">
+            </form>
             <a href="/?afgerond=false&ingelogd=false"><button class="btn btn-succes form-knop annuleren">BESTELLING ANNULEREN</button></a>
-            <a href="/?afgerond=true&ingelogd=false"><button class="btn btn-succes form-knop form-knop-rechts">BESTELLING AFRONDEN</button></a>
             <?php
           }else{
             echo '<div class="warning"><b>U lijkt geen artikelen te hebben om af te rekenen</b></div>';
@@ -205,7 +215,7 @@ if(!empty($_POST)){
       <div class="left">
         <div class="panel panel-default bezorger">
           <div class="panel-body">
-            <input type="radio" id="bezorger" name="bezorgwijze" value="bezorgen">
+            <input type="radio" id="bezorger" name="bezorgwijze" value="Koerierdienst">
             <label class="verzendwijze" for="bezorger">
               <i class="fa fa-truck" aria-hidden="true"></i>
               <h3><b>LATEN BEZORGEN</b></h3>
@@ -216,7 +226,7 @@ if(!empty($_POST)){
       <div class="right">
         <div class="panel panel-default ophalen">
           <div class="panel-body">
-            <input type="radio" id="ophalen" name="bezorgwijze" value="ophalen">
+            <input type="radio" id="ophalen" name="bezorgwijze" value="Ophalen op locatie">
             <label class="verzendwijze" for="ophalen">
               <i class="fa fa-user" aria-hidden="true"></i>
               <h3><b>ZELF OPHALEN</b></h3>

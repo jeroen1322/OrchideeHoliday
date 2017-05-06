@@ -13,7 +13,7 @@ class winkelmandRegistreer{
     $betaalWijze = $postArray['betaalWijze'];
 
     function controlleerEmailAlInGebruik($email){
-      $stmt = DB::conn()->prepare('SELECT email FROM Persoon WHERE email=?');
+      $stmt = DB::conn()->prepare('SELECT email FROM Persoon WHERE email=? AND anoniem=0');
       $stmt->bind_param('s', $email);
       $stmt->execute();
       $stmt->bind_result($opgehaaldeEmail);
