@@ -193,6 +193,13 @@ if(!empty($_POST)){
               <input type="text" name="postcode" placeholder="Postcode" class="form-control" autocomplete="off" required>
               <input type="text" name="straat" placeholder="Straat" autocomplete="off" class="form-control" autocomplete="off" required>
               <input type="text" name="huisnummer" placeholder="Huisnummer" class="form-control" autocomplete="off" required>
+              <?php
+              if(!empty($opmerking)){
+                ?>
+                <input type="hidden" name="opmerking" value="<?php echo $opmerking?>">
+                <?php
+              }
+              ?>
               <input type="submit" class="btn btn-succes form-knop form-knop-rechts" value="BESTELLING AFRONDEN">
             </form>
             <a href="/?afgerond=false&ingelogd=false"><button class="btn btn-succes form-knop annuleren">BESTELLING ANNULEREN</button></a>

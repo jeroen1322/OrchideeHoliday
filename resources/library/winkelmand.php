@@ -272,6 +272,19 @@ class Winkelmand{
       $stmt->close();
     }
 
+    function anoniemeOrderMetOpmerking($id, $verzendWijze, $opmerking){
+      $randId = rand(1, 99999);
+      $besteld = 1;
+      $anoniem = 1;
+      $verzendId = getVerzendWijzeId($verzendWijze);
+      $orderdatum = date('d-m-Y');
+
+      $stmt = DB::conn()->prepare('INSERT INTO `Order`(id, persoon, besteld, verzendWijze, orderdatum, opmerking, anoniem) VALUES(?, ?, ?, ?, ?, ?, ?)');
+      $stmt->bind_param('iiiissi', $randId, $id, $besteld, $verzendId, $orderdatum, $opmerking, $anoniem);
+      $stmt->execute();
+      $stmt->close();
+    }
+
     function getOrderId($id){
       $stmt = DB::conn()->prepare('SELECT id FROM `Order` WHERE persoon=? AND anoniem=1');
       $stmt->bind_param('i', $id);
@@ -304,6 +317,10 @@ class Winkelmand{
       $anoniemeGebruikerHerbruik = getId($email);
       $anoniem = 1;
 
+      if(!empty($postArray['opmerking'])){
+        $opmerking = $postArray['opmerking'];
+      }
+
       if(empty($anoniemeGebruikerHerbruik)){
         $stmt = DB::conn()->prepare('INSERT INTO Persoon(email, woonplaats, postcode, straat, huisnummer, anoniem) VALUES(?, ?, ?, ?, ?, ?)');
         $stmt->bind_param('sssssi', $email, $woonplaats, $postcode, $straat, $huisnummer, $anoniem);
@@ -311,12 +328,19 @@ class Winkelmand{
         $stmt->close();
 
         $id = getId($email);
-        anoniemeOrder($id, $verzendWijze);
+        if(empty($opmerking)){
+          anoniemeOrder($id, $verzendWijze);
+        }else{
+          anoniemeOrderMetOpmerking($id, $verzendWijze, $opmerking);
+        }
         anoniemeOrderRegel($id, $winkelmand);
       }else{
         $id = getId($email);
-        anoniemeOrder($id, $verzendWijze);
-        anoniemeOrderRegel($id, $winkelmand);
+        if(empty($opmerking)){
+          anoniemeOrder($id, $verzendWijze);
+        }else{
+          anoniemeOrderMetOpmerking($id, $verzendWijze, $opmerking);
+        }
       }
 
       return true;
@@ -329,6 +353,7 @@ class Winkelmand{
   }
 
   public function annuleerSessionOrder(){
-    echo 'TODO ANNULEREN';
+    session_unset($_SESSION);
+    header("Refresh:0; url=/");
   }
 }
