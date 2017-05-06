@@ -65,12 +65,14 @@ if(!empty($_POST)){
           echo '<h4><b>TOTAAL PRIJS: €'.array_sum($totaal).'</b></h4>';
           $opmerking = $afrekenen->getSessionOpmerking();
           if(!empty($opmerking)){
+            $winkelmand->inputOpmerking($opmerking, $gebruikerId);
           ?>
           <hr>
           <h3>OPMERKING: </h3>"<?php echo $opmerking ?>"</h3>
           <hr>
           <?php
           }
+          $winkelmand->inputVerzendWijze($_SESSION['bezorgwijze'], $gebruikerId);
           ?>
           <div class="overzichtBottom">
             <a href="/?afgerond=false&ingelogd=true"><button class="btn btn-succes form-knop annuleren">BESTELLING ANNULEREN</button></a>

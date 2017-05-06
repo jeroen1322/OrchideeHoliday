@@ -72,19 +72,31 @@ class Winkelmand{
       }
     }
 
-    function maakOrder($orchideeId, $gebruikerId){
+    function getBetaalWijze($gebruiker){
+      $stmt = DB::conn()->prepare('SELECT betaalwijze FROM Persoon WHERE id=?');
+      $stmt->bind_param('i', $gebruiker);
+      $stmt->execute();
+      $stmt->bind_result($betaalwijze);
+      $stmt->fetch();
+      $stmt->close();
 
+      return $betaalwijze;
+    }
+
+    function maakOrder($orchideeId, $gebruikerId){
+      $anoniem = 0;
       $besteld = 0;
       $randId = rand(1, 999999);
-
+      $orderDatum = date('d-m-Y');
+      $betaalwijze = getBetaalWijze($gebruikerId);
       if(controlleerRand($randId)){
         $id = $randId;
       }else{
         $id = rand(1, 9999999);
       }
 
-      $stmt = DB::conn()->prepare('INSERT INTO `Order`(id, persoon, besteld, orderdatum) VALUES(?, ?, ?, ?)');
-      $stmt->bind_param('iiss', $id, $gebruikerId, $besteld, $orderDatum);
+      $stmt = DB::conn()->prepare('INSERT INTO `Order`(id, persoon, besteld, orderdatum, betaalWijze, anoniem) VALUES(?, ?, ?, ?, ?, ?)');
+      $stmt->bind_param('iissii', $id, $gebruikerId, $besteld, $orderDatum, $betaalwijze, $anoniem);
       $stmt->execute();
       $stmt->close();
 
@@ -109,6 +121,61 @@ class Winkelmand{
     }else{
       insertBestaandeOrderRegel($orchideeId, $bestaandeOrder);
     }
+  }
+
+  public function inputOpmerking($opmerking, $gebruiker){
+    function getOrder($gebruiker){
+      $stmt = DB::conn()->prepare('SELECT id FROM `Order` WHERE persoon=? AND besteld=0');
+      $stmt->bind_param('i', $gebruiker);
+      $stmt->execute();
+      $stmt->bind_result($bestaandeOrder);
+      $stmt->fetch();
+      $stmt->close();
+
+      return $bestaandeOrder;
+    }
+
+    function inputOpmerkingInOrder($opmerking, $id){
+      $stmt = DB::conn()->prepare('UPDATE`Order` SET opmerking=? WHERE id=?');
+      $stmt->bind_param('si', $opmerking, $id);
+      $stmt->execute();
+      $stmt->close();
+    }
+
+    $order = getOrder($gebruiker);
+    inputOpmerkingInOrder($opmerking, $order);
+  }
+
+  public function inputVerzendWijze($verzendWijze, $gebruiker){
+    function getVerzendWijzeId($verzendWijze){
+      $stmt = DB::conn()->prepare('SELECT id FROM verzendWijze WHERE omschrijving=?');
+      $stmt->bind_param('s', $verzendWijze);
+      $stmt->execute();
+      $stmt->bind_result($id);
+      $stmt->fetch();
+      $stmt->close();
+
+      return $id;
+    }
+    function getVerzendWijzeOrder($gebruiker){
+      $stmt = DB::conn()->prepare('SELECT id FROM `Order` WHERE persoon=? AND besteld=0');
+      $stmt->bind_param('i', $gebruiker);
+      $stmt->execute();
+      $stmt->bind_result($bestaandeOrder);
+      $stmt->fetch();
+      $stmt->close();
+
+      return $bestaandeOrder;
+    }
+    function inputVerzendWijzeInOrder($verzendId, $id){
+      $stmt = DB::conn()->prepare('UPDATE`Order` SET verzendWijze=? WHERE id=?');
+      $stmt->bind_param('ii', $verzendId, $id);
+      $stmt->execute();
+      $stmt->close();
+    }
+    $order = getVerzendWijzeOrder($gebruiker);
+    $verzendId = getVerzendWijzeId($verzendWijze);
+    inputVerzendWijzeInOrder($verzendId, $order);
   }
 
   public function plaatsInSessionWinkelmand($artikelId){
