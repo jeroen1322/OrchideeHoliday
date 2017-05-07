@@ -13,6 +13,8 @@ if(!empty($_GET)){
       $winkelmand->plaatsInSessionWinkelmand($_GET['id']);
       header("Refresh:0; url=/artikel/".$_GET['id']);
     }
+  }elseif($_GET['action'] == 'favoriet'){
+    $gebruiker->voegToeAanFavotiet($_GET['id'], $gebruiker->getLoginId());
   }
 }
 
@@ -26,7 +28,9 @@ if(!empty($info)){
   <?php
   if($gebruiker->isIngelogd()){
     ?>
-    <button class="btn btn-succes form-knop"><i class="fa fa-heart" aria-hidden="true"></i></button><br><br>
+    <form method="post" action="?action=favoriet&id=<?php echo $info['id']?>">
+      <button class="btn btn-succes form-knop"><i class="fa fa-heart" aria-hidden="true"></i></button><br><br>
+    </form>
     <?php
   }
   ?>

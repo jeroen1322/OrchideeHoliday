@@ -20,6 +20,10 @@ $klein->respond('/aanbod', function ($request, $response, $service) {
     $service->pageTitle = 'Aanbod | Orchidee Holiday';
     $service->render(VIEWS.'/aanbod.php');
 });
+$klein->respond('/favorieten', function ($request, $response, $service) {
+    $service->pageTitle = 'Favorieten | Orchidee Holiday';
+    $service->render(VIEWS.'/favorieten.php');
+});
 $klein->respond('/login', function ($request, $response, $service) {
     $service->pageTitle = 'Login | Orchidee Holiday';
     $service->render(VIEWS.'/login.php');

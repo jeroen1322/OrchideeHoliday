@@ -158,4 +158,43 @@ class Account{
       return $aantalArtikelen;
     }
   }
+
+  public function voegToeAanFavotiet($orchidee, $gebruiker){
+    function addToDatabase($orchidee, $gebruiker){
+      $stmt = DB::conn()->prepare('INSERT INTO Favoriet(orchidee, persoon) VALUES (?, ?)');
+      $stmt->bind_param('ii', $orchidee, $gebruiker);
+      $stmt->execute();
+      $stmt->close();
+
+      return true;
+    }
+
+    if(addToDatabase($orchidee, $gebruiker)){
+      echo '<div class="succes"><b>Orchidee toegevoegd aan uw Favorieten</b></div>';
+    }
+  }
+
+  public function getFavorieten($gebruiker){
+    $stmt = DB::conn()->prepare('SELECT orchidee FROM Favoriet WHERE persoon=?');
+    $stmt->bind_param('i', $gebruiker);
+    $stmt->execute();
+    $stmt->bind_result($orchidee);
+    while($stmt->fetch()){
+      $orchideeen[] = $orchidee;
+    }
+    $stmt->close();
+
+    if(!empty($orchideeen)){
+      return $orchideeen;
+    }
+  }
+
+  public function deleteFavoriet($artikel){
+    $stmt = DB::conn()->prepare('DELETE FROM Favoriet WHERE orchidee=?');
+    $stmt->bind_param('i', $artikel);
+    $stmt->execute();
+    $stmt->close();
+
+    return true;
+  }
 }
