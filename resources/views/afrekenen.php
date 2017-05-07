@@ -74,6 +74,8 @@ if(!empty($_POST)){
           }
           $winkelmand->inputVerzendWijze($_SESSION['bezorgwijze'], $gebruikerId);
           ?>
+          <hr>
+          <h4><b>BEZORGWIJZE:</b> <?php echo $_SESSION['bezorgwijze'] ?></h4>
           <div class="overzichtBottom">
             <a href="/?afgerond=false&ingelogd=true"><button class="btn btn-succes form-knop annuleren">BESTELLING ANNULEREN</button></a>
             <a href="/?afgerond=true&ingelogd=true"><button class="btn btn-succes form-knop form-knop-rechts">BESTELLING AFRONDEN</button></a>
@@ -186,6 +188,8 @@ if(!empty($_POST)){
             <?php
             }
             ?>
+            <hr>
+            <h4><b>BEZORGWIJZE:</b> <?php echo $_SESSION['bezorgwijze'] ?></h4>
             <hr>
             <h4>Na het afronden van de bestelling, ontvangt u een factuur via email waar u eerst aan moet voldoen voordat de bestelling word verzonden</h4>
             <h4><b>Bezorg-gegevens:</b></h4>
