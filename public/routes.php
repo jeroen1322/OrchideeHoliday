@@ -20,6 +20,10 @@ $klein->respond('/contact', function ($request, $response, $service) {
     $service->pageTitle = 'Contact | Orchidee Holiday';
     $service->render(VIEWS.'/contact.php');
 });
+$klein->respond('/voorwaarden', function ($request, $response, $service) {
+    $service->pageTitle = 'Voorwaarden | Orchidee Holiday';
+    $service->render(VIEWS.'/voorwaarden.php');
+});
 $klein->respond('/aanbod', function ($request, $response, $service) {
     $service->pageTitle = 'Aanbod | Orchidee Holiday';
     $service->render(VIEWS.'/aanbod.php');
