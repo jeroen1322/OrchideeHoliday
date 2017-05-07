@@ -12,6 +12,10 @@ if(!empty($_GET)){
         header("Refresh:0; url=/winkelmand");
       }
     }
+  }else{
+    if($_GET['action'] == 'delete'){
+      $winkelmand->deleteFromSessionWinkelmand($_GET['code']);
+    }
   }
 }
 
@@ -88,5 +92,7 @@ if($account->isIngelogd()){
     ?>
     <a href="/afrekenen"><button class="btn btn-succes form-knop">AFREKENEN</button></a>
     <?php
+  }else{
+    echo '<div class="warning"><b>U HEEFT NOG NIETS IN UW WINKELMAND</b></div>';
   }
 }

@@ -195,6 +195,14 @@ class Winkelmand{
 
   }
 
+  public function deleteFromSessionWinkelmand($artikelId){
+    $key = array_search($artikelId, $_SESSION['winkelmand']);
+    if($key !== false){
+      unset($_SESSION['winkelmand'][$key]);
+      header("Refresh:0; url=/winkelmand");
+    }
+  }
+
   public function deleteFromDatabaseWinkelmand($artikelId, $gebruikerId){
 
     function getOrder($gebruikerId){
