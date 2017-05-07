@@ -29,7 +29,7 @@ function bestellingAfronden($winkelmand, $gebruikerInfo){
   $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
   $mail->Port = 587;                                    // TCP port to connect to
 
-  $mail->setFrom('noreply@orchideeholiday.nl', 'orchideeholiday');
+  $mail->setFrom('noreply@orchideeholiday.nl', 'OrchideeHoliday');
   $mail->addAddress($gebruikerInfo['email'], 'Jeroen Grooten');     // Add a recipient
 
   $mail->isHTML(true);                                  // Set email format to HTML
