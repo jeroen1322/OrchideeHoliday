@@ -86,6 +86,7 @@ if(!empty($_SESSION['login'])){
             <li><a href="/best_verkocht">BEST VERKOCHT</a></li>
             <li><a href="/contact">CONTACT</a></li>
             <li><a href="/voorwaarden">VOORWAARDEN</a></li>
+            <li><a href="/bestelprocedure">BESTELPROCEDURE</a></li>
           </ul>
             <?php
             if(!empty($_SESSION['login'])){

@@ -24,6 +24,10 @@ $klein->respond('/voorwaarden', function ($request, $response, $service) {
     $service->pageTitle = 'Voorwaarden | Orchidee Holiday';
     $service->render(VIEWS.'/voorwaarden.php');
 });
+$klein->respond('/bestelprocedure', function ($request, $response, $service) {
+    $service->pageTitle = 'Bestelprocedure | Orchidee Holiday';
+    $service->render(VIEWS.'/bestelprocedure.php');
+});
 $klein->respond('/aanbod', function ($request, $response, $service) {
     $service->pageTitle = 'Aanbod | Orchidee Holiday';
     $service->render(VIEWS.'/aanbod.php');
