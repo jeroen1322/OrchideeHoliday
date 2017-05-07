@@ -305,7 +305,7 @@ class Winkelmand{
   public function rondSessionBestellingAf($postArray, $winkelmand, $verzendWijze){
 
     function getId($email){
-      $stmt = DB::conn()->prepare('SELECT id FROM Persoon WHERE email=? and anoniem=1');
+      $stmt = DB::conn()->prepare('SELECT id FROM Persoon WHERE email=? AND anoniem=1');
       $stmt->bind_param('s', $email);
       $stmt->execute();
       $stmt->bind_result($id);
@@ -353,7 +353,7 @@ class Winkelmand{
     }
 
     function getOrderId($id){
-      $stmt = DB::conn()->prepare('SELECT id FROM `Order` WHERE persoon=? AND anoniem=1');
+      $stmt = DB::conn()->prepare('SELECT id FROM `Order` WHERE persoon=? AND anoniem=1 AND besteld=1');
       $stmt->bind_param('i', $id);
       $stmt->execute();
       $stmt->bind_result($orderId);
@@ -364,10 +364,10 @@ class Winkelmand{
     }
 
     function anoniemeOrderRegel($id, $winkelmand){
-      $randId = rand(1, 99999);
       $orderId = getOrderId($id);
 
       foreach($winkelmand as $item){
+        $randId = rand(1, 99999);
         $stmt = DB::conn()->prepare('INSERT INTO `OrderRegel`(id, orchideeid, orderid) VALUES (?, ?, ?)');
         $stmt->bind_param('iii', $randId, $item, $orderId);
         $stmt->execute();
@@ -405,8 +405,10 @@ class Winkelmand{
         $id = getId($email);
         if(empty($opmerking)){
           anoniemeOrder($id, $verzendWijze);
+          anoniemeOrderRegel($id, $winkelmand);
         }else{
           anoniemeOrderMetOpmerking($id, $verzendWijze, $opmerking);
+          anoniemeOrderRegel($id, $winkelmand);
         }
       }
 
