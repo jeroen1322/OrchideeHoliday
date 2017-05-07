@@ -252,7 +252,39 @@ class Winkelmand{
       $stmt->close();
     }
 
+    function getWinkelmand($order){
+      $stmt = DB::conn()->prepare('SELECT orchideeid FROM `OrderRegel` WHERE orderid=?');
+      $stmt->bind_param('i', $order);
+      $stmt->execute();
+      $stmt->bind_result($id);
+      while($stmt->fetch()){
+        $ids[] = $id;
+      }
+      $stmt->close();
+
+      return $ids;
+    }
+
+    function getGebruikerInfo($gebruiker){
+      $stmt = DB::conn()->prepare('SELECT voornaam, achternaam, email FROM Persoon WHERE id=?');
+      $stmt->bind_param('i', $gebruiker);
+      $stmt->execute();
+      $stmt->bind_result($voornaam, $achternaam, $email);
+      while($stmt->fetch()){
+        $gebruikerInfo['voornaam'] = $voornaam;
+        $gebruikerInfo['achternaam'] = $achternaam;
+        $gebruikerInfo['email'] = $email;
+      }
+      $stmt->close();
+
+      return $gebruikerInfo;
+    }
+
     $order = getOrder($gebruiker);
+    $winkelmand =getWinkelmand($order);
+    $gebruikerInfo = getGebruikerInfo($gebruiker);
+
+    bestellingAfronden($winkelmand, $gebruikerInfo);
     rondOrderAf($order);
     header("Refresh:0; url=/");
   }
