@@ -19,11 +19,13 @@ if(!empty($_GET)){
 }
 
 if(!empty($info)){
+  $soort = $orchidee->parseSoort($info['soort']);
   $foto = '/foto/'.$info['img'];
   ?>
   <img src="<?php echo $foto ?>" class="img-responsive cover"/>
   <h1><b><?php echo $info['titel'] ?></b></h1>
-  <p><i><?php echo $info['langeOmschrijving'] ?></i></p>
+  <p><b>Omschrijving: </b><?php echo $info['langeOmschrijving'] ?></p>
+  <p><b>Soort: </b><?php echo $soort ?></p>
 
   <?php
   if($gebruiker->isIngelogd()){

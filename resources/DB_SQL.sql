@@ -7,6 +7,12 @@ create table betaalWijze(
 PRIMARY KEY(`id`)
 );
 
+create table artikelGroep(
+`id` INT,
+`omschrijving` VARCHAR(100),
+PRIMARY KEY(`id`)
+);
+
 create table Persoon(
 `id` int auto_increment,
 `voornaam` varchar(255),
@@ -50,7 +56,9 @@ create table Orchidee(
 `korteOmschrijving` VARCHAR(45),
 `prijs` FLOAT,
 `img` VARCHAR(45),
-PRIMARY KEY(`id`)
+`soort` INT,
+PRIMARY KEY(`id`),
+FOREIGN KEY(`soort`) REFERENCES artikelGroep(`id`)
 );
 
 create table verzendWijze(
@@ -100,9 +108,21 @@ INSERT INTO betaalWijze(id, omschrijving) VALUES (3, 'ABN AMRO');
 INSERT INTO betaalWijze(id, omschrijving) VALUES (4, 'SNS BANK');
 INSERT INTO betaalWijze(id, omschrijving) VALUES (5, 'BITCOIN');
 
+INSERT INTO artikelGroep(id, omschrijving) VALUES (1, 'Angraecum longicalcar');
+INSERT INTO artikelGroep(id, omschrijving) VALUES (2, 'Chloraea gavilu');
+INSERT INTO artikelGroep(id, omschrijving) VALUES (3, 'Chondroscaphe chestertonii');
+INSERT INTO artikelGroep(id, omschrijving) VALUES (4, 'Dendrobium nobile');
+INSERT INTO artikelGroep(id, omschrijving) VALUES (5, 'Maanorchidee');
+INSERT INTO artikelGroep(id, omschrijving) VALUES (6, 'Kerstorchidee');
+INSERT INTO artikelGroep(id, omschrijving) VALUES (7, 'Paphinia seegeri');
+INSERT INTO artikelGroep(id, omschrijving) VALUES (8, 'Paphiopedilum sukhakulii');
+INSERT INTO artikelGroep(id, omschrijving) VALUES (9, 'Vanille-orchidee');
+INSERT INTO artikelGroep(id, omschrijving) VALUES (10, 'Lange spinorchidee');
+
 INSERT INTO Rol(id, omschrijving) VALUES(1, 'beheerder');
 INSERT INTO Rol(id, omschrijving) VALUES(2, 'klant');
 INSERT INTO Persoon(voornaam, achternaam, email, woonplaats, postcode, straat, huisnummer, betaalwijze)
 VALUES('Jeroen', 'Grooten', 'contact@jeroengrooten.nl', 'Wijk bij Duurstede', '3961AM', 'Oeverstraat', '21A', 1);
 INSERT INTO TussenRol(rolid, persoonid) VALUES(1, 1);
 INSERT INTO Wachtwoord(wachtwoord, persoon) VALUES('$2y$10$ygURUwn2sI/6UcexSQlCn.CVyG//.WVdOCvbuVUhqaadCAuXGmHaS', 1);
+

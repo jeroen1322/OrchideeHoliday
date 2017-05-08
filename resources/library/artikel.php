@@ -3,10 +3,10 @@ class Artikel{
   public function informatie($artikelId){
     $informatie = array();
 
-    $stmt = DB::conn()->prepare('SELECT id, titel, korteOmschrijving, langeOmschrijving, prijs, img FROM Orchidee WHERE id=?');
+    $stmt = DB::conn()->prepare('SELECT id, titel, korteOmschrijving, langeOmschrijving, prijs, img, soort FROM Orchidee WHERE id=?');
     $stmt->bind_param('i', $artikelId);
     $stmt->execute();
-    $stmt->bind_result($id, $titel, $korteOmschrijving, $langeOmschrijving, $prijs, $img);
+    $stmt->bind_result($id, $titel, $korteOmschrijving, $langeOmschrijving, $prijs, $img, $soort);
     while($stmt->fetch()){
       $informatie['id'] = $id;
       $informatie['titel'] = $titel;
@@ -14,10 +14,22 @@ class Artikel{
       $informatie['langeOmschrijving'] = $langeOmschrijving;
       $informatie['prijs'] = $prijs;
       $informatie['img'] = $img;
+      $informatie['soort'] = $soort;
     }
     $stmt->close();
 
     return $informatie;
+  }
+
+  public function parseSoort($id){
+    $stmt = DB::conn()->prepare('SELECT omschrijving FROM artikelGroep WHERE id=?');
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $stmt->bind_result($omschrijving);
+    $stmt->fetch();
+    $stmt->close();
+
+    return $omschrijving;
   }
 
   public function thumbInfo($artikelId){
