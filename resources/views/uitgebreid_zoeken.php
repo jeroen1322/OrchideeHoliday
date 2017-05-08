@@ -1,9 +1,9 @@
 <h1>UITGEBREID ZOEKEN</h1>
 <form method="post">
-  <input type="text" class="form-control" name="zoekveld" placeholder="ZOEK TERM" autocomplete="off">
+  <input type="text" class="form-control" name="zoekveld" placeholder="ZOEK TERM" autocomplete="off" required>
   <input type="number" name="min" placeholder="MINIMAAL" autocomplete="off">
   <input type="number" name="max" placeholder="MAXIMAAL" autocomplete="off">
-  <input type="submit" class="btn btn-primary form-knop" value="ZOEK">
+  <input type="submit" class="btn btn-primary form-knop fullWidth" value="ZOEK">
 </form>
 <?php
 $zoeken = new uitgebreidZoeken;

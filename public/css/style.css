@@ -249,3 +249,6 @@ i.fa.fa-user, i.fa.fa-truck{
   top: 20px;
   left: 20px;
 }
+.fullWidth{
+  width: 100%;
+}
