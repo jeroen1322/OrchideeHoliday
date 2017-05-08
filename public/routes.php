@@ -28,6 +28,10 @@ $klein->respond('/bestelprocedure', function ($request, $response, $service) {
     $service->pageTitle = 'Bestelprocedure | Orchidee Holiday';
     $service->render(VIEWS.'/bestelprocedure.php');
 });
+$klein->respond('/sitemap', function ($request, $response, $service) {
+    $service->pageTitle = 'Sitemap | Orchidee Holiday';
+    $service->render(VIEWS.'/sitemap.php');
+});
 $klein->respond('/aanbod', function ($request, $response, $service) {
     $service->pageTitle = 'Aanbod | Orchidee Holiday';
     $service->render(VIEWS.'/aanbod.php');
