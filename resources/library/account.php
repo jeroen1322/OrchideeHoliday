@@ -175,18 +175,46 @@ class Account{
   }
 
   public function getFavorieten($gebruiker){
-    $stmt = DB::conn()->prepare('SELECT orchidee FROM Favoriet WHERE persoon=?');
-    $stmt->bind_param('i', $gebruiker);
-    $stmt->execute();
-    $stmt->bind_result($orchidee);
-    while($stmt->fetch()){
-      $orchideeen[] = $orchidee;
-    }
-    $stmt->close();
 
-    if(!empty($orchideeen)){
-      return $orchideeen;
+    function getFavs($gebruiker){
+      $stmt = DB::conn()->prepare('SELECT orchidee FROM Favoriet WHERE persoon=?');
+      $stmt->bind_param('i', $gebruiker);
+      $stmt->execute();
+      $stmt->bind_result($orchidee);
+      while($stmt->fetch()){
+        $orchideeen[] = $orchidee;
+      }
+      $stmt->close();
+
+      if(!empty($orchideeen)){
+        return $orchideeen;
+      }
     }
+
+    function filterDeleted($artikelen){
+      foreach($artikelen as $a){
+        $stmt = DB::conn()->prepare('SELECT id FROM Orchidee WHERE id=? AND verwijderd=0');
+        $stmt->bind_param('i', $a);
+        $stmt->execute();
+        $stmt->bind_result($id);
+        while($stmt->fetch()){
+          $ids[] = $id;
+        }
+        $stmt->close();
+      }
+
+      if(!empty($ids)){
+        return $ids;
+      }
+    }
+
+    $artikelen = getFavs($gebruiker);
+    $filtered = filterDeleted($artikelen);
+
+    if(!empty($filtered)){
+      return $filtered;
+    }
+
   }
 
   public function deleteFavoriet($artikel){

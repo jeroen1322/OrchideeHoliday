@@ -68,7 +68,7 @@ if(!empty($_GET)){
 <h2>RECENT TOEGEVOEGD</h2>
 <?php
 
-$stmt = DB::conn()->prepare("SELECT id FROM Orchidee LIMIT 4 WHERE verwijderd=0");
+$stmt = DB::conn()->prepare("SELECT id FROM Orchidee WHERE verwijderd=0 LIMIT 4");
 $stmt->execute();
 $stmt->bind_result($id);
 while($stmt->fetch()){

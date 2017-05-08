@@ -127,11 +127,29 @@ class Artikel{
       }
     }
 
+    function filterDeleted($artikelen){
+      foreach($artikelen as $a){
+        $stmt = DB::conn()->prepare('SELECT id FROM Orchidee WHERE id=? AND verwijderd=0');
+        $stmt->bind_param('i', $a);
+        $stmt->execute();
+        $stmt->bind_result($id);
+        while($stmt->fetch()){
+          $ids[] = $id;
+        }
+        $stmt->close();
+      }
+
+      if(!empty($ids)){
+        return $ids;
+      }
+    }
+
     $ids = getBesteldeOrders();
     $artikelen = getOrderRegelOrchideeen($ids);
+    $filtered = filterDeleted($artikelen);
 
-    if(!empty($artikelen)){
-      return $artikelen;
+    if(!empty($filtered)){
+      return $filtered;
     }
   }
 
