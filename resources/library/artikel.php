@@ -38,17 +38,35 @@ class Artikel{
   }
 
   public function zoekBestVerkocht(){
-    function getOrderRegelOrchideeen(){
-      $stmt = DB::conn()->prepare('SELECT orchideeid FROM `OrderRegel`');
+
+    function getBesteldeOrders(){
+      $stmt = DB::conn()->prepare('SELECT id FROM `Order` WHERE besteld=1');
       $stmt->execute();
       $stmt->bind_result($id);
       while($stmt->fetch()){
-        $orderRegels[] = $id;
+        $ids[] = $id;
       }
       $stmt->close();
 
-      if(!empty($orderRegels)){
-        return $orderRegels;
+      if(!empty($ids)){
+        return $ids;
+      }
+    }
+    function getOrderRegelOrchideeen($ids){
+      $orchideeen = array();
+      foreach($ids as $id){
+        $stmt = DB::conn()->prepare('SELECT orchideeid FROM `OrderRegel` WHERE orderid=?');
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $stmt->bind_result($orchidee);
+        while($stmt->fetch()){
+          $orchideeen[] = $orchidee;
+        }
+        $stmt->close();
+      }
+
+      if(!empty($orchideeen)){
+        return $orchideeen;
       }
     }
 
@@ -56,7 +74,8 @@ class Artikel{
       return array_count_values($orchideeen);
     }
 
-    $orchideeen = getOrderRegelOrchideeen();
+    $ids = getBesteldeOrders();
+    $orchideeen = getOrderRegelOrchideeen($ids);
 
     if(!empty($orchideeen)){
       return TelAantalVerkochtOp($orchideeen);

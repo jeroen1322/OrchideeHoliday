@@ -27,7 +27,5 @@ if(!empty($ids)){
 }else{
   echo '<div class="warning"><b>Er zijn nog geen artikelen toegevoegd.</b></div>';
 }
-?>
 
-<?php
 DB::conn()->close();
