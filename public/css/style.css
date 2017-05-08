@@ -244,3 +244,8 @@ i.fa.fa-user, i.fa.fa-truck{
 .recentToegevoegd{
   padding-bottom: 100px;
 }
+.zoeken_knop{
+  margin: 0;
+  top: 20px;
+  left: 20px;
+}

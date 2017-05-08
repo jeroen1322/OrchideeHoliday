@@ -81,6 +81,10 @@ $klein->respond('/zoeken', function ($request, $response, $service) {
     $service->pageTitle = 'Zoeken | Orchidee Holiday';
     $service->render(VIEWS.'/simpelZoeken.php');
 });
+$klein->respond('/uitgebreid_zoeken', function ($request, $response, $service) {
+    $service->pageTitle = 'Uitgebreid Zoeken | Orchidee Holiday';
+    $service->render(VIEWS.'/uitgebreid_zoeken.php');
+});
 
 $klein->respond('/foto/[:naam]', function ($request, $response, $service) {
     $naam = $request->naam;
