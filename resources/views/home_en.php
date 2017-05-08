@@ -93,7 +93,7 @@ if(!empty($ids)){
           <a href=<?php echo '/artikel/'.$info['id'] ?>>
             <img src=<?php echo '/foto/'.$info['img'] ?> class="thumb_img filmaanbod_img"/></a>
             <h2 class="textfilmaanbod"><?php echo $info['titel'] ?> </h2>
-            <a href="/artikel/<?php echo $info['id']?>"><button class="btn btn-succes form-knop bekijk-knop">BEKIJK</button></a>
+            <a href="/artikel/<?php echo $info['id']?>"><button class="btn btn-succes form-knop bekijk-knop">SEE MORE</button></a>
           </a>
         </div>
       </div>
