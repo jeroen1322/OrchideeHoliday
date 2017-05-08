@@ -5,10 +5,10 @@ class Account{
       if($_SESSION['login'][2] === 1){
         return true;
       }else{
-        header("Refresh:0; url=/");
+        return false;
       }
     }else{
-      header("Refresh:0; url=/login");
+      return false;
     }
   }
 
