@@ -49,7 +49,7 @@ if(!empty($_SESSION['login'])){
     <div class="navtop container">
       <a href="/"><h1 class="orchideeHoliday">OrchideeHoliday</h1></a>
       <form method="post" action="/zoeken">
-        <input type="text" class="form-control zoek-balk" name="zoekterm" placeholder="ZOEKEN" required>
+        <input type="text" class="form-control zoek-balk" name="zoekterm" placeholder="ZOEKEN" autocomplete="off" required>
       </form>
       <a href="/uitgebreid_zoeken"><button class="btn btn-primary form-knop zoeken_knop">UITGEBREID ZOEKEN</button></a>
       <?php
