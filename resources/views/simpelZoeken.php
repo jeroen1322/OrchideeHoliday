@@ -4,7 +4,11 @@ $artikel = new Artikel;
 
 if(!empty($_POST['zoekterm'])){
   $zoekterm = $_POST['zoekterm'];
-
+  ?>
+  <form method="post" action="/zoeken">
+    <input type="text" class="form-control" name="zoekterm" placeholder="ZOEKEN" autocomplete="off" value="<?php echo $zoekterm ?>" required>
+  </form>
+  <?php
   $resultaat = $zoeken->zoekOpTrefwoord($zoekterm);
   if(empty($resultaat)){
     echo '<div class="warning"><b>GEEN RESULTATEN GEVONDEN</b></div>';
@@ -29,4 +33,10 @@ if(!empty($_POST['zoekterm'])){
   </table>
   <?php
   }
+}else{
+  ?>
+  <form method="post" action="/zoeken">
+    <input type="text" class="form-control" name="zoekterm" placeholder="ZOEKEN" autocomplete="off" required>
+  </form>
+  <?php
 }
