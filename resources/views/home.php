@@ -64,6 +64,7 @@ if(!empty($_GET)){
 <hr>
 <br>
 <div class="artikelen">
+<hr></hr><br>
 <h2>RECENT TOEGEVOEGD</h2>
 <?php
 
