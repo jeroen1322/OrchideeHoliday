@@ -252,3 +252,9 @@ i.fa.fa-user, i.fa.fa-truck{
 .fullWidth{
   width: 100%;
 }
+.zoekPrijs {
+  width: 120px;
+  height: 50px;
+  margin-right: 20px;
+  padding-left: 12px;
+}
