@@ -3,7 +3,7 @@ class Betalen{
 
   public function displayBetaalWijze(){
     function getAlleBetaalwijze(){
-      $stmt = DB::conn()->prepare('SELECT id, omschrijving FROM Betaalwijze');
+      $stmt = DB::conn()->prepare('SELECT id, omschrijving FROM betaalWijze');
       $stmt->execute();
       $stmt->bind_result($id, $omschrijving);
       while($stmt->fetch()){
