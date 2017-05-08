@@ -23,7 +23,9 @@
       <input type="submit" class="btn btn-succes form-knop" name="submit" value="VOEG TOE">
     </form>
     <?php
-    }
+  }else{
+    header("Refresh:0; url=/");
+  }
     ?>
   </div>
 </div>
