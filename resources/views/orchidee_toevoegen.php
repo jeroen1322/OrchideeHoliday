@@ -81,16 +81,18 @@
        echo "Er was een fout tijdens het uploaden van de foto.";
      }
    if(!empty($opgehaaldId)){
+     $verwijderd = 0;
      $newRandId = rand(1, 999999);
-     $stmt = DB::conn()->prepare("INSERT INTO Orchidee(id, titel, langeOmschrijving, korteOmschrijving, prijs, img, soort) VALUES (?, ?, ?, ?, ?, ?, ?)");
-     $stmt->bind_param('isssdsi', $newRandId, $titel, $langeOmschrijving, $korteOmschrijving, $prijs, $name, $artikelGroep);
+     $stmt = DB::conn()->prepare("INSERT INTO Orchidee(id, titel, langeOmschrijving, korteOmschrijving, prijs, img, soort, verwijderd) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+     $stmt->bind_param('isssdsii', $newRandId, $titel, $langeOmschrijving, $korteOmschrijving, $prijs, $name, $artikelGroep, $verwijderd);
      $stmt->execute();
      $stmt->close();
 
      header("Refresh:0; url=/artikel/$newRandId");
    }else{
-     $stmt = DB::conn()->prepare("INSERT INTO Orchidee(id, titel, langeOmschrijving, korteOmschrijving, prijs, img, soort) VALUES (?, ?, ?, ?, ?, ?, ?)");
-     $stmt->bind_param('isssdsi', $randId, $titel, $langeOmschrijving, $korteOmschrijving, $prijs, $name, $artikelGroep);
+     $verwijderd = 0;
+     $stmt = DB::conn()->prepare("INSERT INTO Orchidee(id, titel, langeOmschrijving, korteOmschrijving, prijs, img, soort, verwijderd) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+     $stmt->bind_param('isssdsii', $randId, $titel, $langeOmschrijving, $korteOmschrijving, $prijs, $name, $artikelGroep, $verwijderd);
      $stmt->execute();
      $stmt->close();
      header("Refresh:0; url=/artikel/$randId");

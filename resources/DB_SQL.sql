@@ -57,6 +57,7 @@ create table Orchidee(
 `prijs` FLOAT,
 `img` VARCHAR(45),
 `soort` INT,
+`verwijderd` INT,
 PRIMARY KEY(`id`),
 FOREIGN KEY(`soort`) REFERENCES artikelGroep(`id`)
 );

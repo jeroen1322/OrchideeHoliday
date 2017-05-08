@@ -5,7 +5,6 @@ $artikelGroep = new ArtikelGroep;
 
 $naam = $artikel->parseSoort($groep);
 ?>
-<h1><?php echo $naam ?></h1>
 <?php
 $artikelen = $artikelGroep->getGroepArtikelen($groep);
 
@@ -13,6 +12,7 @@ if(empty($artikelen)){
   echo '<div class="warning"><b>GEEN ARTIKELEN IN DEZE GROEP GEVONDEN</b></di>';
 }else{
   ?>
+  <h1><?php echo $naam ?></h1>
   <table class="table winkelmand_table">
     <tbody>
     <?php
@@ -26,5 +26,8 @@ if(empty($artikelen)){
       </tr>
       <?php
     }
-
+    ?>
+    <tbody>
+  </table>
+  <?php
 }

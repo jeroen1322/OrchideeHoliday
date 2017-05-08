@@ -1,5 +1,5 @@
 <?php
-$stmt = DB::conn()->prepare("SELECT id FROM Orchidee");
+$stmt = DB::conn()->prepare("SELECT id FROM Orchidee WHERE verwijderd=0");
 $stmt->execute();
 $stmt->bind_result($id);
 while($stmt->fetch()){

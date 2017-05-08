@@ -58,7 +58,7 @@ class ArtikelGroep{
   }
 
   public function getGroepArtikelen($groep){
-    $stmt = DB::conn()->prepare('SELECT id FROM Orchidee WHERE soort=?');
+    $stmt = DB::conn()->prepare('SELECT id FROM Orchidee WHERE soort=? AND verwijderd=0');
     $stmt->bind_param('i', $groep);
     $stmt->execute();
     $stmt->bind_result($id);

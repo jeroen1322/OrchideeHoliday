@@ -65,6 +65,10 @@ $klein->respond('/beheer/orchidee_toevoegen', function ($request, $response, $se
     $service->pageTitle = 'Orchidee toevoegen | Orchidee Holiday';
     $service->render(VIEWS.'/orchidee_toevoegen.php');
 });
+$klein->respond('/beheer/orchidee_verwijderen', function ($request, $response, $service) {
+    $service->pageTitle = 'Orchidee Verwijderen | Orchidee Holiday';
+    $service->render(VIEWS.'/orchidee_verwijderen.php');
+});
 $klein->respond('/artikel/[:id]', function ($request, $response, $service) {
     $service->orchideeId = $request->id;
     $service->pageTitle = 'Artikel | Orchidee Holiday';

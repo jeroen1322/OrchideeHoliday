@@ -3,7 +3,7 @@ class Artikel{
   public function informatie($artikelId){
     $informatie = array();
 
-    $stmt = DB::conn()->prepare('SELECT id, titel, korteOmschrijving, langeOmschrijving, prijs, img, soort FROM Orchidee WHERE id=?');
+    $stmt = DB::conn()->prepare('SELECT id, titel, korteOmschrijving, langeOmschrijving, prijs, img, soort FROM Orchidee WHERE id=? AND verwijderd=0');
     $stmt->bind_param('i', $artikelId);
     $stmt->execute();
     $stmt->bind_result($id, $titel, $korteOmschrijving, $langeOmschrijving, $prijs, $img, $soort);
@@ -134,4 +134,29 @@ class Artikel{
       return $artikelen;
     }
   }
+
+  public function getAllArtikelen(){
+    $stmt = DB::conn()->prepare('SELECT id FROM Orchidee WHERE verwijderd=0');
+    $stmt->execute();
+    $stmt->bind_result($id);
+    while($stmt->fetch()){
+      $ids[] = $id;
+    }
+    $stmt->close();
+
+    if(!empty($ids)){
+      return $ids;
+    }
+  }
+
+  public function verwijderArtikel($artikel){
+
+    $stmt = DB::conn()->prepare('UPDATE Orchidee SET verwijderd=1 WHERE id=?');
+    $stmt->bind_param('i', $artikel);
+    $stmt->execute();
+    $stmt->close();
+
+    return true;
+  }
+
 }
