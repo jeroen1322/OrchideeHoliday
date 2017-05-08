@@ -25,21 +25,23 @@ if(!empty($_GET)){
   <a href="/en"><img src="/foto/english_flag.png" class="flag"></a>
 </div>
 <div class="top-home">
-  <h2>TRENDING</h2>
+  <h2>BEST SELLING</h2>
   <div class="slider">
     <?php
     $artikelen = $artikel->getSliderArtikelen();
-    foreach($artikelen as $a => $id){
-      $info = $artikel->thumbInfo($id);
-      ?>
-      <div class="col-md-3 sliderThumb">
-        <div class="thumb">
-          <a href=<?php echo '/artikel/'.$info['id'] ?>>
-            <img src=<?php echo '/foto/'.$info['img'] ?> class="sliderImg"/></a>
-          </a>
+    if(!empty($artikelen)){
+      foreach($artikelen as $a => $id){
+        $info = $artikel->thumbInfo($id);
+        ?>
+        <div class="col-md-3 sliderThumb">
+          <div class="thumb">
+            <a href=<?php echo '/artikel/'.$info['id'] ?>>
+              <img src=<?php echo '/foto/'.$info['img'] ?> class="sliderImg"/></a>
+            </a>
+          </div>
         </div>
-      </div>
-      <?php
+        <?php
+      }
     }
     ?>
   </div>
@@ -52,7 +54,7 @@ if(!empty($_GET)){
     <div class="slide-box">
       <a href="/best_verkocht">
         <div class="slide-box orchidee-slide-box-2">
-          <h2>TREDING</h2>
+          <h2>BEST SELLING</h2>
         </div>
       </a>
     </div>
@@ -69,7 +71,7 @@ if(!empty($_GET)){
 <br>
 <div class="artikelen">
 <hr></hr><br>
-<h2>RECNTLY ADDED</h2>
+<h2>RECENTLY ADDED</h2>
 <?php
 
 $stmt = DB::conn()->prepare("SELECT id FROM Orchidee WHERE verwijderd=0 LIMIT 4");
@@ -91,16 +93,17 @@ if(!empty($ids)){
           <a href=<?php echo '/artikel/'.$info['id'] ?>>
             <img src=<?php echo '/foto/'.$info['img'] ?> class="thumb_img filmaanbod_img"/></a>
             <h2 class="textfilmaanbod"><?php echo $info['titel'] ?> </h2>
-            <a href="/artikel/<?php echo $info['id']?>"><button class="btn btn-succes form-knop bekijk-knop">READ</button></a>
+            <a href="/artikel/<?php echo $info['id']?>"><button class="btn btn-succes form-knop bekijk-knop">BEKIJK</button></a>
           </a>
         </div>
       </div>
     <?php
   }
 }else{
-  echo '<div class="warning"><b>Er zijn nog geen artikelen toegevoegd.</b></div>';
+  echo '<div class="warning"><b>There are no items added yet</b></div>';
 }
 ?>
 </div>
+
 <?php
 DB::conn()->close();

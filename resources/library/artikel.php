@@ -111,36 +111,40 @@ class Artikel{
     }
     function getOrderRegelOrchideeen($ids){
       $orchideeen = array();
-      foreach($ids as $id){
-        $stmt = DB::conn()->prepare('SELECT orchideeid FROM `OrderRegel` WHERE orderid=?');
-        $stmt->bind_param('i', $id);
-        $stmt->execute();
-        $stmt->bind_result($orchidee);
-        while($stmt->fetch()){
-          $orchideeen[] = $orchidee;
+      if(!empty($ids)){
+        foreach($ids as $id){
+          $stmt = DB::conn()->prepare('SELECT orchideeid FROM `OrderRegel` WHERE orderid=?');
+          $stmt->bind_param('i', $id);
+          $stmt->execute();
+          $stmt->bind_result($orchidee);
+          while($stmt->fetch()){
+            $orchideeen[] = $orchidee;
+          }
+          $stmt->close();
         }
-        $stmt->close();
-      }
 
-      if(!empty($orchideeen)){
-        return $orchideeen;
+        if(!empty($orchideeen)){
+          return $orchideeen;
+        }
       }
     }
 
     function filterDeleted($artikelen){
-      foreach($artikelen as $a){
-        $stmt = DB::conn()->prepare('SELECT id FROM Orchidee WHERE id=? AND verwijderd=0');
-        $stmt->bind_param('i', $a);
-        $stmt->execute();
-        $stmt->bind_result($id);
-        while($stmt->fetch()){
-          $ids[] = $id;
+      if(!empty($artikelen)){        
+        foreach($artikelen as $a){
+          $stmt = DB::conn()->prepare('SELECT id FROM Orchidee WHERE id=? AND verwijderd=0');
+          $stmt->bind_param('i', $a);
+          $stmt->execute();
+          $stmt->bind_result($id);
+          while($stmt->fetch()){
+            $ids[] = $id;
+          }
+          $stmt->close();
         }
-        $stmt->close();
-      }
 
-      if(!empty($ids)){
-        return $ids;
+        if(!empty($ids)){
+          return $ids;
+        }
       }
     }
 

@@ -29,17 +29,19 @@ if(!empty($_GET)){
   <div class="slider">
     <?php
     $artikelen = $artikel->getSliderArtikelen();
-    foreach($artikelen as $a => $id){
-      $info = $artikel->thumbInfo($id);
-      ?>
-      <div class="col-md-3 sliderThumb">
-        <div class="thumb">
-          <a href=<?php echo '/artikel/'.$info['id'] ?>>
-            <img src=<?php echo '/foto/'.$info['img'] ?> class="sliderImg"/></a>
-          </a>
+    if(!empty($artikelen)){
+      foreach($artikelen as $a => $id){
+        $info = $artikel->thumbInfo($id);
+        ?>
+        <div class="col-md-3 sliderThumb">
+          <div class="thumb">
+            <a href=<?php echo '/artikel/'.$info['id'] ?>>
+              <img src=<?php echo '/foto/'.$info['img'] ?> class="sliderImg"/></a>
+            </a>
+          </div>
         </div>
-      </div>
-      <?php
+        <?php
+      }
     }
     ?>
   </div>
