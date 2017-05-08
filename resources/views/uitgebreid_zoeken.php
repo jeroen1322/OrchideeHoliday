@@ -1,13 +1,21 @@
 <h1>UITGEBREID ZOEKEN</h1>
 <form method="post">
-  <input type="text" class="form-control" name="zoekveld" placeholder="ZOEKEN" autocomplete="off">
+  <input type="text" class="form-control" name="zoekveld" placeholder="ZOEK TERM" autocomplete="off">
+  <input type="number" name="min" placeholder="MINIMAAL" autocomplete="off">
+  <input type="number" name="max" placeholder="MAXIMAAL" autocomplete="off">
+  <input type="submit" class="btn btn-primary form-knop" value="ZOEK">
 </form>
 <?php
 $zoeken = new uitgebreidZoeken;
 $artikel = new Artikel;
 
 if(!empty($_POST)){
-  $resultaat = $zoeken->zoekOpTrefwoord($_POST['zoekveld']);
+
+  if(empty($_POST['min']) && empty($_POST['max'])){
+    $resultaat = $zoeken->zoekOpTrefwoord($_POST['zoekveld']);
+  }else{
+    $resultaat = $zoeken->zoekMetPrijs($_POST['zoekveld'], $_POST['min'], $_POST['max']);
+  }
 
   if(!empty($resultaat)){
     ?>
