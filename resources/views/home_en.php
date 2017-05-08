@@ -25,7 +25,7 @@ if(!empty($_GET)){
   <a href="/en"><img src="/foto/english_flag.png" class="flag"></a>
 </div>
 <div class="top-home">
-  <h2>BEST VERKOCHT</h2>
+  <h2>TRENDING</h2>
   <div class="slider">
     <?php
     $artikelen = $artikel->getSliderArtikelen();
@@ -46,13 +46,13 @@ if(!empty($_GET)){
   <div class="slide-boxes">
     <a href="/aanbod">
       <div class="slide-box orchidee-slide-box-1">
-        <h2>AANBOD</h2>
+        <h2>BROWSE</h2>
       </div>
     </a>
     <div class="slide-box">
       <a href="/best_verkocht">
         <div class="slide-box orchidee-slide-box-2">
-          <h2>BEST VERKOCHT</h2>
+          <h2>TREDING</h2>
         </div>
       </a>
     </div>
@@ -69,7 +69,7 @@ if(!empty($_GET)){
 <br>
 <div class="artikelen">
 <hr></hr><br>
-<h2>RECENT TOEGEVOEGD</h2>
+<h2>RECNTLY ADDED</h2>
 <?php
 
 $stmt = DB::conn()->prepare("SELECT id FROM Orchidee WHERE verwijderd=0 LIMIT 4");
@@ -91,7 +91,7 @@ if(!empty($ids)){
           <a href=<?php echo '/artikel/'.$info['id'] ?>>
             <img src=<?php echo '/foto/'.$info['img'] ?> class="thumb_img filmaanbod_img"/></a>
             <h2 class="textfilmaanbod"><?php echo $info['titel'] ?> </h2>
-            <a href="/artikel/<?php echo $info['id']?>"><button class="btn btn-succes form-knop bekijk-knop">BEKIJK</button></a>
+            <a href="/artikel/<?php echo $info['id']?>"><button class="btn btn-succes form-knop bekijk-knop">READ</button></a>
           </a>
         </div>
       </div>
@@ -102,6 +102,5 @@ if(!empty($ids)){
 }
 ?>
 </div>
-
 <?php
 DB::conn()->close();

@@ -16,6 +16,10 @@ $klein->respond('/', function ($request, $response, $service) {
     $service->pageTitle = 'Orchidee Holiday';
     $service->render(VIEWS.'/home.php');
 });
+$klein->respond('/en', function ($request, $response, $service) {
+    $service->pageTitle = 'Orchidee Holiday';
+    $service->render(VIEWS.'/home_en.php');
+});
 $klein->respond('/contact', function ($request, $response, $service) {
     $service->pageTitle = 'Contact | Orchidee Holiday';
     $service->render(VIEWS.'/contact.php');
