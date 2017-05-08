@@ -36,6 +36,15 @@ $klein->respond('/aanbod', function ($request, $response, $service) {
     $service->pageTitle = 'Aanbod | Orchidee Holiday';
     $service->render(VIEWS.'/aanbod.php');
 });
+$klein->respond('/artikel_groepen', function ($request, $response, $service) {
+    $service->pageTitle = 'Artikel Groepen | Orchidee Holiday';
+    $service->render(VIEWS.'/artikel_groepen.php');
+});
+$klein->respond('/groep/[:id]', function ($request, $response, $service) {
+    $service->groep = $request->id;
+    $service->pageTitle = 'Artikel Groepen | Orchidee Holiday';
+    $service->render(VIEWS.'/groep.php');
+});
 $klein->respond('/favorieten', function ($request, $response, $service) {
     $service->pageTitle = 'Favorieten | Orchidee Holiday';
     $service->render(VIEWS.'/favorieten.php');

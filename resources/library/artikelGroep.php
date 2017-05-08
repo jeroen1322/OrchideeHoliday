@@ -23,4 +23,33 @@ class ArtikelGroep{
     echo '</select>';
   }
 
+  public function getGroepen(){
+
+    $stmt = DB::conn()->prepare('SELECT id, omschrijving FROM artikelGroep');
+    $stmt->execute();
+    $stmt->bind_result($id, $omschrijving);
+    while($stmt->fetch()){
+      $groepen[$id] = $omschrijving;
+    }
+    $stmt->close();
+
+    return $groepen;
+
+  }
+
+  public function getGroepArtikelen($groep){
+    $stmt = DB::conn()->prepare('SELECT id FROM Orchidee WHERE soort=?');
+    $stmt->bind_param('i', $groep);
+    $stmt->execute();
+    $stmt->bind_result($id);
+    while($stmt->fetch()){
+      $ids[] = $id;
+    }
+    $stmt->close();
+
+    if(!empty($ids)){
+      return $ids;
+    }
+  }
+
 }

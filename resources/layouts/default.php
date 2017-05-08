@@ -84,6 +84,7 @@ if(!empty($_SESSION['login'])){
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav nav-links">
             <li><a href="/aanbod">AANBOD</a></li>
+            <li><a href="/artikel_groepen">ARTIKEL GROEPEN</a></li>
             <li><a href="/best_verkocht">BEST VERKOCHT</a></li>
             <li><a href="/contact">CONTACT</a></li>
             <li><a href="/voorwaarden">VOORWAARDEN</a></li>
