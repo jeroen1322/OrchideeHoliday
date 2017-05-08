@@ -17,6 +17,7 @@ $klein->respond('/', function ($request, $response, $service) {
     $service->render(VIEWS.'/home.php');
 });
 $klein->respond('/en', function ($request, $response, $service) {
+    $service->layout('../resources/layouts/default_en.php');
     $service->pageTitle = 'Orchidee Holiday';
     $service->render(VIEWS.'/home_en.php');
 });
@@ -29,6 +30,7 @@ $klein->respond('/voorwaarden', function ($request, $response, $service) {
     $service->render(VIEWS.'/voorwaarden.php');
 });
 $klein->respond('/voorwaarden/en', function ($request, $response, $service) {
+    $service->layout('../resources/layouts/default_en.php');
     $service->pageTitle = 'Terms and Conditions | Orchidee Holiday';
     $service->render(VIEWS.'/voorwaarden_en.php');
 });
@@ -37,6 +39,7 @@ $klein->respond('/bestelprocedure', function ($request, $response, $service) {
     $service->render(VIEWS.'/bestelprocedure.php');
 });
 $klein->respond('/bestelprocedure/en', function ($request, $response, $service) {
+    $service->layout('../resources/layouts/default_en.php');
     $service->pageTitle = 'Orderingprocedure | Orchidee Holiday';
     $service->render(VIEWS.'/bestelprocedure_en.php');
 });
