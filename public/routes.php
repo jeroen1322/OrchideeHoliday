@@ -36,6 +36,10 @@ $klein->respond('/bestelprocedure', function ($request, $response, $service) {
     $service->pageTitle = 'Bestelprocedure | Orchidee Holiday';
     $service->render(VIEWS.'/bestelprocedure.php');
 });
+$klein->respond('/bestelprocedure/en', function ($request, $response, $service) {
+    $service->pageTitle = 'Orderingprocedure | Orchidee Holiday';
+    $service->render(VIEWS.'/bestelprocedure_en.php');
+});
 $klein->respond('/sitemap', function ($request, $response, $service) {
     $service->pageTitle = 'Sitemap | Orchidee Holiday';
     $service->render(VIEWS.'/sitemap.php');

@@ -1,3 +1,7 @@
+<div class="flags">
+  <a href="/bestelprocedure"><img src="/foto/dutch_flag.jpg" class="flag"></a>
+  <a href="/bestelprocedure/en"><img src="/foto/english_flag.png" class="flag"></a>
+</div>
 <h1>BESTELPROCEDURE</h1>
 <hr>
 
