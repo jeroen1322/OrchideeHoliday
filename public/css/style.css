@@ -205,9 +205,12 @@ img.winkelmand_img {
 .anoniem-bestel-knop{
   width: 100%;
 }
-input[type=radio] {
+/*input[type=radio] {
    display:none;
-}
+}*/
+/*.groepRadioButton > input[type=radio] {
+    display: block !important;
+}*/
 .verzendwijze{
   width: 100%;
   text-align: center;

@@ -37,6 +37,26 @@ class ArtikelGroep{
 
   }
 
+  public function groepenRadioButtons(){
+    function getGroups(){
+      $stmt = DB::conn()->prepare('SELECT id, omschrijving FROM artikelGroep');
+      $stmt->execute();
+      $stmt->bind_result($id, $omschrijving);
+      while($stmt->fetch()){
+        $groepen[$id] = $omschrijving;
+      }
+      $stmt->close();
+
+      return $groepen;
+    }
+
+    $groups = getGroups();
+
+    foreach($groups as $key => $value){
+      echo '<input type="radio" name="groep" value="'.$key.'" class="groepRadioButton">'.$value.'<br>';
+    }
+  }
+
   public function getGroepArtikelen($groep){
     $stmt = DB::conn()->prepare('SELECT id FROM Orchidee WHERE soort=?');
     $stmt->bind_param('i', $groep);

@@ -2,6 +2,7 @@
 <?php
 $zoeken = new uitgebreidZoeken;
 $artikel = new Artikel;
+$groep = new ArtikelGroep;
 
 if(!empty($_POST)){
   ?>
@@ -9,14 +10,27 @@ if(!empty($_POST)){
     <input type="text" class="form-control" name="zoekveld" placeholder="ZOEK TERM" autocomplete="off" value="<?php echo $_POST['zoekveld']?>" required>
     <input type="number" name="min" placeholder="€ MINIMAAL" autocomplete="off" class="zoekPrijs" value="<?php echo $_POST['min']?>">
     <input type="number" name="max" placeholder="€ MAXIMAAL" autocomplete="off" class="zoekPrijs" value="<?php echo $_POST['max']?>">
+    <hr>
+    <?php
+    $groep->groepenRadioButtons();
+    ?>
+    <hr>
     <input type="submit" class="btn btn-primary form-knop fullWidth" value="ZOEK">
   </form>
   <?php
 
   if(empty($_POST['min']) && empty($_POST['max'])){
-    $resultaat = $zoeken->zoekOpTrefwoord($_POST['zoekveld']);
+    if(!empty($_POST['groep'])){
+      $resultaat = $zoeken->ZoekBinnenArtikelGroep($_POST['zoekveld'], $_POST['groep']);
+    }else{
+      $resultaat = $zoeken->zoekOpTrefwoord($_POST['zoekveld']);
+    }
   }else{
-    $resultaat = $zoeken->zoekMetPrijs($_POST['zoekveld'], $_POST['min'], $_POST['max']);
+    if(!empty($_POST['groep'])){
+      $resultaat = $zoeken->ZoekBinnenArtikelGroepMetPrijs($_POST['zoekveld'], $_POST['min'], $_POST['max'], $_POST['groep']);
+    }else{
+      $resultaat = $zoeken->zoekMetPrijs($_POST['zoekveld'], $_POST['min'], $_POST['max']);
+    }
   }
 
   if(!empty($resultaat)){
@@ -49,6 +63,11 @@ if(!empty($_POST)){
     <input type="text" class="form-control" name="zoekveld" placeholder="ZOEK TERM" autocomplete="off" required>
     <input type="number" name="min" placeholder="€ MINIMAAL" autocomplete="off" class="zoekPrijs">
     <input type="number" name="max" placeholder="€ MAXIMAAL" autocomplete="off" class="zoekPrijs">
+    <hr>
+    <?php
+    $groep->groepenRadioButtons();
+    ?>
+    <hr>
     <input type="submit" class="btn btn-primary form-knop fullWidth" value="ZOEK">
   </form>
   <?php
