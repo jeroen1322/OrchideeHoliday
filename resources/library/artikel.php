@@ -82,4 +82,44 @@ class Artikel{
     }
 
   }
+
+  public function getSliderArtikelen(){
+    function getBesteldeOrders(){
+      $stmt = DB::conn()->prepare('SELECT id FROM `Order` WHERE besteld=1');
+      $stmt->execute();
+      $stmt->bind_result($id);
+      while($stmt->fetch()){
+        $ids[] = $id;
+      }
+      $stmt->close();
+
+      if(!empty($ids)){
+        return $ids;
+      }
+    }
+    function getOrderRegelOrchideeen($ids){
+      $orchideeen = array();
+      foreach($ids as $id){
+        $stmt = DB::conn()->prepare('SELECT orchideeid FROM `OrderRegel` WHERE orderid=?');
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $stmt->bind_result($orchidee);
+        while($stmt->fetch()){
+          $orchideeen[] = $orchidee;
+        }
+        $stmt->close();
+      }
+
+      if(!empty($orchideeen)){
+        return $orchideeen;
+      }
+    }
+
+    $ids = getBesteldeOrders();
+    $artikelen = getOrderRegelOrchideeen($ids);
+
+    if(!empty($artikelen)){
+      return $artikelen;
+    }
+  }
 }

@@ -1,6 +1,7 @@
 <?php
 $winkelmand = new Winkelmand;
 $account = new Account;
+$artikel = new Artikel;
 
 if(!empty($_GET)){
   if($_GET['ingelogd'] == 'true'){
@@ -20,8 +21,23 @@ if(!empty($_GET)){
 }
 ?>
 <div class="top-home">
+  <h2>BEST VERKOCHT</h2>
   <div class="slider">
-
+    <?php
+    $artikelen = $artikel->getSliderArtikelen();
+    foreach($artikelen as $a => $id){
+      $info = $artikel->thumbInfo($id);
+      ?>
+      <div class="col-md-3 sliderThumb">
+        <div class="thumb">
+          <a href=<?php echo '/artikel/'.$info['id'] ?>>
+            <img src=<?php echo '/foto/'.$info['img'] ?> class="sliderImg"/></a>
+          </a>
+        </div>
+      </div>
+      <?php
+    }
+    ?>
   </div>
   <div class="slide-boxes">
     <a href="/aanbod">
@@ -46,5 +62,40 @@ if(!empty($_GET)){
   </div>
 </div>
 <hr>
+<br>
+<div class="artikelen">
+<h2>RECENT TOEGEVOEGD</h2>
+<?php
+
+$stmt = DB::conn()->prepare("SELECT id FROM Orchidee LIMIT 4");
+$stmt->execute();
+$stmt->bind_result($id);
+while($stmt->fetch()){
+  $ids[] = $id;
+}
+$stmt->close();
+
+
+
+if(!empty($ids)){
+  foreach($ids as $id){
+    $info = $artikel->thumbInfo($id);
+    ?>
+    <div class="filmThumbnail filmAanbodFilm col-md-3 filmAanbodItem recentToegevoegd">
+      <div class="thumb">
+          <a href=<?php echo '/artikel/'.$info['id'] ?>>
+            <img src=<?php echo '/foto/'.$info['img'] ?> class="thumb_img filmaanbod_img"/></a>
+            <h2 class="textfilmaanbod"><?php echo $info['titel'] ?> </h2>
+            <a href="/artikel/<?php echo $info['id']?>"><button class="btn btn-succes form-knop bekijk-knop">BEKIJK</button></a>
+          </a>
+        </div>
+      </div>
+    <?php
+  }
+}else{
+  echo '<div class="warning"><b>Er zijn nog geen artikelen toegevoegd.</b></div>';
+}
+?>
+</div>
 <?php
 DB::conn()->close();

@@ -102,6 +102,7 @@ body{
   width: 65%;
   margin: 0;
   float: left;
+  background: none !important;
 }
 .slide-boxes {
   float: right;
@@ -231,4 +232,15 @@ i.fa.fa-user, i.fa.fa-truck{
 }
 .bestelprocedure{
   padding-bottom: 50px;
+}
+.sliderImg {
+  width: 200px;
+  height: 250px;
+  margin-top: 30px;
+}
+.artikelen{
+  padding-bottom: 100px;
+}
+.recentToegevoegd{
+  padding-bottom: 100px;
 }

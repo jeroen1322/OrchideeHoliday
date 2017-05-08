@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
   if($(window).width() < 610){
-    $('.nieuw_film_slider').slick({
+    $('.slider').slick({
       infinite: true,
       slidesToShow: 1,
       slidesToScroll: 1,
@@ -10,7 +10,7 @@ $(document).ready(function(){
       responsive: true
     });
   }else if($(window).width() < 1000 && $(window).width() > 610){
-    $('.nieuw_film_slider').slick({
+    $('.slider').slick({
       infinite: true,
       slidesToShow: 2,
       slidesToScroll: 1,
@@ -19,15 +19,18 @@ $(document).ready(function(){
       responsive: true
     });
   }else{
-    $('.nieuw_film_slider').slick({
+    $('.slider').slick({
       infinite: true,
       slidesToShow: 3,
       slidesToScroll: 3,
       dots: true,
       speed: 600,
-      responsive: true
+      responsive: true,
+      autoplay: true,
+      autoplaySpeed: 3000
     });
   }
+
   $('.afleverDatum').hide();
   $('.nee').click(function(){
     $('.afleverDatum').show("fast");
