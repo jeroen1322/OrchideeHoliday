@@ -1,5 +1,12 @@
 <?php
 class Artikel{
+
+  /*
+  Get all the information of a product where the product's id matches the artikelId parameter
+
+  @param: The int to which the id's are matched
+  @return: an array with all the products information
+  */
   public function informatie($artikelId){
     $informatie = array();
 
@@ -21,6 +28,12 @@ class Artikel{
     return $informatie;
   }
 
+  /*
+  Get the omschrijving that matches with the parameter id in the artikelGroep table
+
+  @param: The int to which the id's are matched
+  @return: The omschrijving, if it matches
+  */
   public function parseSoort($id){
     $stmt = DB::conn()->prepare('SELECT omschrijving FROM artikelGroep WHERE id=?');
     $stmt->bind_param('i', $id);
@@ -32,6 +45,12 @@ class Artikel{
     return $omschrijving;
   }
 
+  /*
+  Get some information of a product that will be displayed in the product's thumbnail
+
+  @param: The int to which the product's id is matched
+  @return: An array with all the information that is relevant to the thumbnail of the product
+  */
   public function thumbInfo($artikelId){
     $stmt = DB::conn()->prepare('SELECT id, titel, korteOmschrijving, prijs, img FROM Orchidee WHERE id=?');
     $stmt->bind_param('i', $artikelId);
@@ -130,7 +149,7 @@ class Artikel{
     }
 
     function filterDeleted($artikelen){
-      if(!empty($artikelen)){        
+      if(!empty($artikelen)){
         foreach($artikelen as $a){
           $stmt = DB::conn()->prepare('SELECT id FROM Orchidee WHERE id=? AND verwijderd=0');
           $stmt->bind_param('i', $a);
