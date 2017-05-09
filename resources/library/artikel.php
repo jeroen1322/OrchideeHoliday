@@ -68,8 +68,19 @@ class Artikel{
     return $thumbInfo;
   }
 
+  /*
+  Get the best selling products
+
+  @return: If there are sold products, it will return an array with the id of the product
+  and the number of times that that product is sold.
+  */
   public function zoekBestVerkocht(){
 
+    /*
+    Get the id from orders that are finished
+
+    @return: Returns an array with the id's of finished orders
+    */
     function getBesteldeOrders(){
       $stmt = DB::conn()->prepare('SELECT id FROM `Order` WHERE besteld=1');
       $stmt->execute();
@@ -83,6 +94,13 @@ class Artikel{
         return $ids;
       }
     }
+
+    /*
+    Get all the ids from the products that are included in the orders
+
+    @param: An array with the id's from the finished orders
+    @return: An array with all the product id's that are related to the finished order
+    */
     function getOrderRegelOrchideeen($ids){
       $orchideeen = array();
       foreach($ids as $id){
@@ -101,6 +119,12 @@ class Artikel{
       }
     }
 
+    /*
+    Count the amount of values in the array
+
+    @param: An array
+    @return: A number of the counted amount of values in the array
+    */
     function telAantalVerkochtOp($orchideeen){
       return array_count_values($orchideeen);
     }
@@ -114,7 +138,19 @@ class Artikel{
 
   }
 
+  /*
+  Get the products that will be displayed in the slider on Home.
+  The function will return the best selling items
+
+  @return: An array with product id's
+  */
   public function getSliderArtikelen(){
+
+    /*
+    Get the id from orders that are finished
+
+    @return: Returns an array with the id's of finished orders
+    */
     function getBesteldeOrders(){
       $stmt = DB::conn()->prepare('SELECT id FROM `Order` WHERE besteld=1');
       $stmt->execute();
@@ -128,6 +164,13 @@ class Artikel{
         return $ids;
       }
     }
+
+    /*
+    Get all the ids from the products that are included in the orders
+
+    @param: An array with the id's from the finished orders
+    @return: An array with all the product id's that are related to the finished order
+    */
     function getOrderRegelOrchideeen($ids){
       $orchideeen = array();
       if(!empty($ids)){
@@ -148,6 +191,13 @@ class Artikel{
       }
     }
 
+    /*
+    Filter the 'deleted' product. If a product is deleted, a.k.a set as unavailable, the product's verwijder column will be set to 1.
+    A user can NOT have a deleted product in their Favorieten.
+
+    @param: An array with all the product id's from getFavs();
+    @return: An array with all the product id's that are NOT deleted
+    */
     function filterDeleted($artikelen){
       if(!empty($artikelen)){
         foreach($artikelen as $a){
@@ -176,6 +226,11 @@ class Artikel{
     }
   }
 
+  /*
+  Get the id's of products (that are not deleted)
+
+  @return: An array with the id's of products
+  */
   public function getAllArtikelen(){
     $stmt = DB::conn()->prepare('SELECT id FROM Orchidee WHERE verwijderd=0');
     $stmt->execute();
@@ -190,6 +245,12 @@ class Artikel{
     }
   }
 
+  /*
+  Mark a product as deleted by setting the verwijderd column to 1
+
+  @param: The products id
+  @return: True, if no errors occured
+  */
   public function verwijderArtikel($artikel){
 
     $stmt = DB::conn()->prepare('UPDATE Orchidee SET verwijderd=1 WHERE id=?');
