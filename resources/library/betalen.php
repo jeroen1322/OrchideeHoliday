@@ -1,7 +1,7 @@
 <?php
 class Betalen{
-  /*
-  Get all the rows from BetaalWijze and display them in a <select> tag with the data in the <option> tags
+  /**
+  *Get all the rows from BetaalWijze and display them in a <select> tag with the data in the <option> tags
   */
   public function displayBetaalWijze(){
     function getAlleBetaalwijze(){
