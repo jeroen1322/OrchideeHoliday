@@ -180,7 +180,20 @@ class Winkelmand{
     }
   }
 
+  /**
+  *If the user has written a remark in the Afrekenen page, it will be inserted in to the order
+  *
+  *@param opmerking: The user's remark
+  *@param gebruiker: The user's id
+  */
   public function inputOpmerking($opmerking, $gebruiker){
+
+    /**
+    *The the id of the order where the remark will be inserted to
+    *
+    *@param: The user's id
+    *@return: The id of the open order that is linked to the user
+    */
     function getOrder($gebruiker){
       $stmt = DB::conn()->prepare('SELECT id FROM `Order` WHERE persoon=? AND besteld=0');
       $stmt->bind_param('i', $gebruiker);
@@ -192,6 +205,12 @@ class Winkelmand{
       return $bestaandeOrder;
     }
 
+    /**
+    *Insert the remark in the order
+    *
+    *@param opmerking: The user's remark
+    *@param id: The id of the order that the remark should be inserted in to
+    */
     function inputOpmerkingInOrder($opmerking, $id){
       $stmt = DB::conn()->prepare('UPDATE`Order` SET opmerking=? WHERE id=?');
       $stmt->bind_param('si', $opmerking, $id);
