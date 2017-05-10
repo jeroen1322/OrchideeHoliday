@@ -1,7 +1,20 @@
 <?php
 class Winkelmand{
+
+  /**
+  *Get all the products that a user added to their shoppingcart
+  *
+  *@param: The user's id
+  *@return: An array of the id's of products that the user has in the shoppingcart
+  */
   public function getArtikelen($gebruiker){
 
+    /**
+    *Get the id of the Order that is assigned to the user and is not completed
+    *
+    *@param: The user's id
+    *@return: The id of the user's open order
+    */
     function getOpenOrder($gebruiker){
       $stmt = DB::conn()->prepare('SELECT id FROM `Order` WHERE Persoon=? AND besteld=0');
       $stmt->bind_param('i', $gebruiker);
@@ -13,6 +26,12 @@ class Winkelmand{
       return $orderId;
     }
 
+    /**
+    *Get the ids of the products that are linked to the user's order
+    *
+    *@param: The user's id
+    *@return: An array of the product id's that are linked to the user's order
+    */
     function getArtikelIds($gebruiker){
 
       $order = getOpenOrder($gebruiker);
@@ -42,10 +61,23 @@ class Winkelmand{
     }
     $artikelen = getArtikelIds($gebruiker);
     return $artikelen;
+
   }
 
+  /**
+  *This function contains the entire procedure to place a product in the shoppingcart of the user.
+  *
+  *@param orchideeId: Product's id
+  *@param gebruikerId: User's id
+  */
   public function plaatsInDatabaseWinkelmand($orchideeId, $gebruikerId){
 
+    /**
+    *Get the id of the user's open order
+    *
+    *@param: User's id
+    *@return: If there is an open order, it returns the id of the open order
+    */
     function controlleerBestaandeOrder($gebruikerId){
       $stmt = DB::conn()->prepare('SELECT id FROM `Order` WHERE persoon=? AND besteld=0');
       $stmt->bind_param('i', $gebruikerId);
@@ -59,6 +91,12 @@ class Winkelmand{
       }
     }
 
+    /**
+    *Check if the random id already exists in the Order table
+    *
+    *@param: The id that should be checked
+    *@return: True, if the id does NOT already exist in the Order table
+    */
     function controlleerRand($rand){
       $stmt = DB::conn()->prepare('SELECT id FROM `Order` WHERE id=?');
       $stmt->bind_param('i', $rand);
@@ -72,6 +110,12 @@ class Winkelmand{
       }
     }
 
+    /**
+    *Get the betaalwijze that is linked to the users account
+    *
+    *@param: The user's id
+    *@return: The id of the linked betaalwijze
+    */
     function getBetaalWijze($gebruiker){
       $stmt = DB::conn()->prepare('SELECT betaalwijze FROM Persoon WHERE id=?');
       $stmt->bind_param('i', $gebruiker);
@@ -83,6 +127,13 @@ class Winkelmand{
       return $betaalwijze;
     }
 
+    /**
+    *Create an Order by inserting data in to the Order table.
+    *After the Order is created the product that the user put in their shoppingcart
+    *
+    *@param orchideeId: The product's id that will be put in the OrderRegel
+    *@param gebruikerId: The user's id that of the user to which the shoppingcart is linked
+    */
     function maakOrder($orchideeId, $gebruikerId){
       $anoniem = 0;
       $besteld = 0;
@@ -107,6 +158,12 @@ class Winkelmand{
       $stmt->close();
     }
 
+    /**
+    *If there already exists an open order, put a product in an orderregel and link that to the user's open order
+    *
+    *@param orchideeId: The product's id
+    *@param id: The user's id to which the order is linked to
+    */
     function insertBestaandeOrderRegel($orchideeId, $id){
       $orderRegelId = rand(1, 999999);
       $stmt = DB::conn()->prepare('INSERT INTO `OrderRegel`(id, orchideeid, orderid) VALUES(?, ?, ?)');
