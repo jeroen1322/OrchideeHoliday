@@ -6,7 +6,7 @@ $favorieten = $gebruiker->getFavorieten($gebruikerId);
 
 if(!empty($_GET)){
   if($_GET['action'] == 'delete'){
-    if($gebruiker->deleteFavoriet($_GET['code'])){
+    if($gebruiker->deleteFavoriet($_GET['code'], $gebruikerId)){
       header("Refresh:0; url=/favorieten");
     }
   }

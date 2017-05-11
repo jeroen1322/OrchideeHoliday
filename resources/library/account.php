@@ -2,9 +2,8 @@
 class Account{
 
   /**
-  *Check if the third index in the 'login' session (the rolId) is 1, which represents the administrator.
-  *
-  *@return true of it is 1.
+  * Check if the third index in the 'login' session (the rolId) is 1, which represents the administrator.
+  * @return bool: true of it is 1.
   */
   public function isBeheerder(){
     if(!empty($_SESSION['login'])){
@@ -17,22 +16,18 @@ class Account{
 
   /**
   *Get the value of the first index in the 'login' session, which represents the user's id
-  *
-  *@return: the value of the first index if the 'login' session is not empty, else return false
+  *@return bool $_SESSION['login'][0]: the value of the first index if the 'login' session is not empty
   */
   public function getLoginId(){
     if(!empty($_SESSION['login'])){
       return $_SESSION['login'][0];
-    }else{
-      return false;
     }
   }
 
   /**
-  *Get all the information from the Persoon table colums, where the id column matches the $klantId parameter
-  *
-  *@param: The int to which the id column from Persoon will be matched
-  *@return: If it matches, return an array with all the data from the Persoon columns
+  * Get all the information from the Persoon table colums, where the id column matches the $klantId parameter
+  * @param int $klantId: The int to which the id column from Persoon will be matched
+  * @return array $gebruikerGegevens: If it matches, return an array with all the data from the Persoon columns
   */
   public function gebruikerGegevens($klantId){
     $stmt = DB::conn()->prepare('SELECT voornaam, achternaam, email, woonplaats, postcode, straat, huisnummer FROM Persoon WHERE id=?');
@@ -54,9 +49,8 @@ class Account{
   }
 
   /**
-  *Function to check if the current user is logged in
-  *
-  *@return: true, if the user is logged in
+  * Function to check if the current user is logged in
+  * @return bool: True, if the user is logged in
   */
   public function isIngelogd(){
     if(!empty($_SESSION['login'])){
@@ -65,22 +59,21 @@ class Account{
   }
 
   /**
-  *Function that contains the whole procedure to register a user.
-  *It checks if the inserted email adres is not already registered, and if the inserted passwords match.
+  * Function that contains the whole procedure to register a user.
+  * It checks if the inserted email adres is not already registered, and if the inserted passwords match.
   *
-  *The function adds all the personal data to the Persoon table.
-  *It then assigns the user account to the correct rol and after that it hashes that passwords and inserts that with the user's id in to the Wachtwoord table.
+  * The function adds all the personal data to the Persoon table.
+  * It then assigns the user account to the correct rol and after that it hashes that passwords and inserts that with the user's id in to the Wachtwoord table.
   *
-  *If there is an error, it will display the error by echo'ing a div containing the error.
-  *When everything works just fine, it redirects to the Login page.
+  * If there is an error, it will display the error by echo'ing a div containing the error.
+  * When everything works just fine, it redirects to the Login page.
   */
   public function Registreren($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $wachtwoord, $herhaalWachtwoord, $betaalWijze){
 
     /**
-    *Function that checks if the inserted email matches any email adres already registered
-    *
-    *@param: The inserted email adres
-    *@return: Return true if the inserted email matches.
+    * Function that checks if the inserted email matches any email adres already registered
+    * @param string $email: The inserted email adres
+    * @return bool: Return true if the inserted email matches.
     */
     function controlleerEmailAlInGebruik($email){
       $stmt = DB::conn()->prepare('SELECT email FROM Persoon WHERE email=?');
@@ -95,10 +88,9 @@ class Account{
     }
 
     /**
-    *Check if the thwo inserted passwords match
-    *
-    *@param wachtwoord: The information from the Wachtwoord field
-    *@param herhaalWachtwoord: The information from the Herhaal Wachtwoord field
+    * Check if the thwo inserted passwords match
+    * @param string $wachtwoord: The information from the Wachtwoord field
+    * @param string $herhaalWachtwoord: The information from the Herhaal Wachtwoord field
     */
     function controlleerOvereenkomstWachtwoorden($wachtwoord, $herhaalWachtwoord){
       if($wachtwoord == $herhaalWachtwoord){
@@ -107,27 +99,24 @@ class Account{
     }
 
     /**
-    *Function that handles the actual inserting in to the database
-    *
-    *@param voornaam: The information from the Voornaam field
-    *@param achternaam: The information from the Achternaam field
-    *@param email: The information inserted in the Email field, if it does NOT match any already registered email adresses
-    *@param woonplaats: the information from the Woonplaats field
-    *@param postcode: The information inserted in the Postcode field
-    *@param straat: Information inserted in the Straat field
-    *@param huisnummer: Information inserted in the Huisnummer field
-    *@param Wachtwoord: Information inserted in the Wachtwoord field, if it DOES match the information from the Herhaal Wachtwoord field
-    *@param betaalWijze: The selected Betaalwijze from the Register form
-    *
-    *@return: If everything works and all is inserted correctly, the function returns True
+    * Function that handles the actual inserting in to the database
+    * @param string $voornaam: The information from the Voornaam field
+    * @param string $achternaam: The information from the Achternaam field
+    * @param string $email: The information inserted in the Email field, if it does NOT match any already registered email adresses
+    * @param string $woonplaats: the information from the Woonplaats field
+    * @param string $postcode: The information inserted in the Postcode field
+    * @param string $straat: Information inserted in the Straat field
+    * @param string $huisnummer: Information inserted in the Huisnummer field
+    * @param string $Wachtwoord: Information inserted in the Wachtwoord field, if it DOES match the information from the Herhaal Wachtwoord field
+    * @param string $betaalWijze: The selected Betaalwijze from the Register form
+    * @return bool: If everything works and all is inserted correctly, the function returns True
     */
     function voegToeAanDatabase($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $wachtwoord, $betaalWijze){
 
       /**
-      *Insert the personal details in the Persoon table
-      *
-      *@param: See above..
-      *@return: true, if no error occurs
+      * Insert the personal details in the Persoon table
+      * @param string: See above...
+      * @return bool: true, if no error occurs
       */
       function insertPersoon($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $betaalWijze){
         $anoniem = 0;
@@ -141,10 +130,9 @@ class Account{
       }
 
       /**
-      *Get the id from the newly added user from the Persoon table
-      *
-      *@param: The email adres from the newly added user
-      *@return: The newly added user's id
+      * Get the id from the newly added user from the Persoon table
+      * @param string $email: The email adres from the newly added user
+      * @return int $id: The newly added user's id
       */
       function getGebruikerId($email){
         $stmt = DB::conn()->prepare('SELECT id FROM Persoon WHERE email=?');
@@ -158,11 +146,10 @@ class Account{
       }
 
       /**
-      *Insert the default rol (2), and the id from the newly added user in the TussenRol table
-      *
-      *@param gebruikerId: The user's id
-      *@param defaultRolId: The default rol
-      *@return: True, if no errors occur
+      * Insert the default rol (2), and the id from the newly added user in the TussenRol table
+      * @param int $gebruikerId: The user's id
+      * @param int $defaultRolId: The default rol
+      * @return bool: True, if no errors occur
       */
       function insertTussenRol($gebruikerId, $defaultRolId){
         $stmt = DB::conn()->prepare('INSERT INTO TussenRol(rolid, persoonid) VALUES(?, ?)');
@@ -174,11 +161,10 @@ class Account{
       }
 
       /**
-      *Insert the hashed password in to the database
-      *
-      *@param wachtwoord: The users cleartext-password
-      *@param gebruikerId: The users id
-      *@return: True, if no errors occur
+      * Insert the hashed password in to the database
+      * @param string wachtwoord: The users cleartext-password
+      * @param int gebruikerId: The users id
+      * @return bool: True, if no errors occur
       */
       function insertWachtwoord($wachtwoord, $gebruikerId){
         $hash = password_hash($wachtwoord, PASSWORD_DEFAULT); //Hash the password
@@ -191,12 +177,6 @@ class Account{
         return true;
       }
 
-      /**
-      *Run the above defined functions
-      *
-      *@param: See above defined functions
-      *@return: True if all the functions return true, else return false
-      */
       if(insertPersoon($voornaam, $achternaam, $email, $woonplaats, $postcode, $straat, $huisnummer, $betaalWijze)){
         $gebruikerId = getGebruikerId($email);
         $defaultRolId = 2;
@@ -212,12 +192,6 @@ class Account{
       }
     }
 
-    /**
-    *Run the complete register process by executing the functions
-    *
-    *@param: See above defined functions
-    *@return: If everything returns true, redirect to the login page
-    */
     if(controlleerEmailAlInGebruik($email)){
       echo '<div class="warning"><b>Het door u opgegeven email adres is al in gebruik.</b></div>';
     }else{
@@ -234,11 +208,10 @@ class Account{
   }
 
   /**
-  *Count the amount of items a user has in the shoppingcart.
-  *It matches the parameter gebruikerId to the Persoon column in the Order table
-  *
-  *@param: The user's id
-  *@return: Return an in that represents the amount of items a user has in the shoppingcart, if there are any
+  * Count the amount of items a user has in the shoppingcart.
+  * It matches the parameter gebruikerId to the Persoon column in the Order table
+  * @param int $gebruikerId: The user's id
+  * @return int $aantalArtikelen: Return an int that represents the amount of items a user has in the shoppingcart, if there are any
   */
   public function telOpenOrders($gebruikerId){
     $stmt = DB::conn()->prepare('SELECT id FROM `Order` WHERE Persoon=? AND besteld=0');
@@ -261,18 +234,16 @@ class Account{
   }
 
   /**
-  *Add a product and the user's id to the Favoriet table.
-  *
-  *@param orchidee: The product's id
-  *@param gebruiker: The user's id
+  * Add a product and the user's id to the Favoriet table.
+  * @param int $orchidee: The product's id
+  * @param int $gebruiker: The user's id
   */
   public function voegToeAanFavotiet($orchidee, $gebruiker){
     /**
-    *Insert the data to the Favoriet table
-    *
-    *@param orchidee: The product's id
-    *@param gebruiker: The user's id
-    *@return: true, if no errors occur
+    * Insert the data to the Favoriet table
+    * @param int $orchidee: The product's id
+    * @param int $gebruiker: The user's id
+    * @return bool: true, if no errors occur
     */
     function addToDatabase($orchidee, $gebruiker){
       $stmt = DB::conn()->prepare('INSERT INTO Favoriet(orchidee, persoon) VALUES (?, ?)');
@@ -289,18 +260,16 @@ class Account{
   }
 
   /**
-  *Get all the products that a user has added to their Favorieten lijst (Favoriet table)
-  *
-  *@param gebruiker: The user's id
-  *@return: An array with the ids of all the products that the user has added to their Favorieten lijst
+  * Get all the products that a user has added to their Favorieten lijst (Favoriet table)
+  * @param int $gebruiker: The user's id
+  * @return array $orchideeen: An array with the ids of all the products that the user has added to their Favorieten lijst
   */
   public function getFavorieten($gebruiker){
 
     /**
-    *Get the product ids from the Favoriet table where the persoon columns matches the user id parameter
-    *
-    *@param: The user's id
-    *@return: An array with all the product ids
+    * Get the product ids from the Favoriet table where the persoon columns matches the user id parameter
+    * @param int $gebuiker: The user's id
+    * @return array $orchideeen: An array with all the product ids
     */
     function getFavs($gebruiker){
       $stmt = DB::conn()->prepare('SELECT orchidee FROM Favoriet WHERE persoon=?');
@@ -318,11 +287,10 @@ class Account{
     }
 
     /**
-    *Filter the 'deleted' product. If a product is deleted, a.k.a set as unavailable, the product's verwijder column will be set to 1.
-    *A user can NOT have a deleted product in their Favorieten.
-    *
-    *@param: An array with all the product ids from getFavs();
-    *@return: An array with all the product ids that are NOT deleted
+    * Filter the 'deleted' product. If a product is deleted, a.k.a set as unavailable, the product's verwijder column will be set to 1.
+    * A user can NOT have a deleted product in their Favorieten.
+    * @param array $artikelen: An array with all the product ids from getFavs();
+    * @return array $ids: An array with all the product ids that are NOT deleted
     */
     function filterDeleted($artikelen){
       foreach($artikelen as $a){
@@ -351,17 +319,14 @@ class Account{
   }
 
   /**
-  *Delete a product from a Favorieten list of a user.
-  *
-  *TODO: Add user's id as parameter
-  *
-  *@param artikel: The product's id
-  *@param gebruiker: The users id;
-  *@return: Returns true, if everything works
+  * Delete a product from a Favorieten list of a user.
+  * @param int $artikel: The product's id
+  * @param int $gebruiker: The users id;
+  * @return bool: Returns true, if everything works
   */
-  public function deleteFavoriet($artikel){
-    $stmt = DB::conn()->prepare('DELETE FROM Favoriet WHERE orchidee=?');
-    $stmt->bind_param('i', $artikel);
+  public function deleteFavoriet($artikel, $gebruiker){
+    $stmt = DB::conn()->prepare('DELETE FROM Favoriet WHERE orchidee=? AND persoon=?');
+    $stmt->bind_param('ii', $artikel, $gebruiker);
     $stmt->execute();
     $stmt->close();
 
