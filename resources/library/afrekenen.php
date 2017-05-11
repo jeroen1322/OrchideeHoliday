@@ -2,9 +2,8 @@
 class Afrekenen{
 
   /**
-  *Store the selected Bezorgwijze in the 'bezorgwijze' session
-  *
-  *@param: The user's selected Bezorgwijze
+  * Store the selected Bezorgwijze in the 'bezorgwijze' session
+  * @param string $bezorgwijze: The user's selected Bezorgwijze
   */
   public function slaBezorgwijzeOpInSession($bezorgwijze){
     $_SESSION['bezorgwijze'] = array();
@@ -12,9 +11,8 @@ class Afrekenen{
   }
 
   /**
-  *Check if the 'bezorgwijze' session is empty or not.
-  *
-  *@return: True, if it is not empty
+  * Check if the 'bezorgwijze' session is empty or not.
+  * @return bool: True, if it is not empty
   */
   public function controlleerBezorgwijzeSession(){
     if(!empty($_SESSION['bezorgwijze'])){
@@ -23,9 +21,8 @@ class Afrekenen{
   }
 
   /**
-  *Store the user's Opmerking in the 'opmerking' session
-  *
-  *@param: The user's Opmerking
+  * Store the user's Opmerking in the 'opmerking' session
+  * @param string $opmerking: The user's Opmerking
   */
   public function storeOpmerkingInSession($opmerking){
     $_SESSION['opmerking'] = array();
@@ -33,9 +30,8 @@ class Afrekenen{
   }
 
   /**
-  *Get the user's Opmerking
-  *
-  *@return: The user's Operking
+  * Get the user's Opmerking
+  * @return string $opmerking: The user's Operking
   */
   public function getSessionOpmerking(){
     if(!empty($_SESSION['opmerking'])){

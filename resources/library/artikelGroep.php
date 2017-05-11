@@ -3,14 +3,13 @@
 class ArtikelGroep{
 
   /**
-  *Get all the records in the ArtikelGroep table in the Database
-  *And display the data in a <select> element with the data in in <option> tag
+  * Get all the records in the ArtikelGroep table in the Database
+  * And display the data in a <select> element with the data in in <option> tag
   */
   public function getArtikelGroepen(){
     /**
-    *Get an array of the ArtikelGroep data.
-    *
-    *@return: an array containing all the column data for each row. The array key is the row id, the value is the row omschrijving.
+    * Get an array of the ArtikelGroep data.
+    * @return array $groepen: an array containing all the column data for each row. The array key is the row id, the value is the row omschrijving.
     */
     function getAlleGroepen(){
       $stmt = DB::conn()->prepare('SELECT id, omschrijving FROM artikelGroep');
@@ -26,7 +25,7 @@ class ArtikelGroep{
     $groep = getAlleGroepen();
 
     /**
-    *Display the array as an select with the array data in tne <option>
+    * Display the array as an select with the array data in tne <option>
     */
     echo '<select name="artikelGroep" class="form-control">';
     foreach($groep as $id => $omschrijving){
@@ -37,9 +36,8 @@ class ArtikelGroep{
 
 
   /**
-  *Get all the data in the artikelGroep table in the Database
-  *
-  *@return: An array containing the data. The array key is the artikelGroep id, the value is the artikelGroep omschrijving
+  * Get all the data in the artikelGroep table in the Database
+  * @return: An array containing the data. The array key is the artikelGroep id, the value is the artikelGroep omschrijving
   */
   public function getGroepen(){
 
@@ -56,13 +54,13 @@ class ArtikelGroep{
   }
 
   /**
-  *Display the rows in artikelGroep in the Database as radio buttons.
+  * Display the rows in artikelGroep in the Database as radio buttons.
   */
   public function groepenRadioButtons(){
 
     /**
-    *Get all the data from the artikelGroep table and store it in an array.
-    *The array key is the id from the row, and the value is the omschrijving
+    * Get all the data from the artikelGroep table and store it in an array.
+    * The array key is the id from the row, and the value is the omschrijving
     */
     function getGroups(){
       $stmt = DB::conn()->prepare('SELECT id, omschrijving FROM artikelGroep');
@@ -84,10 +82,9 @@ class ArtikelGroep{
   }
 
   /**
-  *Get all the ids from Orchidee where the soort column matches with the groep parameter
-  *
-  *@parameter $groep: An Int which comes from the artikelGroep table id column.
-  *@return: An array with data from the id column in Orchidee where soort matches $groep
+  * Get all the ids from Orchidee where the soort column matches with the groep parameter
+  * @param int $groep: An Int which comes from the artikelGroep table id column.
+  * @return array $ids: An array with data from the id column in Orchidee where soort matches $groep
   */
   public function getGroepArtikelen($groep){
     $stmt = DB::conn()->prepare('SELECT id FROM Orchidee WHERE soort=? AND verwijderd=0');
