@@ -176,7 +176,7 @@ class Artikel{
         }
 
         if(!empty($orchideeen)){
-          return $orchideeen;
+          return array_unique($orchideeen);
         }
       }
     }
