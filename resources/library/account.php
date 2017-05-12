@@ -293,15 +293,17 @@ class Account{
     * @return array $ids: An array with all the product ids that are NOT deleted
     */
     function filterDeleted($artikelen){
-      foreach($artikelen as $a){
-        $stmt = DB::conn()->prepare('SELECT id FROM Orchidee WHERE id=? AND verwijderd=0');
-        $stmt->bind_param('i', $a);
-        $stmt->execute();
-        $stmt->bind_result($id);
-        while($stmt->fetch()){
-          $ids[] = $id;
+      if(!empty($artikelen)){        
+        foreach($artikelen as $a){
+          $stmt = DB::conn()->prepare('SELECT id FROM Orchidee WHERE id=? AND verwijderd=0');
+          $stmt->bind_param('i', $a);
+          $stmt->execute();
+          $stmt->bind_result($id);
+          while($stmt->fetch()){
+            $ids[] = $id;
+          }
+          $stmt->close();
         }
-        $stmt->close();
       }
 
       if(!empty($ids)){
