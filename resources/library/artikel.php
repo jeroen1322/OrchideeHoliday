@@ -97,15 +97,17 @@ class Artikel{
     */
     function getOrderRegelOrchideeen($ids){
       $orchideeen = array();
-      foreach($ids as $id){
-        $stmt = DB::conn()->prepare('SELECT orchideeid FROM `OrderRegel` WHERE orderid=?');
-        $stmt->bind_param('i', $id);
-        $stmt->execute();
-        $stmt->bind_result($orchidee);
-        while($stmt->fetch()){
-          $orchideeen[] = $orchidee;
+      if(!empty($ids)){
+        foreach($ids as $id){
+          $stmt = DB::conn()->prepare('SELECT orchideeid FROM `OrderRegel` WHERE orderid=?');
+          $stmt->bind_param('i', $id);
+          $stmt->execute();
+          $stmt->bind_result($orchidee);
+          while($stmt->fetch()){
+            $orchideeen[] = $orchidee;
+          }
+          $stmt->close();
         }
-        $stmt->close();
       }
 
       if(!empty($orchideeen)){
