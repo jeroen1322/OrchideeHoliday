@@ -77,6 +77,7 @@ create table `Order`(
 `orderdatum` VARCHAR(45),
 `opmerking` TEXT,
 `anoniem` INT,
+`pagina` VARCHAR,
 PRIMARY KEY(`id`),
 FOREIGN KEY(`persoon`) REFERENCES Persoon(`id`),
 FOREIGN KEY(`verzendWijze`) REFERENCES verzendWijze(`id`),
