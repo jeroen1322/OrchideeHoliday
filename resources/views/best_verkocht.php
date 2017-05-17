@@ -1,7 +1,21 @@
 <?php
 $artikel = new Artikel;
-
+$gebruiker = new Account;
+$winkelmand = new Winkelmand;
 $resultaten = $artikel->zoekBestVerkocht();
+
+
+if(!empty($_GET)){
+  if($_GET['action'] == 'bestel'){
+    if($gebruiker->isIngelogd()){
+      $winkelmand->plaatsInDatabaseWinkelmand($_GET['id'], $_SESSION['login'][0]);
+      header("Refresh:0; url=/best_verkocht");
+    }else{
+      $winkelmand->plaatsInSessionWinkelmand($_GET['id']);
+      header("Refresh:0; url=/best_verkocht");
+    }
+  }
+}
 
 if(!empty($resultaten)){
   ?>
@@ -12,6 +26,7 @@ if(!empty($resultaten)){
       <td><b>Omschrijving</b></td>
       <td><b>Prijs</b></td>
       <td><b>Aantal keer verkocht</b></td>
+      <td></td>
     </thead>
     <tbody>
   <?php
@@ -24,6 +39,11 @@ if(!empty($resultaten)){
       <td><p><?php echo $info['titel'] ?></p></td>
       <td><p>€<?php echo $info['prijs'] ?></p></td>
       <td><p><b><?php echo $aantal ?></b></b></td>
+      <td>
+        <form method="post" action="?action=bestel&id=<?php echo $info['id']?>">
+          <button class="btn btn-succes form-knop bestel-knop">IN WINKELMAND</button>
+        </form>
+      </td>
     </tr>
   <?php
   }
