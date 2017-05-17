@@ -8,10 +8,10 @@ $resultaten = $artikel->zoekBestVerkocht();
 if(!empty($_GET)){
   if($_GET['action'] == 'bestel'){
     if($gebruiker->isIngelogd()){
-      $winkelmand->plaatsInDatabaseWinkelmand($_GET['id'], $_SESSION['login'][0]);
-      header("Refresh:0; url=/best_verkocht");
+      $winkelmand->plaatsInDatabaseWinkelmand($_GET['id'], $_SESSION['login'][0], 'best_verkocht');
+      // header("Refresh:0; url=/best_verkocht");
     }else{
-      $winkelmand->plaatsInSessionWinkelmand($_GET['id']);
+      $winkelmand->plaatsInSessionWinkelmand($_GET['id'], 'best_verkocht');
       header("Refresh:0; url=/best_verkocht");
     }
   }

@@ -77,7 +77,6 @@ create table `Order`(
 `orderdatum` VARCHAR(45),
 `opmerking` TEXT,
 `anoniem` INT,
-`pagina` VARCHAR(45),
 PRIMARY KEY(`id`),
 FOREIGN KEY(`persoon`) REFERENCES Persoon(`id`),
 FOREIGN KEY(`verzendWijze`) REFERENCES verzendWijze(`id`),
@@ -88,6 +87,7 @@ create table OrderRegel(
 `id` INT,
 `orchideeid` INT,
 `orderid` INT,
+`pagina` VARCHAR(45),
 PRIMARY KEY(`id`, `orchideeid`, `orderid`),
 FOREIGN KEY(`orchideeid`) REFERENCES Orchidee(`id`),
 FOREIGN KEY(`orderid`) REFERENCES `Order`(`id`)

@@ -70,7 +70,7 @@ class Winkelmand{
   * @param int $orchideeId: Product's id
   * @param int $gebruikerId: User's id
   */
-  public function plaatsInDatabaseWinkelmand($orchideeId, $gebruikerId){
+  public function plaatsInDatabaseWinkelmand($orchideeId, $gebruikerId, $pagina){
 
     /**
     *Get the id of the user's open order
@@ -134,7 +134,7 @@ class Winkelmand{
     * @param int $orchideeId: The product's id that will be put in the OrderRegel
     * @param ing $gebruikerId: The user's id that of the user to which the shoppingcart is linked
     */
-    function maakOrder($orchideeId, $gebruikerId){
+    function maakOrder($orchideeId, $gebruikerId, $pagina){
       $anoniem = 0;
       $besteld = 0;
       $randId = rand(1, 999999);
@@ -152,8 +152,8 @@ class Winkelmand{
       $stmt->close();
 
       $orderRegelId = rand(1, 999999);
-      $stmt = DB::conn()->prepare('INSERT INTO `OrderRegel`(id, orchideeid, orderid) VALUES(?, ?, ?)');
-      $stmt->bind_param('iii', $orderRegelId, $orchideeId, $id);
+      $stmt = DB::conn()->prepare('INSERT INTO `OrderRegel`(id, orchideeid, orderid, pagina) VALUES(?, ?, ?, ?)');
+      $stmt->bind_param('iiis', $orderRegelId, $orchideeId, $id, $pagina);
       $stmt->execute();
       $stmt->close();
     }
@@ -166,17 +166,17 @@ class Winkelmand{
     */
     function insertBestaandeOrderRegel($orchideeId, $id){
       $orderRegelId = rand(1, 999999);
-      $stmt = DB::conn()->prepare('INSERT INTO `OrderRegel`(id, orchideeid, orderid) VALUES(?, ?, ?)');
-      $stmt->bind_param('iii', $orderRegelId, $orchideeId, $id);
+      $stmt = DB::conn()->prepare('INSERT INTO `OrderRegel`(id, orchideeid, orderid, pagina) VALUES(?, ?, ?, ?)');
+      $stmt->bind_param('iiis', $orderRegelId, $orchideeId, $id, $pagina);
       $stmt->execute();
       $stmt->close();
     }
 
     $bestaandeOrder = controlleerBestaandeOrder($gebruikerId);
     if(empty($bestaandeOrder)){
-      maakOrder($orchideeId, $gebruikerId);
+      maakOrder($orchideeId, $gebruikerId, $pagina);
     }else{
-      insertBestaandeOrderRegel($orchideeId, $bestaandeOrder);
+      insertBestaandeOrderRegel($orchideeId, $bestaandeOrder, $pagina);
     }
   }
 

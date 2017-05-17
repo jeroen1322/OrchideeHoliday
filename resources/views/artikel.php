@@ -7,7 +7,7 @@ $info = $orchidee->informatie($this->orchideeId);
 if(!empty($_GET)){
   if($_GET['action'] == 'bestel'){
     if($gebruiker->isIngelogd()){
-      $winkelmand->plaatsInDatabaseWinkelmand($_GET['id'], $_SESSION['login'][0]);
+      $winkelmand->plaatsInDatabaseWinkelmand($_GET['id'], $_SESSION['login'][0], 'artikel_pagina');
       header("Refresh:0; url=/artikel/".$_GET['id']);
     }else{
       $winkelmand->plaatsInSessionWinkelmand($_GET['id']);
