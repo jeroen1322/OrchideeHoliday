@@ -54,7 +54,7 @@
           <?php
         }
       }else{
-        echo '<div class="warning"><b>ER ZIJN NOG GEEN BESTELLINGEN GEPLAATST</b></div>';
+        echo '<div class="warning"><b>ER ZIJN NOG GEEN ORDERS GEPLAATST</b></div>';
       }
     }
     ?>
