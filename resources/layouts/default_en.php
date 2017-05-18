@@ -110,7 +110,7 @@ if(!empty($_SESSION['login'])){
                      <?php
                      if($_SESSION['login'][2] === 1){
                        ?>
-                         <li><a href="/beheer/orchidee_toevoegen" class="naam">OVERVIEW</a></li>
+                         <li><a href="/beheer/overzicht" class="naam">OVERVIEW</a></li>
                          <li><a href="/favorieten" class="naam">FAVORITES</a></li>
                        <?php
                      }elseif($_SESSION['login'][2] === 2){

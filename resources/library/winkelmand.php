@@ -164,7 +164,7 @@ class Winkelmand{
     * @param int $orchideeId: The product's id
     * @param int $id: The user's id to which the order is linked to
     */
-    function insertBestaandeOrderRegel($orchideeId, $id){
+    function insertBestaandeOrderRegel($orchideeId, $id, $pagina){
       $orderRegelId = rand(1, 999999);
       $stmt = DB::conn()->prepare('INSERT INTO `OrderRegel`(id, orchideeid, orderid, pagina) VALUES(?, ?, ?, ?)');
       $stmt->bind_param('iiis', $orderRegelId, $orchideeId, $id, $pagina);

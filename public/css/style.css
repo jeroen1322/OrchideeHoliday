@@ -137,7 +137,7 @@ h2.textfilmaanbod {
   width: 100%;
 }
 .admin_menu{
-  width: 50%;
+  width: 33.33%;
 }
 .actief{
   background-color: #80726a !important;
@@ -277,4 +277,19 @@ i.fa.fa-user, i.fa.fa-truck{
   margin-left: 5%;
   width: 25%;
   float: left;
+}
+.order_info {
+    background-color: #009688;
+    color: white;
+    font-weight: bolder;
+    line-height: 3;
+    padding-left: 20px;
+}
+.order_info:hover{
+  cursor: pointer;
+}
+.neer{
+  float: right;
+  margin-right: 20px;
+  margin-top: 13px;
 }
