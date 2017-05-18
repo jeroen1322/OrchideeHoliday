@@ -76,6 +76,10 @@ $klein->respond('/uitloggen', function ($request, $response, $service) {
     $service->pageTitle = 'Uitloggen | Orchidee Holiday';
     $service->render(VIEWS.'/uitloggen.php');
 });
+$klein->respond('/beheer/overzicht', function ($request, $response, $service) {
+    $service->pageTitle = 'Overzicht | Orchidee Holiday';
+    $service->render(VIEWS.'/beheer_overzicht.php');
+});
 $klein->respond('/beheer/orchidee_toevoegen', function ($request, $response, $service) {
     $service->pageTitle = 'Orchidee toevoegen | Orchidee Holiday';
     $service->render(VIEWS.'/orchidee_toevoegen.php');
