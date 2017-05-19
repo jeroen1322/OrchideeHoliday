@@ -13,7 +13,6 @@
     $artikel = new Artikel;
 
     if($account->isBeheerder()){
-      //TODO: Add overview of all the orders
       $orders = $beheer->getAlleOrders();
 
       if(!empty($orders)){
@@ -32,6 +31,8 @@
                  <tbody>
               <?php
               $producten = $beheer->getOrderProducten($order);
+              $meta = $beheer->getOrderMeta($order);
+
               foreach($producten as $p){
                 $pagina = $beheer->getUsedPage($order, $p);
                 $info = $artikel->informatie($p);
@@ -49,6 +50,8 @@
               ?>
               </tbody>
             </table>
+            <h4><b>GEBRUIKER: </b><?php echo $beheer->getPersoonConnectedToOrder($order) ?></b></h4>
+            <h4><b>DATUM: </b><?php echo $meta['orderdatum'] ?></h4>
             </div>
           </div>
           <?php
