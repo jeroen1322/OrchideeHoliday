@@ -32,12 +32,12 @@
               <?php
               $producten = $beheer->getOrderProducten($order);
               $meta = $beheer->getOrderMeta($order);
-
+              $totaal = array();
               foreach($producten as $p){
                 $pagina = $beheer->getUsedPage($order, $p);
                 $info = $artikel->informatie($p);
-                $page = str_replace('_', ' ', $pagina);
-                $page = strtoupper($page);
+                $totaal[] = $info['prijs'];
+                $page = strtoupper(str_replace('_', ' ', $pagina));
                 ?>
                 <tr>
                   <td><a href="/artikel/<?php echo $a?>"><img src="/foto/<?php echo $info['img']?>" class="winkelmand_img"></a></td>
@@ -50,6 +50,7 @@
               ?>
               </tbody>
             </table>
+            <h4><b>TOTAAL PRIJS: </b>€<?php echo array_sum($totaal) ?></h4>
             <h4><b>GEBRUIKER: </b><?php echo $beheer->getPersoonConnectedToOrder($order) ?></b></h4>
             <h4><b>DATUM: </b><?php echo $meta['orderdatum'] ?></h4>
             </div>
