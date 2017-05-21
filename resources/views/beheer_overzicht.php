@@ -38,6 +38,7 @@
                 $info = $artikel->informatie($p);
                 $totaal[] = $info['prijs'];
                 $page = strtoupper(str_replace('_', ' ', $pagina));
+                $naam = $beheer->getPersoonConnectedToOrder($order);
                 ?>
                 <tr>
                   <td><a href="/artikel/<?php echo $a?>"><img src="/foto/<?php echo $info['img']?>" class="winkelmand_img"></a></td>
@@ -51,7 +52,15 @@
               </tbody>
             </table>
             <h4><b>TOTAAL PRIJS: </b>€<?php echo array_sum($totaal) ?></h4>
-            <h4><b>GEBRUIKER: </b><?php echo $beheer->getPersoonConnectedToOrder($order) ?></b></h4>
+            <h4><b>GEBRUIKER: </b>
+              <?php
+              if($naam == ' '){ //For some reason, if no name is linked to an order it return " "
+                echo 'Anoniem';
+              }else{
+                echo $naam;
+              }
+              ?>
+            </b></h4>
             <h4><b>DATUM: </b><?php echo $meta['orderdatum'] ?></h4>
             </div>
           </div>
