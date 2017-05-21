@@ -40,4 +40,11 @@ class Afrekenen{
     }
   }
 
+  /**
+  * Set the opmerking session to empty
+  */
+  public function removePreviousOpmerkingSession(){
+    $_SESSION['opmerking'] = '';
+  }
+
 }
