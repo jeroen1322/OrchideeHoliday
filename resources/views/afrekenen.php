@@ -33,6 +33,8 @@ if(!empty($_POST)){
       case 'overzicht':
       if(!empty($_POST['opmerking'])){
         $afrekenen->storeOpmerkingInSession($_POST['opmerking']);
+      }else{
+        $afrekenen->removePreviousOpmerkingSession();
       }
       $gebruikerId = $account->getLoginId();
       $artikelen = $winkelmand->getArtikelen($gebruikerId);
