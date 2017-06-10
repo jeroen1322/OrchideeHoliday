@@ -17,34 +17,34 @@ if(!empty($_SESSION['login'])){
 ?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Material Design fonts -->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/font-awesome-4.7.0/css/font-awesome.min.css">
-    <title><?= $this->escape($this->pageTitle); ?></title>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Material Design fonts -->
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="/font-awesome-4.7.0/css/font-awesome.min.css">
+  <title><?= $this->escape($this->pageTitle); ?></title>
 
-    <!-- Bootstrap -->
-    <link href="../bootstrap/css/bootstrap.min.css " rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="/public/bootstrap/css/bootstrap.min.css " rel="stylesheet">
 
-    <!-- Bootstrap Material Design -->
-    <link rel="stylesheet" type="text/css" href="../css/slick.css">
-    <link rel="stylesheet" type="text/css" href="../css/slick-theme.css">
-    <link rel="stylesheet" type="text/css" href="../bootstrap-material/css/bootstrap-material-design.css">
-    <link rel="stylesheet" type="text/css" href="../bootstrap-material/css/ripples.css">
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <!-- <link rel="stylesheet" type="text/css" href="dist/css/ripples.min.css"> -->
+  <!-- Bootstrap Material Design -->
+  <link rel="stylesheet" type="text/css" href="/public/css/slick.css">
+  <link rel="stylesheet" type="text/css" href="/public/css/slick-theme.css">
+  <link rel="stylesheet" type="text/css" href="/public/bootstrap-material/css/bootstrap-material-design.css">
+  <link rel="stylesheet" type="text/css" href="/public/bootstrap-material/css/ripples.css">
+  <link rel="stylesheet" type="text/css" href="/public/css/style.css">
+  <!-- <link rel="stylesheet" type="text/css" href="dist/css/ripples.min.css"> -->
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
   <body>
     <!--   ____           _     _     _           _    _       _ _     _
   / __ \         | |   (_)   | |         | |  | |     | (_)   | |

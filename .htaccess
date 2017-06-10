@@ -1,4 +1,3 @@
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^ routes.php [L]
-
+RewriteRule ^ /public/routes.php [L]
