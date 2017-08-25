@@ -175,8 +175,10 @@ class Winkelmand{
     $bestaandeOrder = controlleerBestaandeOrder($gebruikerId);
     if(empty($bestaandeOrder)){
       maakOrder($orchideeId, $gebruikerId, $pagina);
+      return true;
     }else{
       insertBestaandeOrderRegel($orchideeId, $bestaandeOrder, $pagina);
+      return true;
     }
   }
 

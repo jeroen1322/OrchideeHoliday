@@ -28,14 +28,14 @@ if(!empty($_SESSION['login'])){
     <title><?= $this->escape($this->pageTitle); ?></title>
 
     <!-- Bootstrap -->
-    <link href="/public/bootstrap/css/bootstrap.min.css " rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Bootstrap Material Design -->
-    <link rel="stylesheet" type="text/css" href="/public/css/slick.css">
-    <link rel="stylesheet" type="text/css" href="/public/css/slick-theme.css">
-    <link rel="stylesheet" type="text/css" href="/public/bootstrap-material/css/bootstrap-material-design.css">
-    <link rel="stylesheet" type="text/css" href="/public/bootstrap-material/css/ripples.css">
-    <link rel="stylesheet" type="text/css" href="/public/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="/css/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="/bootstrap-material/css/bootstrap-material-design.css">
+    <link rel="stylesheet" type="text/css" href="/bootstrap-material/css/ripples.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <!-- <link rel="stylesheet" type="text/css" href="dist/css/ripples.min.css"> -->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -92,6 +92,7 @@ if(!empty($_SESSION['login'])){
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav nav-links">
             <li><a href="/aanbod">AANBOD</a></li>
+            <li><a href="/artikel_van_de_dag">ARTIKEL VDD</a></li>
             <li><a href="/artikel_groepen">ARTIKEL GROEPEN</a></li>
             <li><a href="/best_verkocht">BEST VERKOCHT</a></li>
             <li><a href="/contact">CONTACT</a></li>

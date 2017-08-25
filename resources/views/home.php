@@ -23,6 +23,7 @@ if(!empty($_GET)){
 <div class="flags">
   <a href="/"><img src="/foto/dutch_flag.jpg" class="flag"></a>
   <a href="/en"><img src="/foto/english_flag.png" class="flag"></a>
+  <a href="/artikel_van_de_dag"><button class="btn btn-primary form-knop">Artikel van De Dag</button></a>
 </div>
 <div class="top-home">
   <h2>BEST VERKOCHT</h2>

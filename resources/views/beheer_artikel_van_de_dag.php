@@ -3,22 +3,23 @@
     <div class="btn-group admin">
       <a href="/beheer/overzicht" class="btn btn-primary admin_menu">OVERZICHT</a>
       <a href="/beheer/orchidee_toevoegen" class="btn btn-primary admin_menu">ORCHIDEE TOEVOEGEN</a>
-      <a href="/beheer/orchidee_verwijderen" class="btn btn-primary actief admin_menu">ORCHIDEE VERWIJDEREN</a>
-      <a href="/beheer/artikel_van_de_dag" class="btn btn-primary admin_menu">ARTIKEL VAN DE DAG</a>
+      <a href="/beheer/orchidee_verwijderen" class="btn btn-primary admin_menu">ORCHIDEE VERWIJDEREN</a>
+      <a href="/beheer/artikel_van_de_dag" class="btn btn-primary actief admin_menu">ARTIKEL VAN DE DAG</a>
     </div>
 <?php
 $artikel = new Artikel;
 $account = new Account;
 
 if(!empty($_GET)){
-  if($_GET['action'] == 'delete'){
-    if($artikel->verwijderArtikel($_GET['code'])){
-      header("Refresh:0; url=/beheer/orchidee_verwijderen");
-    }
+  if($_GET['action'] == 'avdd'){
+    $artikel->set_artikel_van_de_dag($_GET['code']);
   }
 }
 
 if($account->isBeheerder()){
+  ?>
+  <h1>ARTIKEL VAN DE DAG</h1>
+  <?php
 
   $artikelen = $artikel->getAllArtikelen();
   if(!empty($artikelen)){
@@ -34,9 +35,9 @@ if($account->isBeheerder()){
         <td><p><?php echo $info['titel'] ?></p></td>
         <td><h4>€<?php echo $info['prijs'] ?></h4></td>
         <td>
-          <form method="post" action="?action=delete&code=<?php echo $a ?>">
-            <button type="submit" class="btn btn-success">
-                <i class="fa fa-trash-o" aria-hidden="true"></i>
+          <form method="post" action="?action=avdd&code=<?php echo $a ?>">
+            <button type="submit" class="btn btn-success form-knop">
+                SELECTEER
             </button>
           </form>
         </td>

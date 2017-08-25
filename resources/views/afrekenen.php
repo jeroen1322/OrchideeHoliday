@@ -48,9 +48,24 @@ if(!empty($_POST)){
           <table class="table winkelmand_table">
             <tbody>
               <?php
+              $openOrders = $account->telOpenOrders($_SESSION['login'][0]);
               $totaal = array();
               foreach ($artikelen as $artikelId){
-                $info = $artikel->thumbInfo($artikelId);
+                if($artikel->isNewPriceActive($artikelId)){
+                  if($openOrders < 3){
+                    $nietGenoeg = true;
+                  }else{
+                    $nietGenoeg = false;
+                  }
+
+                  if($nietGenoeg){
+                    $info = $artikel->thumbInfo($artikelId);
+                  }else{
+                    $info = $artikel->newThumbInfo($artikelId);
+                  }
+                }else{
+                  $info = $artikel->thumbInfo($artikelId);
+                }
                 $totaal[] = $info['prijs'];
                 ?>
                 <tr>

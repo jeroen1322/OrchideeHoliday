@@ -9,7 +9,7 @@ class DB {
         if( !self::$mysqli ) {
             //Server gegevens
             $server = "localhost";
-            $username = "root2";
+            $username = "root";
             $passw = "root";
             $dbname = "orchideeholiday";
             self::$mysqli = new mysqli($server, $username, $passw, $dbname);

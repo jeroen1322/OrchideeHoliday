@@ -37,7 +37,13 @@ if(!empty($info)){
   }
   ?>
   <p><b>BESCHIKBAAR</b></p>
-  <h2><b>€<?php echo $info['prijs'] ?></b></h2>
+  <h2><b><?php
+            if($orchidee->isNewPriceActive($this->orchideeId)){
+              echo '<div class="newPrice">€'. $info['prijs']/2 . '</div>';
+            }else{
+              echo '€'.$info['prijs'];
+            }
+            ?></b></h2>
     <form method="post" action="?action=bestel&id=<?php echo $info['id']?>">
       <button class="btn btn-succes form-knop bestel-knop">IN WINKELMAND</button>
     </form>

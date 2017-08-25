@@ -88,10 +88,18 @@ $klein->respond('/beheer/orchidee_verwijderen', function ($request, $response, $
     $service->pageTitle = 'Orchidee Verwijderen | Orchidee Holiday';
     $service->render(VIEWS.'/orchidee_verwijderen.php');
 });
+$klein->respond('/beheer/artikel_van_de_dag', function ($request, $response, $service) {
+    $service->pageTitle = 'Artikel van De Dag toevoegen | Orchidee Holiday';
+    $service->render(VIEWS.'/beheer_artikel_van_de_dag.php');
+});
 $klein->respond('/artikel/[:id]', function ($request, $response, $service) {
     $service->orchideeId = $request->id;
     $service->pageTitle = 'Artikel | Orchidee Holiday';
     $service->render(VIEWS.'/artikel.php');
+});
+$klein->respond('/artikel_van_de_dag', function ($request, $response, $service) {
+    $service->pageTitle = 'Artikel van De Dag | Orchidee Holiday';
+    $service->render(VIEWS.'/artikel_van_de_dag.php');
 });
 $klein->respond('/winkelmand', function ($request, $response, $service) {
     $service->pageTitle = 'Winkelmand | Orchidee Holiday';

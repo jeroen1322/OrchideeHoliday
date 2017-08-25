@@ -1,6 +1,6 @@
 create database orchideeholiday;
 use orchideeholiday;
-
+select * from `Orchidee`;
 create table betaalWijze(
 `id` INT,
 `omschrijving` VARCHAR(100),
@@ -61,7 +61,15 @@ create table Orchidee(
 PRIMARY KEY(`id`),
 FOREIGN KEY(`soort`) REFERENCES artikelGroep(`id`)
 );
+ALTER TABLE Orchidee ADD `newPrice` FLOAT;
 
+create table artikel_van_de_dag(
+`id` INT,
+`artikel_id` INT,
+`datum` VARCHAR(45),
+PRIMARY KEY(`id`)
+);
+SELECT * FROM artikel_va	n_de_dag;
 create table verzendWijze(
 `id` INT,
 `omschrijving` VARCHAR(100),

@@ -18,12 +18,12 @@ if(!empty($_GET)){
     }
   }
 }
-
 if($account->isIngelogd()){
   ?>
   <h1>WINKELMAND</h1>
   <?php
   $artikelen = $winkelmand->getArtikelen($_SESSION['login'][0]);
+  $openOrders = $account->telOpenOrders($_SESSION['login'][0]);
   if(!empty($artikelen)){
     ?>
     <table class="table winkelmand_table">
@@ -31,7 +31,21 @@ if($account->isIngelogd()){
     <?php
     $totaal = array();
     foreach ($artikelen as $artikelId){
-      $info = $artikel->thumbInfo($artikelId);
+      if($artikel->isNewPriceActive($artikelId)){
+        if($openOrders < 3){
+          $nietGenoeg = true;
+        }else{
+          $nietGenoeg = false;
+        }
+
+        if($nietGenoeg){
+          $info = $artikel->thumbInfo($artikelId);
+        }else{
+          $info = $artikel->newThumbInfo($artikelId);
+        }
+      }else{
+        $info = $artikel->thumbInfo($artikelId);
+      }
       $totaal[] = $info['prijs'];
       ?>
       <tr>
@@ -53,6 +67,9 @@ if($account->isIngelogd()){
     </table>
     <?php
       echo '<h4><b>TOTAAL PRIJS: €'.array_sum($totaal).'</b></h4>';
+      if($nietGenoeg){
+        echo '<div class="warning">U moet in totaal minimaal drie artikelen kopen om korting te krijgen op het Artikel Van De Dag.</div>';
+      }
     ?>
     <a href="/afrekenen"><button class="btn btn-succes form-knop">AFREKENEN</button></a>
     <?php

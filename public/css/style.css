@@ -30,6 +30,9 @@
 body{
   background-color: white;
 }
+.newPrice{
+  color: red;
+}
 .terug_button{
   float: left;
   background-color: rgb(0, 150, 136) !important;
@@ -137,7 +140,7 @@ h2.textfilmaanbod {
   width: 100%;
 }
 .admin_menu{
-  width: 33.33%;
+  width: 25%;
 }
 .actief{
   background-color: #80726a !important;

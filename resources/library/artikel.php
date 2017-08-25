@@ -65,6 +65,23 @@ class Artikel{
     return $thumbInfo;
   }
 
+  public function newThumbInfo($artikelId){
+    $stmt = DB::conn()->prepare('SELECT id, titel, korteOmschrijving, newPrice, img FROM Orchidee WHERE id=?');
+    $stmt->bind_param('i', $artikelId);
+    $stmt->execute();
+    $stmt->bind_result($id, $titel, $korteOmschrijving, $prijs, $img);
+    while($stmt->fetch()){
+      $thumbInfo['id'] = $id;
+      $thumbInfo['titel'] = $titel;
+      $thumbInfo['korteOmschrijving'] = $korteOmschrijving;
+      $thumbInfo['prijs'] = $prijs;
+      $thumbInfo['img'] = $img;
+    }
+    $stmt->close();
+
+    return $thumbInfo;
+  }
+
   /**
   * Get the best selling products
   * @return int: If there are sold products, it will return an array with the id of the product
@@ -250,4 +267,89 @@ class Artikel{
     return true;
   }
 
+  public function get_artikel_van_de_dag(){
+    $stmt = DB::conn()->prepare('SELECT artikel_id, datum FROM artikel_van_de_dag WHERE id=1');
+    $stmt->execute();
+    $stmt->bind_result($id, $datum);
+    while($stmt->fetch()){
+      $test[] = $id;
+      $test[] = $datum;
+    }
+    $stmt->close();
+
+    if(!empty($test)){
+      return $test;
+    }
+  }
+
+  public function set_artikel_van_de_dag($artikel){
+    $date = date('d-m-Y');
+    $id = 1;
+
+    function avdd_empty(){
+      $stmt = DB::conn()->prepare('SELECT artikel_id FROM artikel_van_de_dag');
+      $stmt->execute();
+      $stmt->bind_result($id);
+      $stmt->fetch();
+      $stmt->close();
+
+      if(empty($id)){
+        return true;
+      }
+    }
+
+    function getOriginalPrice($artikel){
+      $stmt = DB::conn()->prepare('SELECT prijs FROM Orchidee WHERE id=?');
+      $stmt->bind_param('i', $artikel);
+      $stmt->execute();
+      $stmt->bind_result($originalPrice);
+      $stmt->fetch();
+      $stmt->close();
+
+      return $originalPrice;
+    }
+    $originalPrice = getOriginalPrice($artikel);
+    $newPrice = $originalPrice / 2;
+
+    if(avdd_empty()){
+      $stmt = DB::conn()->prepare('INSERT INTO artikel_van_de_dag(id, artikel_id, datum) VALUES (?, ?, ?)');
+      $stmt->bind_param('iis', $id, $artikel, $date);
+      $stmt->execute();
+      $stmt->close();
+
+      $stmt = DB::conn()->prepare('UPDATE Orchidee SET newPrice=? WHERE id=?');
+      $stmt->bind_param('di', $newPrice, $artikel);
+      $stmt->execute();
+      $stmt->close();
+
+      header("Refresh:0; url=/artikel_van_de_dag");
+    }else{
+      $stmt = DB::conn()->prepare('UPDATE artikel_van_de_dag SET artikel_id=?, datum=? WHERE id=?');
+      $stmt->bind_param('isi', $artikel, $date, $id);
+      $stmt->execute();
+      $stmt->close();
+
+      $stmt = DB::conn()->prepare('UPDATE Orchidee SET newPrice=? WHERE id=?');
+      $stmt->bind_param('di', $newPrice, $artikel);
+      $stmt->execute();
+      $stmt->close();
+
+      header("Refresh:0; url=/artikel_van_de_dag");
+    }
+
+  }
+
+  public function isNewPriceActive($artikel){
+    if(date('H') >= 11 && date('H') < 13){
+      $stmt = DB::conn()->prepare('SELECT artikel_id FROM artikel_van_de_dag WHERE id=1');
+      $stmt->execute();
+      $stmt->bind_result($artikel_id);
+      $stmt->fetch();
+      $stmt->close();
+
+      if($artikel == $artikel_id){
+        return true;
+      }
+    }
+  }
 }
