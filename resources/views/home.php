@@ -19,6 +19,7 @@ if(!empty($_GET)){
     }
   }
 }
+
 ?>
 <div class="flags">
   <a href="/"><img src="/foto/dutch_flag.jpg" class="flag"></a>

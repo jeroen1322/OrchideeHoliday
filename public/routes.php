@@ -92,6 +92,10 @@ $klein->respond('/beheer/artikel_van_de_dag', function ($request, $response, $se
     $service->pageTitle = 'Artikel van De Dag toevoegen | Orchidee Holiday';
     $service->render(VIEWS.'/beheer_artikel_van_de_dag.php');
 });
+$klein->respond('/beheer/contactformulier', function ($request, $response, $service) {
+    $service->pageTitle = 'contactformulier | Orchidee Holiday';
+    $service->render(VIEWS.'/beheer_contactformulier.php');
+});
 $klein->respond('/artikel/[:id]', function ($request, $response, $service) {
     $service->orchideeId = $request->id;
     $service->pageTitle = 'Artikel | Orchidee Holiday';

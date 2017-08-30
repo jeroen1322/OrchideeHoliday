@@ -140,7 +140,7 @@ h2.textfilmaanbod {
   width: 100%;
 }
 .admin_menu{
-  width: 25%;
+  width: 20%;
 }
 .actief{
   background-color: #80726a !important;
@@ -295,4 +295,11 @@ i.fa.fa-user, i.fa.fa-truck{
   float: right;
   margin-right: 20px;
   margin-top: 13px;
+}
+.navbar .navbar-nav > li > a:hover {
+  color: #621EA0;
+}
+.nav > li > a {
+  padding-left: 12px !important;
+  padding-right: 12px !important;
 }

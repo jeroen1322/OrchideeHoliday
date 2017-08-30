@@ -1,6 +1,15 @@
 create database orchideeholiday;
 use orchideeholiday;
-select * from `Orchidee`;
+
+create table Contact(
+`id` INT auto_increment,
+`email` VARCHAR(255),
+`naam` VARCHAR(255),
+`onderwerp` VARCHAR(255),
+`bericht` TEXT,
+PRIMARY KEY(`id`)
+);
+
 create table betaalWijze(
 `id` INT,
 `omschrijving` VARCHAR(100),

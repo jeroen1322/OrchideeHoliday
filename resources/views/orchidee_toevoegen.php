@@ -11,6 +11,7 @@
       <a href="/beheer/orchidee_toevoegen" class="btn btn-primary actief admin_menu">ORCHIDEE TOEVOEGEN</a>
       <a href="/beheer/orchidee_verwijderen" class="btn btn-primary admin_menu">ORCHIDEE VERWIJDEREN</a>
       <a href="/beheer/artikel_van_de_dag" class="btn btn-primary admin_menu">ARTIKEL VAN DE DAG</a>
+      <a href="/beheer/contactformulier" class="btn btn-primary admin_menu">CONTACT FORMULIER</a>
     </div>
     <h1>ORCHIDEE TOEVOEGEN</h1>
     <form method="post" enctype="multipart/form-data">

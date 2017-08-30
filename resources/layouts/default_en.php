@@ -59,7 +59,8 @@ if(!empty($_SESSION['login'])){
       <form method="post" action="/zoeken">
         <input type="text" class="form-control zoek-balk" name="zoekterm" placeholder="SEARCH" autocomplete="off" required>
       </form>
-      <a href="/uitgebreid_zoeken"><button class="btn btn-primary form-knop zoeken_knop">ADVANCED SEARCH</button></a>
+      <a href="/uitgebreid_zoeken"><button class="btn btn-primary form-knop zoeken_knop"><i class="fa fa-search" aria-hidden="true"></i>
+ADVANCED SEARCH</button></a>
       <?php
       $account = new Account;
       if($account->isIngelogd()){

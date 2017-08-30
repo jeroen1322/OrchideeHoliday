@@ -2,6 +2,7 @@
 $contact = new Contact;
 if(!empty($_POST)){
   $contact->verstuurContact($_POST);
+  $contact->storeContact($_POST);
 }
 
 ?>
