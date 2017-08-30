@@ -93,6 +93,7 @@ ADVANCED SEARCH</button></a>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav nav-links">
             <li><a href="/aanbod">SHOP OFFER</a></li>
+            <li><a href="/artikel_van_de_dag">ARTICLE OTD</a></li>
             <li><a href="/artikel_groepen">PRODUCT GROUPS</a></li>
             <li><a href="/best_verkocht">BEST SOLD</a></li>
             <li><a href="/contact">CONTACT</a></li>

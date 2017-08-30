@@ -352,4 +352,16 @@ class Artikel{
       }
     }
   }
+
+  public function isActionDate(){
+    $stmt = DB::conn()->prepare('SELECT datum FROM artikel_van_de_dag');
+    $stmt->execute();
+    $stmt->bind_result($datum);
+    $stmt->fetch();
+    $stmt->close();
+
+    if($datum == date('d-m-Y')){
+      return true;
+    }
+  }
 }
