@@ -12,6 +12,7 @@ class uitgebreidZoeken{
 
       $stmt = DB::conn()->prepare("SELECT id FROM Orchidee WHERE titel LIKE ?
         OR korteOmschrijving LIKE ? OR langeOmschrijving LIKE ? OR id LIKE ?");
+      $zoekterm = "%$zoekterm%";
       $stmt->bind_param('ssss', $zoekterm, $zoekterm, $zoekterm, $zoekterm);
       $stmt->execute();
       $stmt->bind_result($resultaat);
@@ -46,6 +47,7 @@ class uitgebreidZoeken{
     function zoekDB($zoekterm){
       $stmt = DB::conn()->prepare("SELECT id FROM Orchidee WHERE titel LIKE ?
         OR korteOmschrijving LIKE ? OR langeOmschrijving LIKE ? OR id LIKE ?");
+      $zoekterm = "%$zoekterm%";
       $stmt->bind_param('ssss', $zoekterm, $zoekterm, $zoekterm, $zoekterm);
       $stmt->execute();
       $stmt->bind_result($resultaat);
@@ -108,6 +110,7 @@ class uitgebreidZoeken{
     function zoekDB($zoekterm){
       $stmt = DB::conn()->prepare("SELECT id FROM Orchidee WHERE titel LIKE ?
         OR korteOmschrijving LIKE ? OR langeOmschrijving LIKE ? OR id LIKE ?");
+      $zoekterm = "%$zoekterm%";
       $stmt->bind_param('ssss', $zoekterm, $zoekterm, $zoekterm, $zoekterm);
       $stmt->execute();
       $stmt->bind_result($resultaat);
@@ -172,6 +175,7 @@ class uitgebreidZoeken{
     function zoekDB($zoekterm){
       $stmt = DB::conn()->prepare("SELECT id FROM Orchidee WHERE titel LIKE ?
         OR korteOmschrijving LIKE ? OR langeOmschrijving LIKE ? OR id LIKE ?");
+      $zoekterm = "%$zoekterm%";
       $stmt->bind_param('ssss', $zoekterm, $zoekterm, $zoekterm, $zoekterm);
       $stmt->execute();
       $stmt->bind_result($resultaat);

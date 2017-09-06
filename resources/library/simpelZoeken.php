@@ -10,6 +10,7 @@ class simpelZoeken{
   public function zoekOpTrefwoord($zoekterm){
     function zoekDB($zoekterm){
       $stmt = DB::conn()->prepare("SELECT id FROM Orchidee WHERE titel LIKE ? OR korteOmschrijving LIKE ? OR langeOmschrijving LIKE ?");
+      $zoekterm = "%$zoekterm%";
       $stmt->bind_param('sss', $zoekterm, $zoekterm, $zoekterm);
       $stmt->execute();
       $stmt->bind_result($resultaat);
