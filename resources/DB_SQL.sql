@@ -78,7 +78,7 @@ create table artikel_van_de_dag(
 `datum` VARCHAR(45),
 PRIMARY KEY(`id`)
 );
-SELECT * FROM artikel_va	n_de_dag;
+
 create table verzendWijze(
 `id` INT,
 `omschrijving` VARCHAR(100),
@@ -144,4 +144,3 @@ INSERT INTO Persoon(voornaam, achternaam, email, woonplaats, postcode, straat, h
 VALUES('Jeroen', 'Grooten', 'contact@jeroengrooten.nl', 'Wijk bij Duurstede', '3961AM', 'Oeverstraat', '21A', 1);
 INSERT INTO TussenRol(rolid, persoonid) VALUES(1, 1);
 INSERT INTO Wachtwoord(wachtwoord, persoon) VALUES('$2y$10$ygURUwn2sI/6UcexSQlCn.CVyG//.WVdOCvbuVUhqaadCAuXGmHaS', 1);
-
