@@ -28,14 +28,14 @@ if(!empty($_SESSION['login'])){
   <title><?= $this->escape($this->pageTitle); ?></title>
 
   <!-- Bootstrap -->
-  <link href="/bootstrap/css/bootstrap.min.css " rel="stylesheet">
+  <link href="/public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Bootstrap Material Design -->
-  <link rel="stylesheet" type="text/css" href="/css/slick.css">
-  <link rel="stylesheet" type="text/css" href="/css/slick-theme.css">
-  <link rel="stylesheet" type="text/css" href="/bootstrap-material/css/bootstrap-material-design.css">
-  <link rel="stylesheet" type="text/css" href="/bootstrap-material/css/ripples.css">
-  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <link rel="stylesheet" type="text/css" href="/public/css/slick.css">
+  <link rel="stylesheet" type="text/css" href="/public/css/slick-theme.css">
+  <link rel="stylesheet" type="text/css" href="/public/bootstrap-material/css/bootstrap-material-design.css">
+  <link rel="stylesheet" type="text/css" href="/public/bootstrap-material/css/ripples.css">
+  <link rel="stylesheet" type="text/css" href="/public/css/style.css">
   <!-- <link rel="stylesheet" type="text/css" href="dist/css/ripples.min.css"> -->
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
