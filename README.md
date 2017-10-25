@@ -4,7 +4,7 @@ Bron van het eindexamenproject voor opleiding Applicatie- en mediaontwikkelaar
 Het project gaat onder de naam "OrchideeHoliday".
 
 
-#Installatie
+# Installatie
 Kleine instructie over hoe je het project op een (nieuwe) GNU/Linux machine moet installeren. 
 
 __Installeer Apache__
